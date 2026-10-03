@@ -1,47 +1,83 @@
 import express from "express";
 import OpenAI from "openai";
-import path from "path";
-import { fileURLToPath } from "url";
 
 const app = express();
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-app.use(express.json({limit:"1mb"}));
-app.use(express.static(__dirname));
 
-app.post("/api/chat", async (req,res)=>{
-  try{
-    const {avatar="Alex", kind="friendly character", history=[], message} = req.body || {};
-    if(!message) return res.status(400).send("message missing");
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
 
-    const safeHistory = Array.isArray(history) ? history.slice(-16) : [];
-    const instructions = `You are ${avatar}, a ${kind}, in the SpeakUp English-learning app.
-Have a friendly, age-appropriate conversation with a teenage English learner.
-Speak mostly simple natural English suitable for roughly 8th grade.
-Keep replies short, usually 1-3 sentences, and ask a natural follow-up question.
-Do not turn every reply into a grammar lesson. If the learner makes an important English mistake, gently model the correct phrase in your response.
-Stay in character as the selected avatar, but do not pretend to be a real person.`;
+app.use(express.json());
+
+// Erlaubt unserer GitHub-Pages-Website, den Server aufzurufen
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(204);
+  }
+
+  next();
+});
+
+app.get("/", (req, res) => {
+  res.send("SpeakUp OpenAI Server is live! 🚀");
+});
+
+app.post("/api/chat", async (req, res) => {
+  try {
+    const { message, history = [] } = req.body;
+
+    if (!message || typeof message !== "string") {
+      return res.status(400).json({
+        error: "No message provided."
+      });
+    }
+
+    const previousMessages = Array.isArray(history)
+      ? history.slice(-10).map(item => ({
+          role: item.role === "assistant" ? "assistant" : "user",
+          content: String(item.content || "")
+        }))
+      : [];
 
     const response = await client.responses.create({
-      model: "gpt-5.6-luna",
-      instructions,
-      input: [...safeHistory, {role:"user", content:message}]
-    });
-    const text = response.output_text || "Sorry, I didn't understand that.";
+      model: "gpt-6-luna",
+      instructions: `
+You are the friendly English speaking partner in the SpeakUp learning app.
 
-    const speech = await client.audio.speech.create({
-      model: "gpt-4o-mini-tts",
-      voice: "coral",
-      input: text,
-      response_format: "mp3"
+Speak simple, natural English suitable for a teenage English learner.
+Keep your answers fairly short.
+Ask a follow-up question so the conversation continues.
+Correct important English mistakes gently, but do not interrupt the conversation constantly.
+Be encouraging and friendly.
+`,
+      input: [
+        ...previousMessages,
+        {
+          role: "user",
+          content: message
+        }
+      ]
     });
-    const buffer = Buffer.from(await speech.arrayBuffer());
-    res.json({text, audio:buffer.toString("base64")});
-  }catch(err){
-    console.error(err);
-    res.status(500).send("AI request failed");
+
+    res.json({
+      text: response.output_text
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error: "The AI could not answer right now."
+    });
   }
 });
 
-const port=process.env.PORT || 3000;
-app.listen(port,()=>console.log(`SpeakUp server running on port ${port}`));
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`SpeakUp server running on port ${PORT}`);
+});
