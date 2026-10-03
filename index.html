@@ -3,1028 +3,1539 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>SpeakUp – English AI</title>
+<title>SpeakUp</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
+:root {
+  --green: #58cc02;
+  --green-dark: #46a302;
+  --blue: #1cb0f6;
+  --purple: #ce82ff;
+  --yellow: #ffc800;
+  --red: #ff4b4b;
+  --bg: #f7f7f7;
+  --white: #ffffff;
+  --text: #3c3c3c;
+  --muted: #777;
+  --border: #e5e5e5;
 }
 
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f4f7fb;
-  color:#172033;
+* {
+  box-sizing: border-box;
 }
 
-header{
-  background:linear-gradient(135deg,#5b5ce2,#7c4dff);
-  color:white;
-  padding:30px 20px;
-  text-align:center;
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
 
-header h1{
-  margin:0;
-  font-size:42px;
+/* =========================
+   ZUGANGSCODE
+========================= */
+
+#gate {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: linear-gradient(135deg, #58cc02, #1cb0f6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
-header p{
-  font-size:18px;
-  opacity:.9;
+.gate-box {
+  background: white;
+  width: 100%;
+  max-width: 390px;
+  padding: 30px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
 }
 
-.stats{
-  display:flex;
-  justify-content:center;
-  gap:15px;
-  margin-top:20px;
-  flex-wrap:wrap;
+.logo {
+  font-size: 38px;
+  font-weight: 900;
+  color: var(--green);
 }
 
-.stat{
-  background:rgba(255,255,255,.2);
-  padding:10px 20px;
-  border-radius:15px;
+.gate-box input {
+  width: 100%;
+  margin: 20px 0;
+  padding: 16px;
+  border: 2px solid var(--border);
+  border-radius: 15px;
+  text-align: center;
+  font-size: 24px;
+  letter-spacing: 7px;
 }
 
-.container{
-  max-width:900px;
-  margin:30px auto;
-  padding:0 20px;
+.primary-button {
+  width: 100%;
+  border: none;
+  padding: 15px;
+  border-radius: 14px;
+  background: var(--green);
+  color: white;
+  font-weight: 900;
+  font-size: 17px;
+  box-shadow: 0 4px 0 var(--green-dark);
 }
 
-.card{
-  background:white;
-  border-radius:22px;
-  padding:25px;
-  margin-bottom:25px;
-  box-shadow:0 8px 25px rgba(0,0,0,.08);
+.error {
+  color: var(--red);
+  margin-top: 12px;
+  min-height: 20px;
 }
 
-.card h2{
-  margin-top:0;
+/* =========================
+   HEADER
+========================= */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-.question{
-  font-size:25px;
-  font-weight:bold;
-  margin:20px 0;
+.header-logo {
+  font-size: 27px;
+  font-weight: 900;
+  color: var(--green);
+  margin-right: auto;
 }
 
-button{
-  border:none;
-  border-radius:14px;
-  padding:13px 18px;
-  font-size:16px;
-  cursor:pointer;
-  margin:5px;
-  background:#5b5ce2;
-  color:white;
-  transition:.2s;
+.stats {
+  display: flex;
+  gap: 13px;
+  font-weight: 900;
 }
 
-button:hover{
-  transform:translateY(-2px);
-  opacity:.9;
+.stat {
+  white-space: nowrap;
 }
 
-button:disabled{
-  opacity:.5;
-  cursor:not-allowed;
+.streak {
+  color: var(--red);
 }
 
-.mic-button{
-  width:130px;
-  height:130px;
-  border-radius:50%;
-  font-size:45px;
-  display:block;
-  margin:25px auto;
-  background:#5b5ce2;
+.xp {
+  color: var(--yellow);
 }
 
-.mic-button.recording{
-  background:#e53935;
-  animation:pulse 1s infinite;
+.gems {
+  color: var(--blue);
 }
 
-@keyframes pulse{
+/* =========================
+   MAIN
+========================= */
 
-  0%{
-    box-shadow:0 0 0 0 rgba(229,57,53,.6);
+main {
+  max-width: 1050px;
+  margin: auto;
+  padding: 22px 16px 100px;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.hero p {
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* =========================
+   TAGESZIEL
+========================= */
+
+.goal {
+  margin-top: 18px;
+  background: #f0fbe9;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.progress {
+  height: 12px;
+  background: #e5e5e5;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progress span {
+  display: block;
+  width: 62%;
+  height: 100%;
+  background: var(--green);
+}
+
+/* =========================
+   KARTEN
+========================= */
+
+.section-title {
+  margin: 25px 0 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 15px;
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
+  transition: 0.15s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+}
+
+.card h3 {
+  margin: 10px 0 6px;
+}
+
+.card p {
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.topic-icon {
+  font-size: 38px;
+}
+
+.card button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 13px;
+  border: none;
+  border-radius: 13px;
+  background: #eef8ff;
+  color: #168bc5;
+  font-weight: 900;
+}
+
+.grammar-card button {
+  background: #f0fbe9;
+  color: #378d00;
+}
+
+/* =========================
+   GRAMMATIK
+========================= */
+
+.subtopics {
+  display: none;
+}
+
+.subtopics.active {
+  display: block;
+}
+
+.back-button {
+  border: none;
+  background: transparent;
+  color: #168bc5;
+  font-weight: 900;
+  margin-bottom: 15px;
+}
+
+/* =========================
+   ÜBUNG
+========================= */
+
+.exercise {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 22px;
+  margin-top: 18px;
+}
+
+.question {
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+.option {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid var(--border);
+  background: white;
+  border-radius: 13px;
+  text-align: left;
+  font-weight: 700;
+}
+
+.option:hover {
+  border-color: var(--blue);
+}
+
+.feedback {
+  margin-top: 15px;
+  font-weight: 900;
+  min-height: 25px;
+}
+
+.pill {
+  display: inline-block;
+  padding: 7px 11px;
+  border-radius: 99px;
+  background: #f0fbe9;
+  color: #378d00;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.small {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* =========================
+   KI CALL
+========================= */
+
+.call {
+  min-height: 520px;
+  border-radius: 28px;
+  background: #20242b;
+  color: white;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.call-avatar {
+  font-size: 110px;
+  margin: 25px;
+}
+
+.call h2 {
+  margin: 0;
+}
+
+.call-controls {
+  display: flex;
+  gap: 18px;
+  margin-top: 30px;
+}
+
+.round-button {
+  width: 65px;
+  height: 65px;
+  border: none;
+  border-radius: 50%;
+  background: #333941;
+  color: white;
+  font-size: 25px;
+}
+
+.hangup {
+  background: var(--red);
+}
+
+/* =========================
+   FREUNDE
+========================= */
+
+.friend-input {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.friend-input input {
+  flex: 1;
+  padding: 14px;
+  border: 2px solid var(--border);
+  border-radius: 13px;
+}
+
+.friend-input button {
+  border: none;
+  background: var(--blue);
+  color: white;
+  padding: 14px;
+  border-radius: 13px;
+  font-weight: 900;
+}
+
+/* =========================
+   PROFIL
+========================= */
+
+.profile-box {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 30px;
+  text-align: center;
+}
+
+.profile-avatar {
+  font-size: 75px;
+}
+
+.big-stats {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  margin-top: 25px;
+}
+
+.big-stats b {
+  display: block;
+  font-size: 23px;
+}
+
+/* =========================
+   BOTTOM NAV
+========================= */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  background: white;
+  border-top: 1px solid var(--border);
+}
+
+.nav {
+  max-width: 700px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.nav button {
+  border: none;
+  background: white;
+  padding: 10px 5px;
+  color: #777;
+  font-weight: 900;
+  font-size: 12px;
+}
+
+.nav button.active {
+  color: var(--green);
+}
+
+.nav span {
+  display: block;
+  font-size: 22px;
+  margin-bottom: 3px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 90;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-box {
+  background: white;
+  border-radius: 23px;
+  width: 100%;
+  max-width: 620px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 25px;
+}
+
+.close {
+  float: right;
+  border: none;
+  background: #eee;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 22px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px) {
+
+  .header-logo {
+    font-size: 22px;
   }
 
-  70%{
-    box-shadow:0 0 0 25px rgba(229,57,53,0);
+  .stats {
+    gap: 7px;
+    font-size: 12px;
   }
 
-  100%{
-    box-shadow:0 0 0 0 rgba(229,57,53,0);
+  .hero h1 {
+    font-size: 24px;
   }
 
-}
-
-.status{
-  text-align:center;
-  font-weight:bold;
-  min-height:28px;
-}
-
-.recording-status{
-  color:#e53935;
-}
-
-.transcript{
-  background:#f1f3f8;
-  border-radius:15px;
-  padding:18px;
-  min-height:80px;
-  font-size:18px;
-  margin-top:15px;
-}
-
-.feedback{
-  margin-top:15px;
-  padding:15px;
-  border-radius:12px;
-  background:#e9f7ef;
-  display:none;
-}
-
-.progress-container{
-  background:#ddd;
-  border-radius:20px;
-  height:15px;
-  overflow:hidden;
-}
-
-.progress{
-  height:100%;
-  width:0%;
-  background:#5b5ce2;
-  transition:width .4s;
-}
-
-.chat{
-  background:#f4f6fb;
-  border-radius:15px;
-  padding:15px;
-  min-height:150px;
-  max-height:450px;
-  overflow-y:auto;
-}
-
-.ai{
-  background:#e2e4ff;
-  padding:12px;
-  border-radius:15px;
-  margin-bottom:10px;
-}
-
-.user{
-  background:#dff7e7;
-  padding:12px;
-  border-radius:15px;
-  margin-bottom:10px;
-  text-align:right;
-}
-
-.topic-buttons{
-  display:flex;
-  flex-wrap:wrap;
-  gap:5px;
-}
-
-.topic-buttons button{
-  background:#eeeef8;
-  color:#333;
-}
-
-.ai-button{
-  width:100%;
-  font-size:18px;
-  padding:16px;
-  margin-top:15px;
-}
-
-.clear-button{
-  background:#777;
-}
-
-@media(max-width:600px){
-
-  header h1{
-    font-size:32px;
-  }
-
-  .question{
-    font-size:21px;
-  }
-
-  .card{
-    padding:20px;
+  .big-stats {
+    gap: 18px;
   }
 
 }
-
 </style>
 </head>
 
 <body>
 
+<!-- =========================
+     ZUGANGSCODE
+========================= -->
+
+<div id="gate">
+
+  <div class="gate-box">
+
+    <div class="logo">
+      SpeakUp 🚀
+    </div>
+
+    <p>
+      Deine Englisch-Lernapp
+    </p>
+
+    <p class="small">
+      Gib den Zugangscode ein.
+    </p>
+
+    <input
+      id="code"
+      inputmode="numeric"
+      maxlength="4"
+      placeholder="••••"
+    >
+
+    <button
+      class="primary-button"
+      onclick="unlock()"
+    >
+      Öffnen
+    </button>
+
+    <div
+      id="gateError"
+      class="error"
+    ></div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
 
-<h1>🗣️ SpeakUp</h1>
+  <div class="header-logo">
+    SpeakUp
+  </div>
 
-<p>Learn English by actually speaking it! 🤖</p>
+  <div class="stats">
 
-<div class="stats">
+    <div class="stat streak">
+      🔥 <span id="streak">7</span>
+    </div>
 
-<div class="stat">
-⭐ XP: <span id="xp">0</span>
-</div>
+    <div class="stat xp">
+      ⭐ <span id="xp">120</span>
+    </div>
 
-<div class="stat">
-🔥 Streak: <span id="streak">1</span>
-</div>
+    <div class="stat gems">
+      💎 <span id="gems">80</span>
+    </div>
 
-</div>
+  </div>
 
 </header>
 
 
-<div class="container">
+<!-- =========================
+     MAIN
+========================= -->
+
+<main>
 
 
-<!-- PROGRESS -->
+<!-- =========================
+     STARTSEITE
+========================= -->
 
-<div class="card">
-
-<h2>📈 Dein Fortschritt</h2>
-
-<div class="progress-container">
-<div class="progress" id="progress"></div>
-</div>
-
-<p id="progressText">
-0 / 10 Übungen
-</p>
-
-</div>
-
-
-<!-- SPEAKING -->
-
-<div class="card">
-
-<h2>🎙️ Speaking Challenge</h2>
-
-<p>
-Beantworte die Frage auf Englisch:
-</p>
-
-<div class="question" id="question">
-What do you like to do in your free time?
-</div>
-
-<button onclick="speakQuestion()">
-🔊 Frage anhören
-</button>
-
-<button onclick="newQuestion()">
-🔄 Neue Frage
-</button>
-
-
-<button
-id="micButton"
-class="mic-button"
-onclick="toggleRecording()"
+<section
+  id="home"
+  class="page active"
 >
-🎙️
-</button>
 
+  <div class="hero">
+
+    <h1>
+      Hallo! 👋
+    </h1>
+
+    <p>
+      Was möchtest du heute lernen?
+    </p>
+
+    <div class="goal">
+
+      <b>
+        🎯 Tagesziel
+      </b>
+
+      <br>
+
+      <span class="small">
+        Du hast heute schon 62 % geschafft.
+      </span>
+
+      <div class="progress">
+        <span></span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <h2 class="section-title">
+    Schnellstart
+  </h2>
+
+
+  <div class="grid">
+
+    <div class="card">
+
+      <div class="topic-icon">
+        📚
+      </div>
+
+      <h3>
+        Grammatik
+      </h3>
+
+      <p>
+        Wähle jedes Grammatik-Thema frei aus
+        und übe ohne Leben.
+      </p>
+
+      <button
+        onclick="showPage('grammar')"
+      >
+        Grammatik öffnen
+      </button>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="topic-icon">
+        📞
+      </div>
+
+      <h3>
+        KI-Sprechen
+      </h3>
+
+      <p>
+        Sprich mit deinem KI-Partner
+        und übe echte Gespräche.
+      </p>
+
+      <button
+        onclick="showPage('ai')"
+      >
+        Zum KI-Anruf
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     GRAMMATIK
+========================= -->
+
+<section
+  id="grammar"
+  class="page"
+>
+
+  <div class="hero">
+
+    <h1>
+      📚 Grammatik
+    </h1>
+
+    <p>
+      Wähle einfach das Thema aus,
+      das du gerade üben möchtest.
+      Keine Reihenfolge, keine Leben –
+      unendlich viele Versuche. ♾️
+    </p>
+
+  </div>
+
+
+  <div
+    id="topicGrid"
+    class="grid"
+  ></div>
+
+
+  <div
+    id="subtopicView"
+    class="subtopics"
+  ></div>
+
+</section>
+
+
+<!-- =========================
+     KI
+========================= -->
+
+<section
+  id="ai"
+  class="page"
+>
+
+  <div class="call">
+
+    <div class="pill">
+      KI-Sprechpartner
+    </div>
+
+    <div
+      id="callAvatar"
+      class="call-avatar"
+    >
+      🧑‍🏫
+    </div>
+
+    <h2>
+      English Chat
+    </h2>
+
+    <p id="callText">
+      Sprich später mit deinem
+      KI-Partner und übe Englisch.
+    </p>
+
+    <div class="call-controls">
+
+      <button
+        class="round-button"
+        onclick="changeAvatar()"
+      >
+        🎭
+      </button>
+
+      <button
+        class="round-button"
+        onclick="speakAI()"
+      >
+        🔊
+      </button>
+
+      <button
+        class="round-button hangup"
+        onclick="endCall()"
+      >
+        ☎
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     FREUNDE
+========================= -->
+
+<section
+  id="friends"
+  class="page"
+>
+
+  <div class="hero">
+
+    <h1>
+      👥 Freunde
+    </h1>
+
+    <p>
+      Füge Freunde über einen Code hinzu
+      und vergleicht eure XP.
+    </p>
+
+
+    <div class="friend-input">
+
+      <input
+        id="friendInput"
+        placeholder="Freundescode"
+      >
+
+      <button
+        onclick="addFriend()"
+      >
+        Hinzufügen
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <h2>
+    Meine Freunde
+  </h2>
+
+  <div
+    id="friendList"
+    class="grid"
+  ></div>
+
+</section>
+
+
+<!-- =========================
+     PROFIL
+========================= -->
+
+<section
+  id="profile"
+  class="page"
+>
+
+  <div class="profile-box">
+
+    <div class="profile-avatar">
+      🧙‍♂️
+    </div>
+
+    <h1>
+      Magier der Stufe 10
+    </h1>
+
+    <p class="small">
+      Englisch lernen mit SpeakUp
+    </p>
+
+
+    <div class="big-stats">
+
+      <div>
+        <b id="profileXP">
+          120
+        </b>
+        XP
+      </div>
+
+      <div>
+        <b>
+          🔥 7
+        </b>
+        Tage
+      </div>
+
+      <div>
+        <b>
+          🏆 4
+        </b>
+        Abzeichen
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     BOTTOM NAVIGATION
+========================= -->
+
+<div class="bottom-nav">
+
+  <div class="nav">
+
+    <button
+      class="active"
+      onclick="showPage('home', this)"
+    >
+      <span>🏠</span>
+      Start
+    </button>
+
+
+    <button
+      onclick="showPage('grammar', this)"
+    >
+      <span>📚</span>
+      Grammatik
+    </button>
+
+
+    <button
+      onclick="showPage('ai', this)"
+    >
+      <span>📞</span>
+      KI
+    </button>
+
+
+    <button
+      onclick="showPage('friends', this)"
+    >
+      <span>👥</span>
+      Freunde
+    </button>
+
+
+    <button
+      onclick="showPage('profile', this)"
+    >
+      <span>👤</span>
+      Profil
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     ÜBUNGS-MODAL
+========================= -->
 
 <div
-id="status"
-class="status"
->
-Klicke auf das Mikrofon, um zu sprechen.
-</div>
-
-
-<div
-class="transcript"
-id="transcript"
->
-Dein gesprochener Text erscheint hier …
-</div>
-
-
-<button
-class="ai-button"
-onclick="sendToAI()"
->
-🤖 Mit KI sprechen
-</button>
-
-
-<div
-class="feedback"
-id="feedback"
->
-</div>
-
-</div>
-
-
-<!-- THEMES -->
-
-<div class="card">
-
-<h2>📚 Thema auswählen</h2>
-
-<div class="topic-buttons">
-
-<button onclick="setTopic('school')">
-🏫 School
-</button>
-
-<button onclick="setTopic('hobbies')">
-🎮 Hobbies
-</button>
-
-<button onclick="setTopic('travel')">
-✈️ Travel
-</button>
-
-<button onclick="setTopic('daily')">
-☀️ Daily life
-</button>
-
-<button onclick="setTopic('future')">
-🚀 Future
-</button>
-
-</div>
-
-</div>
-
-
-<!-- AI CHAT -->
-
-<div class="card">
-
-<h2>🤖 AI Conversation</h2>
-
-<div
-class="chat"
-id="chat"
+  id="modal"
+  class="modal"
 >
 
-<div class="ai">
+  <div class="modal-box">
 
-🤖 Hi! I'm your English speaking partner! 👋
+    <button
+      class="close"
+      onclick="closeModal()"
+    >
+      ×
+    </button>
 
-<br><br>
+    <div id="modalContent"></div>
 
-Tell me something about yourself.
-
-</div>
-
-</div>
-
-
-<button
-class="clear-button"
-onclick="clearChat()"
->
-🗑️ Gespräch löschen
-</button>
-
-</div>
-
+  </div>
 
 </div>
 
 
 <script>
 
-
 /* =========================
-   GRUNDVARIABLEN
+   ZUGANG
 ========================= */
 
-let xp = 0;
+function unlock() {
 
-let completed = 0;
+  const code =
+    document.getElementById("code").value;
 
-let currentTopic = "hobbies";
+  if (code === "1234") {
 
-let recognition = null;
+    document.getElementById("gate").style.display = "none";
 
-let isRecording = false;
+    sessionStorage.setItem(
+      "speakupUnlocked",
+      "1"
+    );
 
-let finalTranscript = "";
+  } else {
 
-let chatHistory = [];
+    document.getElementById(
+      "gateError"
+    ).textContent =
+      "Falscher Code. Versuch es noch einmal.";
+
+  }
+
+}
+
+
+if (
+  sessionStorage.getItem(
+    "speakupUnlocked"
+  ) === "1"
+) {
+
+  document.getElementById(
+    "gate"
+  ).style.display = "none";
+
+}
 
 
 /* =========================
-   FRAGEN
+   STATS
 ========================= */
 
-const questions = {
+let xp = 120;
 
-school:[
-"What is your favorite subject at school?",
-"What do you like about your school?",
-"Who is your best classmate?",
-"What do you usually do during your school break?"
-],
 
-hobbies:[
-"What do you like to do in your free time?",
-"What is your favorite hobby?",
-"What games do you like to play?",
-"What kind of music do you like?"
-],
+/* =========================
+   GRAMMATIK-THEMEN
+========================= */
 
-travel:[
-"Where would you like to travel?",
-"What is your favorite place?",
-"Would you like to visit the USA?",
-"What would you do on a perfect holiday?"
-],
+const topics = [
 
-daily:[
-"What do you usually do after school?",
-"What time do you get up?",
-"What do you do in the evening?",
-"What is your favorite day of the week?"
-],
+  {
+    name: "Zeitformen",
+    icon: "🕐",
+    desc: "Present, Past, Perfect und mehr",
+    subs: [
+      "Present Simple",
+      "Present Progressive",
+      "Past Simple",
+      "Past Progressive",
+      "Present Perfect",
+      "Past Perfect",
+      "Future",
+      "Gemischte Zeitformen"
+    ]
+  },
 
-future:[
-"What would you like to do in the future?",
-"What job would you like to have?",
-"Where would you like to live?",
-"What are your goals?"
-]
+  {
+    name: "If-Sätze",
+    icon: "🔀",
+    desc: "Type 1, Type 2, Type 3",
+    subs: [
+      "Grundlagen",
+      "Type 1",
+      "Type 2",
+      "Type 3",
+      "Gemischte Übungen"
+    ]
+  },
+
+  {
+    name: "Modalverben",
+    icon: "🧩",
+    desc: "can, must, should, might ...",
+    subs: [
+      "can / could",
+      "must / have to",
+      "should",
+      "may / might",
+      "Gemischte Übungen"
+    ]
+  },
+
+  {
+    name: "Passiv",
+    icon: "🔄",
+    desc: "Passive Voice verstehen und bilden",
+    subs: [
+      "Grundlagen",
+      "Present Passive",
+      "Past Passive",
+      "Perfect Passive",
+      "Gemischte Übungen"
+    ]
+  },
+
+  {
+    name: "Reported Speech",
+    icon: "💬",
+    desc: "Aussagen richtig wiedergeben",
+    subs: [
+      "Grundlagen",
+      "Statements",
+      "Questions",
+      "Commands",
+      "Gemischte Übungen"
+    ]
+  },
+
+  {
+    name: "Fragen",
+    icon: "❓",
+    desc: "Questions und Frageformen",
+    subs: [
+      "Yes/No Questions",
+      "Wh-Questions",
+      "Questions with auxiliaries",
+      "Indirect Questions"
+    ]
+  },
+
+  {
+    name: "Vergleiche",
+    icon: "📏",
+    desc: "Comparative und Superlative",
+    subs: [
+      "Comparative",
+      "Superlative",
+      "as ... as",
+      "Gemischte Übungen"
+    ]
+  },
+
+  {
+    name: "Pronomen",
+    icon: "🧠",
+    desc: "Personal, possessive und relative pronouns",
+    subs: [
+      "Personal Pronouns",
+      "Possessive Pronouns",
+      "Reflexive Pronouns",
+      "Relative Pronouns"
+    ]
+  },
+
+  {
+    name: "Artikel",
+    icon: "🅰️",
+    desc: "a, an, the oder kein Artikel",
+    subs: [
+      "a / an",
+      "the",
+      "kein Artikel",
+      "Gemischte Übungen"
+    ]
+  },
+
+  {
+    name: "Präpositionen",
+    icon: "📍",
+    desc: "in, on, at und viele mehr",
+    subs: [
+      "Zeit",
+      "Ort",
+      "Bewegung",
+      "Gemischte Übungen"
+    ]
+  }
+
+];
+
+
+/* =========================
+   ÜBUNGEN
+========================= */
+
+const exercises = {
+
+  "Present Simple": [
+
+    [
+      "She ___ to school every day.",
+      ["go", "goes", "going"],
+      "goes"
+    ],
+
+    [
+      "They ___ football on Saturdays.",
+      ["play", "plays", "playing"],
+      "play"
+    ]
+
+  ],
+
+  "Past Simple": [
+
+    [
+      "Yesterday I ___ a movie.",
+      ["watch", "watched", "watching"],
+      "watched"
+    ],
+
+    [
+      "He ___ home late last night.",
+      ["comes", "came", "come"],
+      "came"
+    ]
+
+  ],
+
+  "Present Progressive": [
+
+    [
+      "Look! The baby ___.",
+      ["sleeps", "is sleeping", "sleep"],
+      "is sleeping"
+    ]
+
+  ],
+
+  "Type 1": [
+
+    [
+      "If it rains, we ___ at home.",
+      ["stay", "will stay", "would stay"],
+      "will stay"
+    ]
+
+  ],
+
+  "Type 2": [
+
+    [
+      "If I had more time, I ___ more.",
+      ["travel", "would travel", "will travel"],
+      "would travel"
+    ]
+
+  ],
+
+  "Type 3": [
+
+    [
+      "If I had studied, I ___ the test.",
+      ["would pass", "would have passed", "will pass"],
+      "would have passed"
+    ]
+
+  ],
+
+  "can / could": [
+
+    [
+      "I ___ swim when I was five.",
+      ["can", "could", "must"],
+      "could"
+    ]
+
+  ],
+
+  "must / have to": [
+
+    [
+      "You ___ wear a seatbelt.",
+      ["must", "might", "could"],
+      "must"
+    ]
+
+  ],
+
+  "should": [
+
+    [
+      "You ___ study for the test.",
+      ["should", "couldn't", "mightn't"],
+      "should"
+    ]
+
+  ],
+
+  "Comparative": [
+
+    [
+      "My bike is ___ than yours.",
+      ["fast", "faster", "fastest"],
+      "faster"
+    ]
+
+  ],
+
+  "Superlative": [
+
+    [
+      "This is the ___ book here.",
+      ["interesting", "more interesting", "most interesting"],
+      "most interesting"
+    ]
+
+  ],
+
+  "Personal Pronouns": [
+
+    [
+      "Tom is my friend. ___ is nice.",
+      ["He", "She", "They"],
+      "He"
+    ]
+
+  ],
+
+  "a / an": [
+
+    [
+      "I saw ___ elephant.",
+      ["a", "an", "the"],
+      "an"
+    ]
+
+  ],
+
+  "the": [
+
+    [
+      "___ sun is shining.",
+      ["A", "An", "The"],
+      "The"
+    ]
+
+  ],
+
+  "Zeitformen": [
+
+    [
+      "I ___ my homework yesterday.",
+      ["do", "did", "am doing"],
+      "did"
+    ]
+
+  ],
+
+  "Gemischte Zeitformen": [
+
+    [
+      "She ___ here since 2020.",
+      ["lives", "lived", "has lived"],
+      "has lived"
+    ]
+
+  ]
 
 };
 
 
 /* =========================
-   UI AKTUALISIEREN
+   SEITENWECHSEL
 ========================= */
 
-function updateUI(){
-
-  document.getElementById("xp").textContent = xp;
-
-  document.getElementById("progress").style.width =
-    Math.min(completed * 10,100) + "%";
-
-  document.getElementById("progressText").textContent =
-    completed + " / 10 Übungen";
-
-}
-
-
-/* =========================
-   THEMA
-========================= */
-
-function setTopic(topic){
-
-  currentTopic = topic;
-
-  newQuestion();
-
-}
-
-
-/* =========================
-   NEUE FRAGE
-========================= */
-
-function newQuestion(){
-
-  const list = questions[currentTopic];
-
-  const q =
-    list[Math.floor(Math.random()*list.length)];
-
-  document.getElementById("question").textContent = q;
-
-  document.getElementById("transcript").textContent =
-    "Dein gesprochener Text erscheint hier …";
-
-  document.getElementById("feedback").style.display =
-    "none";
-
-  document.getElementById("status").textContent =
-    "Klicke auf das Mikrofon, um zu sprechen.";
-
-  document.getElementById("status").className =
-    "status";
-
-  finalTranscript = "";
-
-}
-
-
-/* =========================
-   FRAGE VORLESEN
-========================= */
-
-function speakQuestion(){
-
-  const text =
-    document.getElementById("question").textContent;
-
-  const speech =
-    new SpeechSynthesisUtterance(text);
-
-  speech.lang = "en-US";
-
-  speech.rate = 0.9;
-
-  speechSynthesis.cancel();
-
-  speechSynthesis.speak(speech);
-
-}
-
-
-/* =========================
-   SPRACHERKENNUNG
-========================= */
-
-function createRecognition(){
-
-  const SpeechRecognition =
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
-
-  if(!SpeechRecognition){
-
-    alert(
-      "Dein Browser unterstützt leider keine Spracherkennung. Bitte probiere Chrome oder Safari."
-    );
-
-    return null;
-
-  }
-
-
-  const rec = new SpeechRecognition();
-
-  rec.lang = "en-US";
-
-  rec.continuous = true;
-
-  rec.interimResults = true;
-
-  rec.maxAlternatives = 1;
-
-
-  rec.onstart = function(){
-
-    isRecording = true;
-
-    const button =
-      document.getElementById("micButton");
-
-    button.classList.add("recording");
-
-    button.textContent = "⏹️";
-
-
-    const status =
-      document.getElementById("status");
-
-    status.textContent =
-      "🔴 Aufnahme läuft … Sprich jetzt Englisch!";
-
-    status.className =
-      "status recording-status";
-
-  };
-
-
-  rec.onresult = function(event){
-
-    let interimTranscript = "";
-
-    for(
-      let i = event.resultIndex;
-      i < event.results.length;
-      i++
-    ){
-
-      const text =
-        event.results[i][0].transcript;
-
-      if(event.results[i].isFinal){
-
-        finalTranscript += text + " ";
-
-      }else{
-
-        interimTranscript += text;
-
-      }
-
-    }
-
-
-    document.getElementById("transcript").textContent =
-      finalTranscript + interimTranscript;
-
-  };
-
-
-  rec.onerror = function(event){
-
-    console.log(event);
-
-    isRecording = false;
-
-    document
-      .getElementById("micButton")
-      .classList.remove("recording");
-
-    document
-      .getElementById("micButton")
-      .textContent = "🎙️";
-
-
-    let message =
-      "⚠️ Mikrofon-Fehler: " + event.error;
-
-
-    if(event.error === "not-allowed"){
-
-      message =
-        "⚠️ Mikrofon wurde blockiert. Bitte erlaube den Mikrofonzugriff.";
-
-    }
-
-
-    if(event.error === "no-speech"){
-
-      message =
-        "⚠️ Ich habe nichts gehört. Versuch es noch einmal.";
-
-    }
-
-
-    document.getElementById("status").textContent =
-      message;
-
-  };
-
-
-  rec.onend = function(){
-
-    isRecording = false;
-
-    document
-      .getElementById("micButton")
-      .classList.remove("recording");
-
-    document
-      .getElementById("micButton")
-      .textContent = "🎙️";
-
-
-    const text =
-      finalTranscript.trim();
-
-
-    if(text){
-
-      document.getElementById("status").textContent =
-        "✅ Antwort erkannt! Klicke auf „Mit KI sprechen“.";
-
-    }else{
-
-      document.getElementById("status").textContent =
-        "Klicke erneut auf das Mikrofon und sprich.";
-
-    }
-
-  };
-
-
-  return rec;
-
-}
-
-
-/* =========================
-   MIKROFON
-========================= */
-
-function toggleRecording(){
-
-  if(!navigator.mediaDevices ||
-     !navigator.mediaDevices.getUserMedia){
-
-    alert(
-      "Der Browser erlaubt hier keinen Mikrofonzugriff. Öffne die Website über HTTPS."
-    );
-
-    return;
-
-  }
-
-
-  if(isRecording){
-
-    if(recognition){
-
-      recognition.stop();
-
-    }
-
-    return;
-
-  }
-
-
-  finalTranscript = "";
-
-  document.getElementById("transcript").textContent =
-    "Ich höre zu …";
-
-
-  navigator.mediaDevices
-    .getUserMedia({audio:true})
-
-    .then(function(stream){
-
-      stream
-        .getTracks()
-        .forEach(function(track){
-          track.stop();
-        });
-
-
-      if(!recognition){
-
-        recognition =
-          createRecognition();
-
-      }
-
-
-      if(recognition){
-
-        try{
-
-          recognition.start();
-
-        }catch(error){
-
-          console.log(error);
-
-        }
-
-      }
-
-    })
-
-    .catch(function(error){
-
-      console.log(error);
-
-      document.getElementById("status").textContent =
-        "⚠️ Mikrofonzugriff wurde nicht erlaubt.";
-
-      alert(
-        "Bitte erlaube dieser Webseite den Zugriff auf dein Mikrofon."
-      );
-
+function showPage(id, button) {
+
+  document
+    .querySelectorAll(".page")
+    .forEach(page => {
+      page.classList.remove("active");
     });
 
-}
+  document
+    .getElementById(id)
+    .classList.add("active");
 
 
-/* =========================
-   KI ANTWORT
-========================= */
+  if (button) {
 
-async function sendToAI(){
+    document
+      .querySelectorAll(".nav button")
+      .forEach(btn => {
+        btn.classList.remove("active");
+      });
 
-  const message =
-    finalTranscript.trim();
-
-
-  if(!message){
-
-    alert(
-      "🎙️ Sprich zuerst ins Mikrofon."
-    );
-
-    return;
+    button.classList.add("active");
 
   }
 
-
-  const chat =
-    document.getElementById("chat");
-
-
-  /* USER-NACHRICHT */
-
-  const userMessage =
-    document.createElement("div");
-
-  userMessage.className = "user";
-
-  userMessage.textContent =
-    "🧑 " + message;
-
-  chat.appendChild(userMessage);
-
-
-  /* GESPRÄCH SPEICHERN */
-
-  chatHistory.push({
-
-    role:"user",
-
-    content:message
-
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
   });
 
-
-  /* LADETEXT */
-
-  const loading =
-    document.createElement("div");
-
-  loading.className = "ai";
-
-  loading.textContent =
-    "🤔 AI is thinking...";
-
-  chat.appendChild(loading);
-
-  chat.scrollTop =
-    chat.scrollHeight;
+}
 
 
-  try{
+/* =========================
+   THEMEN ANZEIGEN
+========================= */
 
+function renderTopics() {
 
-    const response =
-      await fetch(
-        "https://speakup-english-ai.onrender.com/api/chat",
-        {
+  document.getElementById(
+    "topicGrid"
+  ).innerHTML = topics.map(
+    (topic, index) => `
 
-          method:"POST",
+      <div class="card grammar-card">
 
-          headers:{
-            "Content-Type":"application/json"
-          },
+        <div class="topic-icon">
+          ${topic.icon}
+        </div>
 
-          body:JSON.stringify({
+        <h3>
+          ${topic.name}
+        </h3>
 
-            message:message,
+        <p>
+          ${topic.desc}
+        </p>
 
-            history:
-              chatHistory.slice(0,-1)
+        <button
+          onclick="openTopic(${index})"
+        >
+          Thema öffnen →
+        </button>
 
-          })
+      </div>
 
-        }
-      );
-
-
-    const data =
-      await response.json();
-
-
-    if(!response.ok){
-
-      throw new Error(
-        data.error || "AI error"
-      );
-
-    }
-
-
-    loading.remove();
-
-
-    /* KI-NACHRICHT */
-
-    const aiMessage =
-      document.createElement("div");
-
-    aiMessage.className = "ai";
-
-    aiMessage.textContent =
-      "🤖 " + data.text;
-
-    chat.appendChild(aiMessage);
-
-
-    /* KI ANTWORT SPEICHERN */
-
-    chatHistory.push({
-
-      role:"assistant",
-
-      content:data.text
-
-    });
-
-
-    /* KI SPRICHT */
-
-    const speech =
-      new SpeechSynthesisUtterance(
-        data.text
-      );
-
-    speech.lang = "en-US";
-
-    speech.rate = 0.9;
-
-    speechSynthesis.cancel();
-
-    speechSynthesis.speak(speech);
-
-
-    /* XP */
-
-    xp += 10;
-
-    completed++;
-
-    updateUI();
-
-
-    document.getElementById("feedback").style.display =
-      "block";
-
-    document.getElementById("feedback").textContent =
-      "🎉 Great job! +10 XP";
-
-
-    chat.scrollTop =
-      chat.scrollHeight;
-
-
-    /* TRANSKRIPT LEEREN */
-
-    finalTranscript = "";
-
-    document.getElementById("transcript").textContent =
-      "Deine nächste Antwort erscheint hier …";
-
-
-  }catch(error){
-
-    console.error(error);
-
-    loading.textContent =
-      "⚠️ Die KI konnte gerade nicht antworten. Versuch es bitte noch einmal.";
-
-  }
+    `
+  ).join("");
 
 }
 
 
 /* =========================
-   CHAT LÖSCHEN
+   THEMA ÖFFNEN
 ========================= */
 
-function clearChat(){
+let currentTopic = null;
 
-  chatHistory = [];
+function openTopic(index) {
+
+  currentTopic =
+    topics[index];
 
 
-  const chat =
-    document.getElementById("chat");
+  document.getElementById(
+    "topicGrid"
+  ).style.display = "none";
 
 
-  chat.innerHTML = `
+  const view =
+    document.getElementById(
+      "subtopicView"
+    );
 
-    <div class="ai">
+  view.classList.add("active");
 
-      🤖 Hi! I'm your English speaking partner! 👋
 
-      <br><br>
+  view.innerHTML = `
 
-      Tell me something about yourself.
+    <button
+      class="back-button"
+      onclick="backTopics()"
+    >
+      ← Alle Grammatik-Themen
+    </button>
+
+
+    <div class="hero">
+
+      <h1>
+        ${currentTopic.icon}
+        ${currentTopic.name}
+      </h1>
+
+      <p>
+        Wähle einen Unterpunkt.
+        Du kannst jederzeit wechseln
+        und so oft üben, wie du möchtest.
+      </p>
+
+    </div>
+
+
+    <div class="grid">
+
+      ${currentTopic.subs.map(
+        sub => `
+
+          <div class="card">
+
+            <span class="pill">
+              ♾️ Unbegrenzt
+            </span>
+
+            <h3>
+              ${sub}
+            </h3>
+
+            <p>
+              Übungen zu ${sub}.
+            </p>
+
+            <button
+              onclick="startExercise('${sub.replaceAll("'","\\'")}')"
+            >
+              Üben →
+            </button>
+
+          </div>
+
+        `
+      ).join("")}
 
     </div>
 
@@ -1034,12 +1545,316 @@ function clearChat(){
 
 
 /* =========================
+   ZURÜCK
+========================= */
+
+function backTopics() {
+
+  document.getElementById(
+    "topicGrid"
+  ).style.display = "grid";
+
+  document.getElementById(
+    "subtopicView"
+  ).classList.remove("active");
+
+}
+
+
+/* =========================
+   ÜBUNG
+========================= */
+
+let currentSub = "";
+let questionIndex = 0;
+
+
+function startExercise(subtopic) {
+
+  currentSub = subtopic;
+
+  questionIndex = 0;
+
+  document
+    .getElementById("modal")
+    .classList.add("show");
+
+  renderQuestion();
+
+}
+
+
+function renderQuestion() {
+
+  const bank =
+    exercises[currentSub] ||
+    [
+      [
+        "Wähle die richtige Antwort.",
+        [
+          "Option A",
+          "Option B",
+          "Option C"
+        ],
+        "Option B"
+      ]
+    ];
+
+
+  const question =
+    bank[
+      questionIndex % bank.length
+    ];
+
+
+  document.getElementById(
+    "modalContent"
+  ).innerHTML = `
+
+    <span class="pill">
+      ♾️ Unbegrenzte Versuche
+    </span>
+
+    <h2>
+      ${currentSub}
+    </h2>
+
+    <div class="exercise">
+
+      <div class="question">
+        ${question[0]}
+      </div>
+
+      <div class="options">
+
+        ${question[1].map(
+          option => `
+
+            <button
+              class="option"
+              onclick="answer(
+                '${option.replaceAll("'","\\'")}',
+                '${question[2].replaceAll("'","\\'")}'
+              )"
+            >
+              ${option}
+            </button>
+
+          `
+        ).join("")}
+
+      </div>
+
+      <div
+        id="feedback"
+        class="feedback"
+      ></div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================
+   ANTWORT
+========================= */
+
+function answer(
+  selected,
+  correct
+) {
+
+  const feedback =
+    document.getElementById(
+      "feedback"
+    );
+
+
+  if (selected === correct) {
+
+    xp += 10;
+
+
+    document.getElementById(
+      "xp"
+    ).textContent = xp;
+
+
+    document.getElementById(
+      "profileXP"
+    ).textContent = xp;
+
+
+    feedback.textContent =
+      "✅ Richtig! +10 XP";
+
+
+    setTimeout(
+      () => {
+
+        questionIndex++;
+
+        renderQuestion();
+
+      },
+      700
+    );
+
+
+  } else {
+
+    feedback.textContent =
+      "💡 Noch nicht. Versuch es einfach noch einmal – du verlierst kein Leben!";
+
+  }
+
+}
+
+
+/* =========================
+   MODAL SCHLIESSEN
+========================= */
+
+function closeModal() {
+
+  document
+    .getElementById("modal")
+    .classList.remove("show");
+
+}
+
+
+/* =========================
+   FREUNDE
+========================= */
+
+function addFriend() {
+
+  const input =
+    document.getElementById(
+      "friendInput"
+    );
+
+
+  if (!input.value.trim()) {
+    return;
+  }
+
+
+  const friend =
+    document.createElement("div");
+
+
+  friend.className = "card";
+
+
+  friend.innerHTML = `
+
+    <h3>
+      👤 ${input.value}
+    </h3>
+
+    <p>
+      Freund hinzugefügt · 0 XP
+    </p>
+
+  `;
+
+
+  document
+    .getElementById("friendList")
+    .appendChild(friend);
+
+
+  input.value = "";
+
+}
+
+
+/* =========================
+   KI AVATARE
+========================= */
+
+const avatars = [
+  "🧑‍🏫",
+  "🦙",
+  "👽",
+  "🤖",
+  "🐱",
+  "🐉"
+];
+
+let avatarIndex = 0;
+
+
+function changeAvatar() {
+
+  avatarIndex++;
+
+  if (
+    avatarIndex >= avatars.length
+  ) {
+    avatarIndex = 0;
+  }
+
+
+  document.getElementById(
+    "callAvatar"
+  ).textContent =
+    avatars[avatarIndex];
+
+}
+
+
+function speakAI() {
+
+  document.getElementById(
+    "callText"
+  ).textContent =
+    "Hi! Let's practice English together. What did you do today?";
+
+
+  if ("speechSynthesis" in window) {
+
+    const speech =
+      new SpeechSynthesisUtterance(
+        "Hi! Let's practice English together. What did you do today?"
+      );
+
+    speech.lang = "en-US";
+
+    speechSynthesis.speak(
+      speech
+    );
+
+  }
+
+}
+
+
+function endCall() {
+
+  document.getElementById(
+    "callText"
+  ).textContent =
+    "Anruf beendet 👋";
+
+}
+
+
+/* =========================
    START
 ========================= */
 
-updateUI();
+renderTopics();
 
 </script>
 
 </body>
-</html>
+  </html>
+
+    
+
+
