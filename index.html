@@ -2,2591 +2,388 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#58cc02">
-
-<title>SpeakUp – English Learning</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#07110e">
+<title>SpeakUp – Englisch lernen</title>
 <style>
 :root{
-  --green:#58cc02;
-  --green-dark:#46a302;
-  --blue:#1cb0f6;
-  --purple:#8b5cf6;
-  --orange:#ff9600;
-  --red:#ff4b4b;
-  --yellow:#ffc800;
-  --bg:#f7f7f7;
-  --card:#ffffff;
-  --text:#222;
-  --muted:#777;
-  --border:#e5e5e5;
+  --bg:#06100d;
+  --panel:#0c1915;
+  --panel2:#10211b;
+  --line:rgba(255,255,255,.09);
+  --text:#f4faf7;
+  --muted:#91a49d;
+  --green:#57e58a;
+  --green2:#22c96a;
+  --red:#ff5b61;
+  --shadow:0 24px 70px rgba(0,0,0,.38);
 }
-
-*{
-  box-sizing:border-box;
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:radial-gradient(circle at 70% 0%,#153228 0,#08130f 38%,#040907 100%);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button{font:inherit}
+.app{min-height:100vh;display:flex}
+.sidebar{
+  width:230px;flex:none;padding:24px 16px;border-right:1px solid var(--line);
+  background:rgba(4,11,9,.82);backdrop-filter:blur(20px);display:flex;flex-direction:column
 }
-
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--text);
+.logo{font-size:25px;font-weight:850;letter-spacing:-1px;padding:8px 12px 28px}
+.logo span{color:var(--green)}
+.nav{display:grid;gap:8px}
+.nav button{
+  border:0;background:transparent;color:#aebdb7;text-align:left;padding:15px 16px;border-radius:18px;
+  cursor:pointer;font-weight:700;display:flex;gap:13px;align-items:center
 }
-
-button{
-  font-family:inherit;
-  cursor:pointer;
-}
-
-.app{
-  min-height:100vh;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-.topbar{
-  position:sticky;
-  top:0;
-  z-index:20;
-  background:white;
-  border-bottom:1px solid var(--border);
-  height:64px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 18px;
-}
-
-.logo{
-  font-size:25px;
-  font-weight:900;
-  color:var(--green);
-}
-
-.logo span{
-  color:#222;
-}
-
-.profile-button{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  border:none;
-  background:#eef8e8;
-  font-size:22px;
-}
-
-/* =========================
-   MAIN
-========================= */
-
-main{
-  max-width:1050px;
-  margin:auto;
-  padding:25px 18px 100px;
-}
-
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
-}
-
-.hero{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:28px;
-  margin-bottom:22px;
-}
-
-.hero h1{
-  margin:0 0 8px;
-  font-size:32px;
-}
-
-.hero p{
-  margin:0;
-  color:var(--muted);
-  font-size:17px;
-}
-
-/* =========================
-   CARDS
-========================= */
-
-.card-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:16px;
-}
-
-.card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:22px;
-  transition:.15s;
-}
-
-.card:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 25px rgba(0,0,0,.07);
-}
-
-.card-icon{
-  font-size:42px;
-  margin-bottom:12px;
-}
-
-.card h2,
-.card h3{
-  margin:0 0 8px;
-}
-
-.card p{
-  color:var(--muted);
-  margin:0;
-  line-height:1.5;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
+.nav button.active,.nav button:hover{background:rgba(87,229,138,.13);color:var(--green)}
+.nav .ico{width:24px;text-align:center;font-size:20px}
+.sidebarBottom{margin-top:auto;padding:16px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.025)}
+.sidebarBottom strong{display:block;margin-bottom:5px}.sidebarBottom small{color:var(--muted);line-height:1.45}
+.main{flex:1;min-width:0}
+.topbar{height:74px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-bottom:1px solid var(--line);background:rgba(5,13,10,.45);backdrop-filter:blur(18px)}
+.status{display:flex;align-items:center;gap:9px;color:#b7c7c0;font-size:14px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}
+.profile{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#183027;border:1px solid var(--line)}
+.page{display:none;padding:28px;max-width:1250px;margin:auto}.page.active{display:block}
+h1{font-size:clamp(30px,5vw,48px);margin:0 0 8px;letter-spacing:-1.5px}
+.sub{color:var(--muted);margin:0 0 25px}
+.card{background:linear-gradient(145deg,rgba(18,35,29,.92),rgba(8,17,14,.92));border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow)}
+.hero{padding:32px;display:grid;grid-template-columns:1.2fr .8fr;gap:25px;align-items:center}
+.hero h2{font-size:34px;margin:0 0 12px}.hero p{color:var(--muted);line-height:1.6}
 .primary{
-  border:none;
-  background:var(--green);
-  color:white;
-  padding:14px 20px;
-  border-radius:14px;
-  font-size:16px;
-  font-weight:800;
-  box-shadow:0 4px 0 var(--green-dark);
-}
-
-.primary:active{
-  transform:translateY(3px);
-  box-shadow:none;
-}
-
-.secondary{
-  border:2px solid var(--border);
-  background:white;
-  padding:12px 18px;
-  border-radius:13px;
-  font-weight:700;
-}
-
-.danger{
-  background:var(--red);
-  color:white;
-  border:none;
-  padding:13px 18px;
-  border-radius:13px;
-  font-weight:800;
-}
-
-/* =========================
-   GRAMMAR
-========================= */
-
-.section-title{
-  margin:28px 0 14px;
-}
-
-.section-title h2{
-  margin:0 0 5px;
-}
-
-.section-title p{
-  margin:0;
-  color:var(--muted);
-}
-
-.topic-card{
-  cursor:pointer;
-}
-
-.topic-card .emoji{
-  font-size:40px;
-}
-
-.subtopics{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:14px;
-  margin-top:18px;
-}
-
-.subtopic{
-  background:white;
-  border:2px solid var(--border);
-  padding:18px;
-  border-radius:17px;
-  text-align:left;
-  font-size:16px;
-  font-weight:700;
-}
-
-.subtopic:hover{
-  border-color:var(--green);
-}
-
-.back-button{
-  margin-bottom:18px;
-}
-
-/* =========================
-   EXERCISES
-========================= */
-
-.exercise-box{
-  max-width:750px;
-  margin:30px auto;
-}
-
-.question-card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:24px;
-  padding:28px;
-}
-
-.question-number{
-  color:var(--muted);
-  font-weight:700;
-  margin-bottom:18px;
-}
-
-.question{
-  font-size:24px;
-  font-weight:800;
-  line-height:1.4;
-  margin-bottom:24px;
-}
-
-.answers{
-  display:grid;
-  gap:12px;
-}
-
-.answer{
-  border:2px solid var(--border);
-  background:white;
-  padding:16px;
-  border-radius:15px;
-  text-align:left;
-  font-size:17px;
-  font-weight:700;
-}
-
-.answer:hover{
-  border-color:var(--blue);
-}
-
-.answer.correct{
-  border-color:var(--green);
-  background:#e9f9df;
-}
-
-.answer.wrong{
-  border-color:var(--red);
-  background:#ffe8e8;
-}
-
-.explanation{
-  margin-top:20px;
-  padding:16px;
-  border-radius:15px;
-  background:#f4f4f4;
-  display:none;
-}
-
-.explanation.show{
-  display:block;
-}
-
-.next-row{
-  display:flex;
-  justify-content:flex-end;
-  margin-top:18px;
-}
-
-/* =========================
-   AI CALL
-========================= */
-
-.ai-page{
-  max-width:850px;
-  margin:auto;
-}
-
-.call-container{
-  background:#151515;
-  border-radius:30px;
-  min-height:650px;
-  overflow:hidden;
-  position:relative;
-  color:white;
-  display:flex;
-  flex-direction:column;
-}
-
-.call-top{
-  padding:18px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:#202020;
-}
-
-.call-title{
-  font-weight:800;
-}
-
-.call-time{
-  color:#aaa;
-  font-size:14px;
-}
-
-.connection{
-  font-size:13px;
-  color:#77df4c;
-}
-
-/* =========================
-   AVATAR
-========================= */
-
-.avatar-area{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  padding:25px;
-}
-
-.avatar-name{
-  margin-top:18px;
-  font-size:22px;
-  font-weight:800;
-}
-
-.avatar-status{
-  margin-top:7px;
-  color:#aaa;
-  min-height:20px;
-}
-
-/* Face */
-
-.face{
-  width:230px;
-  height:230px;
-  border-radius:50%;
-  background:#ffd5b5;
-  position:relative;
-  box-shadow:
-    0 0 0 8px rgba(255,255,255,.06),
-    0 15px 50px rgba(0,0,0,.5);
-  transition:.25s;
-}
-
-/* hair */
-
-.face::before{
-  content:"";
-  position:absolute;
-  width:190px;
-  height:85px;
-  background:#382414;
-  border-radius:100px 100px 30px 30px;
-  top:-12px;
-  left:20px;
-}
-
-/* ears */
-
-.face::after{
-  content:"";
-  position:absolute;
-  width:30px;
-  height:50px;
-  background:#ffc39b;
-  border-radius:50%;
-  left:-18px;
-  top:90px;
-  box-shadow:236px 0 0 #ffc39b;
-}
-
-.eye{
-  position:absolute;
-  width:23px;
-  height:30px;
-  background:#222;
-  border-radius:50%;
-  top:92px;
-  z-index:2;
-}
-
-.eye.left{
-  left:62px;
-}
-
-.eye.right{
-  right:62px;
-}
-
-.mouth{
-  position:absolute;
-  z-index:3;
-  left:83px;
-  top:145px;
-  width:64px;
-  height:28px;
-  border-bottom:6px solid #8b3d3d;
-  border-radius:0 0 60px 60px;
-  transition:.2s;
-}
-
-/* Thinking */
-
-.face.thinking .eye{
-  transform:scaleY(.65);
-}
-
-.face.thinking .mouth{
-  width:35px;
-  left:98px;
-  height:35px;
-  border:4px solid #8b3d3d;
-  border-radius:50%;
-  background:transparent;
-}
-
-/* Happy */
-
-.face.happy .mouth{
-  height:35px;
-  border-bottom:8px solid #8b3d3d;
-}
-
-.face.happy{
-  transform:translateY(-3px);
-}
-
-/* Surprised */
-
-.face.surprised .eye{
-  width:29px;
-  height:36px;
-}
-
-.face.surprised .mouth{
-  width:35px;
-  height:45px;
-  left:98px;
-  border:5px solid #8b3d3d;
-  border-radius:50%;
-}
-
-/* Listening */
-
-.face.listening{
-  animation:listen 1.3s infinite;
-}
-
-@keyframes listen{
-  0%,100%{
-    transform:scale(1);
-  }
-  50%{
-    transform:scale(1.025);
-  }
-}
-
-/* Speaking */
-
-.face.speaking .mouth{
-  animation:talk .18s infinite alternate;
-}
-
-@keyframes talk{
-  from{
-    height:10px;
-    width:55px;
-    left:87px;
-  }
-  to{
-    height:42px;
-    width:43px;
-    left:94px;
-  }
-}
-
-/* Alien */
-
-.face.alien{
-  background:#9be15d;
-}
-
-.face.alien::before{
-  background:#71a943;
-  height:55px;
-}
-
-.face.alien::after{
-  background:#85ca4d;
-  box-shadow:236px 0 0 #85ca4d;
-}
-
-.face.alien .eye{
-  background:#111;
-  width:30px;
-  height:43px;
-  transform:rotate(-8deg);
-}
-
-.face.alien .eye.left{
-  left:58px;
-}
-
-.face.alien .eye.right{
-  right:58px;
-  transform:rotate(8deg);
-}
-
-/* Llama */
-
-.face.llama{
-  background:#d9b27d;
-}
-
-.face.llama::before{
-  background:#9d7045;
-  height:100px;
-}
-
-.face.llama::after{
-  background:#c69b68;
-  box-shadow:236px 0 0 #c69b68;
-}
-
-.face.llama .eye{
-  width:17px;
-  height:25px;
-}
-
-/* Robot */
-
-.face.robot{
-  border-radius:35px;
-  background:#b9c3cc;
-}
-
-.face.robot::before{
-  background:#78848f;
-  border-radius:25px 25px 10px 10px;
-}
-
-.face.robot::after{
-  display:none;
-}
-
-.face.robot .eye{
-  background:#1cb0f6;
-  border-radius:5px;
-}
-
-/* Cat */
-
-.face.cat{
-  border-radius:45% 45% 50% 50%;
-  background:#f3b45b;
-}
-
-.face.cat::before{
-  background:#c77c28;
-}
-
-.face.cat::after{
-  display:none;
-}
-
-/* =========================
-   AI SUBTITLE
-========================= */
-
-.ai-message{
-  width:min(700px,90%);
-  background:rgba(255,255,255,.09);
-  border-radius:18px;
-  padding:15px 18px;
-  margin-top:25px;
-  min-height:55px;
-  line-height:1.5;
-  text-align:center;
-}
-
-/* =========================
-   CALL CONTROLS
-========================= */
-
-.call-controls{
-  padding:20px;
-  background:#202020;
-  display:flex;
-  justify-content:center;
-  gap:14px;
-  flex-wrap:wrap;
-}
-
-.call-button{
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  border:none;
-  font-size:24px;
-  background:#333;
-  color:white;
-}
-
-.call-button:hover{
-  background:#444;
-}
-
-.call-button.mic-active{
-  background:var(--green);
-}
-
-.call-button.end{
-  background:var(--red);
-}
-
-/* =========================
-   AVATAR SELECTOR
-========================= */
-
-.avatar-picker{
-  display:flex;
-  gap:9px;
-  justify-content:center;
-  flex-wrap:wrap;
-  padding:16px;
-}
-
-.avatar-choice{
-  width:45px;
-  height:45px;
-  border-radius:50%;
-  border:2px solid #444;
-  background:#252525;
-  font-size:23px;
-}
-
-.avatar-choice.active{
-  border-color:var(--green);
-}
-
-/* =========================
-   TYPING FALLBACK
-========================= */
-
-.ai-input{
-  display:flex;
-  gap:8px;
-  width:min(700px,90%);
-  margin:15px auto 0;
-}
-
-.ai-input input{
-  flex:1;
-  border:none;
-  border-radius:15px;
-  padding:15px;
-  font-size:16px;
-}
-
-.ai-input button{
-  border:none;
-  background:var(--green);
-  color:white;
-  border-radius:15px;
-  padding:0 18px;
-  font-weight:800;
-}
-
-/* =========================
-   FRIENDS / PROFILE
-========================= */
-
-.friend-list{
-  display:grid;
-  gap:12px;
-}
-
-.friend{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:16px;
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-
-.friend-avatar{
-  font-size:30px;
-}
-
-/* =========================
-   BOTTOM NAV
-========================= */
-
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:72px;
-  background:white;
-  border-top:1px solid var(--border);
-  display:flex;
-  justify-content:center;
-  z-index:30;
-}
-
-.nav-inner{
-  width:min(700px,100%);
-  display:flex;
-  justify-content:space-around;
-}
-
-.nav-button{
-  border:none;
-  background:none;
-  color:#777;
-  font-weight:700;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:3px;
-  font-size:12px;
-}
-
-.nav-button span:first-child{
-  font-size:24px;
-}
-
-.nav-button.active{
-  color:var(--green-dark);
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:600px){
-
-  main{
-    padding:18px 12px 95px;
-  }
-
-  .hero h1{
-    font-size:26px;
-  }
-
-  .question{
-    font-size:21px;
-  }
-
-  .call-container{
-    min-height:calc(100vh - 100px);
-    border-radius:22px;
-  }
-
-  .face{
-    width:190px;
-    height:190px;
-  }
-
-  .face::before{
-    width:155px;
-    left:18px;
-  }
-
-  .face::after{
-    box-shadow:195px 0 0 #ffc39b;
-  }
-
-  .eye.left{
-    left:50px;
-  }
-
-  .eye.right{
-    right:50px;
-  }
-
-  .mouth{
-    left:68px;
-  }
-}
+  border:0;background:linear-gradient(135deg,var(--green),var(--green2));color:#06100b;
+  font-weight:850;padding:14px 20px;border-radius:15px;cursor:pointer;box-shadow:0 12px 30px rgba(43,211,111,.18)
+}
+.secondary{border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);padding:13px 18px;border-radius:14px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px}
+.topic{padding:20px;cursor:pointer;transition:.2s}.topic:hover{transform:translateY(-3px);border-color:rgba(87,229,138,.28)}
+.topic .emoji{font-size:30px}.topic h3{margin:14px 0 6px}.topic p{margin:0;color:var(--muted);font-size:14px}
+.callLayout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px}
+.call{
+  position:relative;overflow:hidden;min-height:690px;border-radius:30px;border:1px solid var(--line);
+  background:linear-gradient(180deg,#26302e 0%,#171f1c 55%,#0a110e 100%);box-shadow:var(--shadow)
+}
+.callBg{position:absolute;inset:0;background:
+ radial-gradient(circle at 80% 15%,rgba(100,220,160,.16),transparent 30%),
+ linear-gradient(90deg,rgba(0,0,0,.35),transparent 55%,rgba(0,0,0,.25))}
+.callTop{position:absolute;left:20px;right:20px;top:18px;display:flex;justify-content:space-between;z-index:5}
+.pill{padding:9px 13px;border-radius:999px;background:rgba(4,9,7,.55);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(14px)}
+.characterWrap{position:absolute;inset:68px 20px 115px;display:flex;align-items:center;justify-content:center}
+.character{
+  position:relative;height:min(76vh,610px);aspect-ratio:700/900;max-width:86%;
+  border-radius:32px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45);
+  animation:float 4.5s ease-in-out infinite;
+}
+.character img{width:100%;height:100%;object-fit:cover;display:block}
+.character::after{
+  content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.23));pointer-events:none
+}
+.speaking .character{animation:talk .85s ease-in-out infinite alternate}
+.thinking .character{animation:think 2s ease-in-out infinite}
+.listening .character{animation:listen 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-5px)}}
+@keyframes talk{to{transform:translateY(-3px) scale(1.008)}}
+@keyframes think{50%{transform:translateX(5px) rotate(.35deg)}}
+@keyframes listen{50%{transform:translateY(-2px) rotate(-.25deg)}}
+.bubble{
+  position:absolute;left:50%;bottom:135px;transform:translateX(-50%);z-index:6;width:min(620px,88%);
+  padding:16px 19px;border-radius:20px;background:rgba(10,17,14,.78);border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(18px);box-shadow:0 14px 40px rgba(0,0,0,.25)
+}
+.bubble small{display:block;color:var(--green);font-weight:800;margin-bottom:5px}
+.controls{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:12px;z-index:7}
+.control{
+  width:58px;height:58px;border-radius:50%;border:1px solid rgba(255,255,255,.1);
+  background:#16231e;color:white;cursor:pointer;display:grid;place-items:center;font-size:22px
+}
+.control.mic{background:var(--green);color:#07100b;box-shadow:0 0 0 6px rgba(87,229,138,.09)}
+.control.end{background:var(--red)}
+.sidePanel{padding:18px}
+.sidePanel h3{margin:4px 0 15px}
+.moods{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mood{border:1px solid var(--line);background:rgba(255,255,255,.025);color:var(--text);border-radius:16px;padding:10px;cursor:pointer;text-align:left}
+.mood.active{border-color:var(--green);box-shadow:0 0 0 1px rgba(87,229,138,.18) inset}
+.moodImg{height:90px;border-radius:12px;overflow:hidden;margin-bottom:8px}
+.moodImg img{width:100%;height:100%;object-fit:cover;object-position:center 26%}
+.mood span{font-size:12px;color:#c7d3ce}
+.exercises{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px}
+.exercise{padding:20px}.exercise h3{margin:0 0 7px}.exercise p{color:var(--muted);line-height:1.5}
+.answer{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;background:#0b1511;color:white;margin-top:9px;text-align:left;cursor:pointer}
+.answer:hover{border-color:var(--green)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+.modal.show{display:flex}.modalBox{max-width:620px;width:100%;padding:25px}
+.modalBox h2{margin-top:0}.input{width:100%;padding:14px;border-radius:13px;border:1px solid var(--line);background:#08110e;color:white;margin:10px 0}
+.feedback{min-height:25px;margin:10px 0;font-weight:750}.ok{color:var(--green)}.bad{color:#ff8d91}
+@media(max-width:900px){.sidebar{width:76px;padding:15px 8px}.logo{font-size:0;text-align:center}.logo:after{content:"S";font-size:25px;color:var(--green);font-weight:900}.nav button{justify-content:center;padding:14px}.nav button span:last-child{display:none}.sidebarBottom{display:none}.callLayout{grid-template-columns:1fr}.sidePanel{display:none}}
+@media(max-width:650px){.topbar{padding:0 15px}.page{padding:17px}.hero{grid-template-columns:1fr;padding:22px}.call{min-height:640px}.characterWrap{inset:68px 8px 110px}.character{max-width:100%;height:72vh}.bubble{bottom:112px}.controls{bottom:16px}.control{width:53px;height:53px}.grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
-
 <body>
-
 <div class="app">
+  <aside class="sidebar">
+    <div class="logo">Speak<span>Up</span></div>
+    <nav class="nav">
+      <button class="active" data-page="home"><span class="ico">⌂</span><span>Home</span></button>
+      <button data-page="grammar"><span class="ico">▤</span><span>Grammatik</span></button>
+      <button data-page="ai"><span class="ico">◉</span><span>KI-Sprechen</span></button>
+      <button data-page="friends"><span class="ico">♧</span><span>Freunde</span></button>
+      <button data-page="profile"><span class="ico">♙</span><span>Profil</span></button>
+    </nav>
+    <div class="sidebarBottom"><strong>♾️ Freies Üben</strong><small>Keine Herzen, kein XP, kein Druck. Übe so lange du möchtest.</small></div>
+  </aside>
 
-<header class="topbar">
-  <div class="logo">
-    Speak<span>Up</span> 🇬🇧
-  </div>
+  <main class="main">
+    <header class="topbar">
+      <div class="status"><span class="dot"></span> SpeakUp ist bereit</div>
+      <div class="profile">👤</div>
+    </header>
 
-  <button class="profile-button" onclick="showPage('profile')">
-    👤
-  </button>
-</header>
-
-<main>
-
-<!-- ================= HOME ================= -->
-
-<section id="home" class="page active">
-
-  <div class="hero">
-    <h1>Hallo! 👋</h1>
-    <p>
-      Willkommen bei SpeakUp. Lerne Englisch in deinem eigenen Tempo.
-    </p>
-  </div>
-
-  <div class="card-grid">
-
-    <div class="card" onclick="showPage('grammar')">
-      <div class="card-icon">📚</div>
-      <h2>Grammatik</h2>
-      <p>
-        Wähle frei ein Grammatik-Thema und übe so oft du möchtest.
-      </p>
-      <br>
-      <button class="primary">
-        Grammatik öffnen
-      </button>
-    </div>
-
-    <div class="card" onclick="showPage('ai')">
-      <div class="card-icon">🎤</div>
-      <h2>Mit KI sprechen</h2>
-      <p>
-        Sprich Englisch mit deinem persönlichen KI-Lernpartner.
-      </p>
-      <br>
-      <button class="primary">
-        Gespräch starten
-      </button>
-    </div>
-
-    <div class="card" onclick="showPage('friends')">
-      <div class="card-icon">👥</div>
-      <h2>Freunde</h2>
-      <p>
-        Verwalte deine SpeakUp-Freunde.
-      </p>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ================= GRAMMAR ================= -->
-
-<section id="grammar" class="page">
-
-  <div class="section-title">
-    <h2>📚 Grammatik</h2>
-    <p>Wähle ein Thema. Du kannst jederzeit wechseln.</p>
-  </div>
-
-  <div id="topics" class="card-grid"></div>
-
-</section>
-
-
-<!-- ================= SUBTOPICS ================= -->
-
-<section id="subtopicsPage" class="page">
-
-  <button class="secondary back-button" onclick="showPage('grammar')">
-    ← Zurück
-  </button>
-
-  <div class="section-title">
-    <h2 id="subtopicTitle"></h2>
-    <p>Wähle einen Bereich zum Üben.</p>
-  </div>
-
-  <div id="subtopics" class="subtopics"></div>
-
-</section>
-
-
-<!-- ================= EXERCISE ================= -->
-
-<section id="exercise" class="page">
-
-  <div class="exercise-box">
-
-    <button class="secondary back-button" onclick="backToSubtopics()">
-      ← Zurück
-    </button>
-
-    <div class="question-card">
-
-      <div id="questionNumber" class="question-number"></div>
-
-      <div id="question" class="question"></div>
-
-      <div id="answers" class="answers"></div>
-
-      <div id="explanation" class="explanation"></div>
-
-      <div class="next-row">
-        <button
-          id="nextButton"
-          class="primary"
-          style="display:none"
-          onclick="nextQuestion()">
-          Weiter →
-        </button>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ================= AI ================= -->
-
-<section id="ai" class="page">
-
-  <div class="ai-page">
-
-    <div class="section-title">
-      <h2>🎤 KI-Sprechpartner</h2>
-      <p>Sprich auf Englisch mit deinem KI-Partner.</p>
-    </div>
-
-    <div class="call-container">
-
-      <div class="call-top">
-
+    <section id="home" class="page active">
+      <div class="hero card">
         <div>
-          <div class="call-title">
-            SpeakUp AI
+          <h2>Englisch sprechen – ganz entspannt. 👋</h2>
+          <p>Übe Grammatik oder sprich mit Sophie. Sie hört dir zu, antwortet auf Englisch und hilft dir bei wichtigen Fehlern.</p>
+          <button class="primary" onclick="showPage('ai')">Mit Sophie sprechen →</button>
+        </div>
+        <div class="card" style="padding:24px">
+          <strong style="font-size:20px">Heute üben</strong>
+          <p class="sub" style="margin-top:7px">Wähle einfach selbst dein Thema.</p>
+          <div class="grid">
+            <div><b>∞</b><br><small style="color:var(--muted)">Übungen</small></div>
+            <div><b>10</b><br><small style="color:var(--muted)">Themen</small></div>
           </div>
+        </div>
+      </div>
+    </section>
 
-          <div class="connection" id="connection">
-            ● Bereit
+    <section id="grammar" class="page">
+      <h1>Grammatik 📚</h1><p class="sub">Wähle frei ein Thema. Du kannst jedes Thema jederzeit üben.</p>
+      <div class="grid" id="topicGrid"></div>
+    </section>
+
+    <section id="ai" class="page">
+      <h1>KI-Sprechen 🗣️</h1><p class="sub">Sprich mit Sophie wie in einem echten Gespräch.</p>
+      <div class="callLayout">
+        <div class="call" id="call">
+          <div class="callBg"></div>
+          <div class="callTop">
+            <div class="pill">🟢 Online · Sophie</div>
+            <div class="pill" id="timer">00:00</div>
+          </div>
+          <div class="characterWrap">
+            <div class="character" id="character"><img src="sophie.png" alt="SpeakUp KI-Figur Sophie"></div>
+          </div>
+          <div class="bubble"><small id="speaker">Sophie</small><div id="bubbleText">Hi! I’m Sophie. Let’s practice English together! 😊</div></div>
+          <div class="controls">
+            <button class="control mic" id="micBtn" title="Mikrofon">🎙️</button>
+            <button class="control" onclick="repeatLast()" title="Wiederholen">🔊</button>
+            <button class="control" onclick="cycleMood()" title="Mimik">😊</button>
+            <button class="control end" onclick="endCall()" title="Beenden">☎</button>
           </div>
         </div>
 
-        <div class="call-time" id="callTime">
-          00:00
-        </div>
-
+        <aside class="sidePanel card">
+          <h3>Mimik & Animationen</h3>
+          <div class="moods">
+            <button class="mood active" data-mood="normal"><div class="moodImg"><img src="sophie.png"></div><span>Normal</span></button>
+            <button class="mood" data-mood="happy"><div class="moodImg"><img src="sophie.png"></div><span>Lächeln</span></button>
+            <button class="mood" data-mood="laugh"><div class="moodImg"><img src="sophie.png"></div><span>Lachen</span></button>
+            <button class="mood" data-mood="surprised"><div class="moodImg"><img src="sophie.png"></div><span>Überrascht</span></button>
+            <button class="mood" data-mood="thinking"><div class="moodImg"><img src="sophie.png"></div><span>Nachdenken</span></button>
+            <button class="mood" data-mood="listening"><div class="moodImg"><img src="sophie.png"></div><span>Zuhören</span></button>
+          </div>
+          <div style="margin-top:18px;padding:16px;border-radius:17px;background:rgba(87,229,138,.07);border:1px solid rgba(87,229,138,.13)">
+            <strong>🗣️ Sophie spricht …</strong>
+            <p style="color:var(--muted);line-height:1.5;margin-bottom:0">Die Figur bewegt sich während des Gesprächs leicht, damit der Call lebendiger wirkt.</p>
+          </div>
+        </aside>
       </div>
+    </section>
 
+    <section id="friends" class="page">
+      <h1>Freunde 👥</h1><p class="sub">Lokale Demo-Funktion – später kannst du hier echte Accounts verbinden.</p>
+      <div class="card" style="padding:25px"><h3>Deine Freunde</h3><p style="color:var(--muted)">Noch keine Freunde hinzugefügt.</p><button class="primary" onclick="alert('Freunde-Funktion kommt später.')">Freund hinzufügen</button></div>
+    </section>
 
-      <div class="avatar-area">
-
-        <div id="face" class="face">
-
-          <div class="eye left"></div>
-          <div class="eye right"></div>
-          <div class="mouth"></div>
-
-        </div>
-
-        <div id="avatarName" class="avatar-name">
-          Alex
-        </div>
-
-        <div id="avatarStatus" class="avatar-status">
-          Bereit zum Sprechen
-        </div>
-
-        <div id="aiMessage" class="ai-message">
-          Hi! I'm Alex. Let's practice English together! 👋
-        </div>
-
-        <div class="ai-input">
-
-          <input
-            id="textInput"
-            type="text"
-            placeholder="Oder hier Englisch schreiben..."
-            onkeydown="if(event.key==='Enter') sendText()">
-
-          <button onclick="sendText()">
-            Senden
-          </button>
-
-        </div>
-
+    <section id="profile" class="page">
+      <h1>Profil 👤</h1><p class="sub">Dein SpeakUp-Profil.</p>
+      <div class="card" style="padding:25px">
+        <h3>Tobi</h3>
+        <p style="color:var(--muted)">Freies Lernen · unbegrenzte Übungen · KI-Sprechen</p>
       </div>
-
-
-      <div class="avatar-picker">
-
-        <button class="avatar-choice active"
-          onclick="selectAvatar('human','Alex','🧑‍🏫',this)">
-          🧑‍🏫
-        </button>
-
-        <button class="avatar-choice"
-          onclick="selectAvatar('llama','Luna','🦙',this)">
-          🦙
-        </button>
-
-        <button class="avatar-choice"
-          onclick="selectAvatar('alien','Zorp','👽',this)">
-          👽
-        </button>
-
-        <button class="avatar-choice"
-          onclick="selectAvatar('robot','Robo','🤖',this)">
-          🤖
-        </button>
-
-        <button class="avatar-choice"
-          onclick="selectAvatar('cat','Milo','🐱',this)">
-          🐱
-        </button>
-
-      </div>
-
-
-      <div class="call-controls">
-
-        <button
-          id="micButton"
-          class="call-button"
-          onclick="toggleMicrophone()"
-          title="Mikrofon">
-          🎙️
-        </button>
-
-        <button
-          class="call-button"
-          onclick="repeatAI()"
-          title="Wiederholen">
-          🔊
-        </button>
-
-        <button
-          class="call-button"
-          onclick="changeMood()"
-          title="Mimik">
-          🙂
-        </button>
-
-        <button
-          class="call-button end"
-          onclick="endCall()"
-          title="Gespräch beenden">
-          ☎️
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ================= FRIENDS ================= -->
-
-<section id="friends" class="page">
-
-  <div class="section-title">
-    <h2>👥 Freunde</h2>
-    <p>Deine Freunde in SpeakUp.</p>
-  </div>
-
-  <div class="card">
-
-    <div style="display:flex;gap:10px">
-
-      <input
-        id="friendInput"
-        placeholder="Name eingeben..."
-        style="
-          flex:1;
-          padding:13px;
-          border:2px solid #ddd;
-          border-radius:12px;
-          font-size:16px;
-        ">
-
-      <button class="primary" onclick="addFriend()">
-        Hinzufügen
-      </button>
-
-    </div>
-
-  </div>
-
-  <br>
-
-  <div id="friendList" class="friend-list"></div>
-
-</section>
-
-
-<!-- ================= PROFILE ================= -->
-
-<section id="profile" class="page">
-
-  <div class="section-title">
-    <h2>👤 Profil</h2>
-    <p>Dein SpeakUp-Profil.</p>
-  </div>
-
-  <div class="card">
-
-    <div style="font-size:60px">
-      👨‍🎓
-    </div>
-
-    <h2>SpeakUp Learner</h2>
-
-    <p>
-      Lerne Englisch in deinem eigenen Tempo.
-    </p>
-
-    <br>
-
-    <button class="secondary" onclick="resetFriends()">
-      Freundesliste zurücksetzen
-    </button>
-
-  </div>
-
-</section>
-
-</main>
-
-
-<!-- ================= NAV ================= -->
-
-<nav class="bottom-nav">
-
-  <div class="nav-inner">
-
-    <button class="nav-button active"
-      onclick="showPage('home')">
-      <span>🏠</span>
-      Start
-    </button>
-
-    <button class="nav-button"
-      onclick="showPage('grammar')">
-      <span>📚</span>
-      Grammatik
-    </button>
-
-    <button class="nav-button"
-      onclick="showPage('ai')">
-      <span>🎤</span>
-      KI
-    </button>
-
-    <button class="nav-button"
-      onclick="showPage('friends')">
-      <span>👥</span>
-      Freunde
-    </button>
-
-  </div>
-
-</nav>
-
+    </section>
+  </main>
 </div>
 
+<div class="modal" id="exerciseModal">
+  <div class="modalBox card">
+    <button class="secondary" style="float:right" onclick="closeExercise()">✕</button>
+    <h2 id="exerciseTitle">Übung</h2>
+    <p id="exerciseQuestion"></p>
+    <div id="answers"></div>
+    <div class="feedback" id="feedback"></div>
+    <button class="primary" id="nextBtn" style="display:none" onclick="nextExercise()">Nächste Übung →</button>
+  </div>
+</div>
 
 <script>
+const API_URL = "https://speakup-english-ai.onrender.com/api/chat";
 
-/* =========================================================
-   BASIC NAVIGATION
-========================================================= */
-
-function showPage(id){
-
-  document.querySelectorAll(".page").forEach(page=>{
-    page.classList.remove("active");
-  });
-
-  const page=document.getElementById(id);
-
-  if(page){
-    page.classList.add("active");
-  }
-
-  document.querySelectorAll(".nav-button").forEach(button=>{
-    button.classList.remove("active");
-  });
-
-  const mapping={
-    home:0,
-    grammar:1,
-    ai:2,
-    friends:3
-  };
-
-  if(mapping[id] !== undefined){
-
-    const buttons=document.querySelectorAll(".nav-button");
-
-    if(buttons[mapping[id]]){
-      buttons[mapping[id]].classList.add("active");
-    }
-  }
-
-  if(id==="friends"){
-    renderFriends();
-  }
-}
-
-
-/* =========================================================
-   GRAMMAR DATA
-========================================================= */
-
-const grammarTopics=[
-
-{
-  title:"Zeitformen",
-  emoji:"🕐",
-  description:"Die wichtigsten englischen Zeiten.",
-  subtopics:[
-    "Present Simple",
-    "Present Progressive",
-    "Past Simple",
-    "Past Progressive",
-    "Present Perfect",
-    "Past Perfect",
-    "Future",
-    "Gemischte Zeitformen"
-  ]
-},
-
-{
-  title:"If-Sätze",
-  emoji:"🔀",
-  description:"Bedingungssätze richtig verwenden.",
-  subtopics:[
-    "Grundlagen",
-    "Type 1",
-    "Type 2",
-    "Type 3",
-    "Gemischte If-Sätze"
-  ]
-},
-
-{
-  title:"Modalverben",
-  emoji:"🧩",
-  description:"can, must, should, may und mehr.",
-  subtopics:[
-    "can / could",
-    "must / have to",
-    "should",
-    "may / might",
-    "Gemischte Modalverben"
-  ]
-},
-
-{
-  title:"Passiv",
-  emoji:"🔄",
-  description:"Aktiv und Passiv verstehen.",
-  subtopics:[
-    "Grundlagen Passiv",
-    "Present Passive",
-    "Past Passive",
-    "Perfect Passive",
-    "Gemischtes Passiv"
-  ]
-},
-
-{
-  title:"Reported Speech",
-  emoji:"💬",
-  description:"Gesagtes auf Englisch wiedergeben.",
-  subtopics:[
-    "Grundlagen",
-    "Statements",
-    "Questions",
-    "Commands",
-    "Gemischt"
-  ]
-},
-
-{
-  title:"Fragen",
-  emoji:"❓",
-  description:"Englische Fragen richtig bilden.",
-  subtopics:[
-    "Yes / No Questions",
-    "Wh-Questions",
-    "Hilfsverben",
-    "Indirect Questions",
-    "Gemischte Fragen"
-  ]
-},
-
-{
-  title:"Vergleiche",
-  emoji:"📏",
-  description:"Comparative und Superlative.",
-  subtopics:[
-    "Comparative",
-    "Superlative",
-    "as ... as",
-    "Gemischte Vergleiche"
-  ]
-},
-
-{
-  title:"Pronomen",
-  emoji:"🧠",
-  description:"Personal, possessive und relative pronouns.",
-  subtopics:[
-    "Personal Pronouns",
-    "Possessive Pronouns",
-    "Reflexive Pronouns",
-    "Relative Pronouns",
-    "Gemischte Pronomen"
-  ]
-},
-
-{
-  title:"Artikel",
-  emoji:"🅰️",
-  description:"a, an, the oder kein Artikel.",
-  subtopics:[
-    "a / an",
-    "the",
-    "No Article",
-    "Gemischte Artikel"
-  ]
-},
-
-{
-  title:"Präpositionen",
-  emoji:"📍",
-  description:"Zeit, Ort und Bewegung.",
-  subtopics:[
-    "Time",
-    "Place",
-    "Movement",
-    "Gemischte Präpositionen"
-  ]
-}
-
+const topics = [
+  ["🕐","Zeitformen","Present Simple, Progressive, Past, Perfect, Future"],
+  ["🔀","If-Sätze","Type 1, Type 2, Type 3 und gemischt"],
+  ["🧩","Modalverben","can, could, must, should, may, might"],
+  ["🔄","Passiv","Present, Past und Perfect Passive"],
+  ["💬","Reported Speech","Statements, Questions und Commands"],
+  ["❓","Fragen","Yes/No, Wh-, indirekte Fragen"],
+  ["📏","Vergleiche","Comparative, Superlative, as...as"],
+  ["🧠","Pronomen","Personal, Possessive, Reflexive, Relative"],
+  ["🅰️","Artikel","a/an, the und kein Artikel"],
+  ["📍","Präpositionen","Zeit, Ort, Bewegung und gemischt"]
 ];
 
-
-/* =========================================================
-   EXERCISES
-========================================================= */
-
-const E={
-
-"Present Simple":[
-["She ___ to school every day.",["go","goes","going"],1,"Bei he/she/it bekommt das Verb im Present Simple meistens -s."],
-["I ___ English every Monday.",["study","studies","studying"],0,"Bei I bleibt das Verb ohne -s."],
-["Tom ___ football after school.",["play","plays","playing"],1,"Tom = he, deshalb plays."]
-],
-
-"Present Progressive":[
-["Look! The dog ___ .",["runs","is running","ran"],1,"Etwas passiert gerade: is + Verb-ing."],
-["They ___ dinner right now.",["eat","are eating","ate"],1,"right now → Present Progressive."],
-["I ___ to music at the moment.",["listen","am listening","listened"],1,"I + am + Verb-ing."]
-],
-
-"Past Simple":[
-["Yesterday I ___ to school.",["walk","walked","walking"],1,"Yesterday zeigt die Vergangenheit."],
-["She ___ a movie last night.",["watch","watched","watching"],1,"Last night → Past Simple."],
-["We ___ pizza yesterday.",["eat","ate","eating"],1,"eat → ate im Past Simple."]
-],
-
-"Past Progressive":[
-["At 8 pm I ___ TV.",["watched","was watching","watch"],1,"Eine Handlung war zu einem Zeitpunkt gerade im Gange."],
-["They ___ football when it started raining.",["played","were playing","play"],1,"They → were playing."],
-["She ___ when I called.",["was sleeping","slept","sleep"],0,"Eine gerade laufende Handlung → was sleeping."]
-],
-
-"Present Perfect":[
-["I ___ my homework.",["have finished","finished","am finishing"],0,"Present Perfect: have/has + past participle."],
-["She ___ never ___ sushi.",["has / eaten","have / ate","is / eating"],0,"She → has; eat → eaten."],
-["We ___ already seen this film.",["have","has","are"],0,"We → have."]
-],
-
-"Past Perfect":[
-["She ___ already left when I arrived.",["has","had","have"],1,"Past Perfect: had + past participle."],
-["They ___ eaten before the movie started.",["had","have","has"],0,"Vergangenheit vor einer anderen Vergangenheit → had."]
-],
-
-"Future":[
-["I think it ___ tomorrow.",["will rain","rained","raining"],0,"Vorhersage → will."],
-["She ___ visit us next week.",["will","was","has"],0,"Future mit will."],
-["We ___ going to travel next summer.",["are","is","was"],0,"be going to → are going."]
-],
-
-"Gemischte Zeitformen":[
-["He usually ___ breakfast at 7.",["has","is having","had"],0,"usually → Present Simple."],
-["Look! She ___ .",["runs","is running","ran"],1,"Look! → gerade jetzt."],
-["I ___ my homework yesterday.",["finish","finished","have finished"],1,"Yesterday → Past Simple."]
-],
-
-"Grundlagen":[
-["If it rains, I ___ at home.",["stay","will stay","stayed"],0,"Bei einem allgemeinen Type-1-Satz steht im if-Teil Present Simple."],
-["If you study, you ___ better.",["learn","will learn","learned"],1,"Type 1: if + Present Simple, will + infinitive."]
-],
-
-"Type 1":[
-["If I have time, I ___ you.",["call","will call","called"],1,"Type 1: will im Hauptsatz."],
-["If she studies, she ___ the test.",["will pass","passed","passes"],0,"Mögliche Zukunft → will pass."]
-],
-
-"Type 2":[
-["If I were rich, I ___ a big house.",["buy","would buy","bought"],1,"Type 2: would + infinitive."],
-["If he had more time, he ___ more.",["would read","reads","read"],0,"Unwirkliche Situation → would read."]
-],
-
-"Type 3":[
-["If I had studied, I ___ the test.",["would pass","would have passed","passed"],1,"Type 3: had + past participle / would have + past participle."],
-["If she had left earlier, she ___ the train.",["would have caught","catches","caught"],0,"Vergangene irreale Bedingung."]
-],
-
-"Gemischte If-Sätze":[
-["If I were you, I ___ that.",["wouldn't do","won't do","didn't do"],0,"If I were you → Type 2."],
-["If he had listened, he ___ the problem now.",["wouldn't have","doesn't have","won't have"],0,"Vergangenheit beeinflusst die Gegenwart."]
-],
-
-"can / could":[
-["I ___ swim when I was five.",["can","could","must"],1,"Vergangenheit von can → could."],
-["___ you help me?",["Could","Must","Should"],0,"Could you ...? ist eine höfliche Bitte."]
-],
-
-"must / have to":[
-["You ___ wear a seatbelt.",["must","might","could"],0,"must = starke Verpflichtung."],
-["I ___ do my homework tonight.",["have to","might","can"],0,"have to = müssen."]
-],
-
-"should":[
-["You ___ drink more water.",["should","mustn't","couldn't"],0,"should = guter Rat."],
-["He ___ study for the test.",["should","may","would"],0,"should wird für Empfehlungen verwendet."]
-],
-
-"may / might":[
-["It ___ rain later.",["might","must","should"],0,"might = vielleicht."],
-["___ I come in?",["May","Must","Should"],0,"May I ...? ist eine höfliche Erlaubnisfrage."]
-],
-
-"Gemischte Modalverben":[
-["You ___ be quiet in the library.",["should","might","could"],0,"should = Empfehlung/Regel."],
-["She ___ speak three languages.",["can","must","should"],0,"can = Fähigkeit."]
-],
-
-"Grundlagen Passiv":[
-["The cake ___ by Tom.",["was made","made","makes"],0,"Passiv: be + past participle."],
-["English ___ in many countries.",["is spoken","speaks","spoke"],0,"Present Passive."]
-],
-
-"Present Passive":[
-["The room ___ every day.",["cleans","is cleaned","cleaned"],1,"is + past participle."],
-["Cars ___ here.",["are made","make","made"],0,"Plural → are made."]
-],
-
-"Past Passive":[
-["The house ___ in 1990.",["was built","is built","built"],0,"Past Passive → was/were + past participle."],
-["The letters ___ yesterday.",["were sent","are sent","send"],0,"Plural → were sent."]
-],
-
-"Perfect Passive":[
-["The work ___ already been finished.",["has","have","is"],0,"Present Perfect Passive → has/have been + participle."],
-["The windows have ___ cleaned.",["been","be","being"],0,"have been cleaned."]
-],
-
-"Gemischtes Passiv":[
-["The book ___ by millions of people.",["is read","reads","read"],0,"Present Passive."],
-["The car ___ yesterday.",["was repaired","is repaired","repairs"],0,"Past Passive."]
-],
-
-"Grundlagen":[
-["He said that he ___ tired.",["was","is","be"],0,"Reported speech verschiebt häufig die Zeitform zurück."],
-["She said she ___ happy.",["was","were","is"],0,"she → was."]
-],
-
-"Statements":[
-["Tom said, 'I am tired.' → Tom said that he ___ tired.",["was","is","were"],0,"am → was."],
-["She said, 'I like pizza.' → She said that she ___ pizza.",["liked","likes","liking"],0,"like → liked."]
-],
-
-"Questions":[
-["'Where do you live?' → He asked me where I ___.",["lived","live","did live"],0,"In reported questions keine normale Fragewortstellung."],
-["'Are you okay?' → She asked if I ___ okay.",["was","am","were"],0,"are → was."]
-],
-
-"Commands":[
-["'Close the door.' → He told me ___ the door.",["to close","close","closing"],0,"Reported commands → told + object + to + infinitive."],
-["'Don't run.' → She told him ___ run.",["not to","to not","don't"],0,"Negative command → not to."]
-],
-
-"Gemischt":[
-["She said that she ___ busy.",["was","is","were"],0,"Reported speech."],
-["He asked where I ___.",["lived","live","did live"],0,"Indirect question."]
-],
-
-"Yes / No Questions":[
-["___ you like pizza?",["Do","Does","Are"],0,"I/you/we/they → do."],
-["___ she play tennis?",["Does","Do","Is"],0,"she → does."]
-],
-
-"Wh-Questions":[
-["___ do you live?",["Where","What","Who"],0,"Where fragt nach einem Ort."],
-["___ is your favorite color?",["What","Where","When"],0,"What fragt nach einer Sache."]
-],
-
-"Hilfsverben":[
-["___ you finished your homework?",["Have","Do","Are"],0,"Present Perfect question → Have you ...?"],
-["___ he play football?",["Does","Is","Has"],0,"Present Simple question mit he → Does."]
-],
-
-"Indirect Questions":[
-["Can you tell me where he ___?",["is","does","is he"],0,"Nach dem Fragewort normale Satzstellung."],
-["Do you know what she ___?",["wants","does she want","want"],0,"Indirect question → she wants."]
-],
-
-"Gemischte Fragen":[
-["Why ___ you late?",["are","do","is"],0,"you → are."],
-["When ___ she arrive?",["does","do","is"],0,"she → does."]
-],
-
-"Comparative":[
-["Tom is ___ than Ben.",["tall","taller","tallest"],1,"Comparative → taller."],
-["This book is ___ than that one.",["interesting","more interesting","most interesting"],1,"Längeres Adjektiv → more."]
-],
-
-"Superlative":[
-["She is the ___ student in the class.",["tall","taller","tallest"],2,"Superlative → the tallest."],
-["This is the ___ movie.",["best","better","good"],0,"good → better → best."]
-],
-
-"as ... as":[
-["Tom is as tall ___ Ben.",["as","than","like"],0,"as ... as."],
-["This test is not as easy ___ the last one.",["as","than","like"],0,"not as ... as."]
-],
-
-"Gemischte Vergleiche":[
-["My car is ___ than yours.",["fast","faster","fastest"],1,"Comparative."],
-["She is the ___ runner.",["fast","faster","fastest"],2,"Superlative."]
-],
-
-"Personal Pronouns":[
-["___ am from Germany.",["I","Me","My"],0,"Subjektpronomen: I."],
-["Tom likes ___ .",["I","me","my"],1,"Objektpronomen: me."]
-],
-
-"Possessive Pronouns":[
-["This book is ___.",["my","mine","me"],1,"Nach is → Possessive Pronoun mine."],
-["That is ___ bag.",["my","mine","me"],0,"Vor einem Nomen → my."]
-],
-
-"Reflexive Pronouns":[
-["I made it ___.",["myself","me","mine"],0,"I → myself."],
-["She hurt ___.",["herself","her","hers"],0,"she → herself."]
-],
-
-"Relative Pronouns":[
-["The boy ___ lives here is my friend.",["who","where","which"],0,"who für Personen."],
-["The book ___ I bought is interesting.",["which","who","where"],0,"which für Dinge."]
-],
-
-"Gemischte Pronomen":[
-["This is the girl ___ helped me.",["who","which","where"],0,"Person → who."],
-["This phone is ___.",["mine","my","me"],0,"mine = meines."]
-],
-
-"a / an":[
-["I have ___ apple.",["a","an","the"],1,"apple beginnt mit einem Vokallaut → an."],
-["She is ___ teacher.",["a","an","the"],0,"teacher → a teacher."]
-],
-
-"the":[
-["___ sun is shining.",["A","An","The"],2,"Einzigartiges Objekt → the sun."],
-["I opened ___ door.",["the","a","an"],0,"Eine bestimmte Tür → the."]
-],
-
-"No Article":[
-["I like ___ music.",["the","a","—"],2,"Bei music allgemein kein Artikel."],
-["___ dogs are friendly.",["The","A","—"],2,"Hunde allgemein → kein Artikel."]
-],
-
-"Gemischte Artikel":[
-["He has ___ orange.",["a","an","the"],1,"an orange."],
-["___ moon is bright.",["A","An","The"],2,"the moon."]
-],
-
-"Time":[
-["I wake up ___ 7 o'clock.",["at","on","in"],0,"at + Uhrzeit."],
-["We meet ___ Monday.",["at","on","in"],1,"on + Wochentag."],
-["I was born ___ July.",["at","on","in"],2,"in + Monat."]
-],
-
-"Place":[
-["The book is ___ the table.",["on","at","to"],0,"on the table."],
-["She is ___ school.",["at","on","to"],0,"at school."]
-],
-
-"Movement":[
-["I am going ___ school.",["to","at","on"],0,"go to + Ort."],
-["He walked ___ the room.",["into","at","on"],0,"into = hinein."]
-],
-
-"Gemischte Präpositionen":[
-["We arrived ___ 8 pm.",["at","on","in"],0,"at + Uhrzeit."],
-["She lives ___ London.",["at","on","in"],2,"in + Stadt/Land."]
-]
-
+const exercises = {
+  "If-Sätze":[
+    {q:"If it rains, I ___ at home.",a:["stay","stayed","would stay"],c:0},
+    {q:"If I had more time, I ___ more English.",a:["study","would study","will study"],c:1},
+    {q:"If she had studied, she ___ the test.",a:["would have passed","will pass","passes"],c:0}
+  ],
+  "Zeitformen":[
+    {q:"She ___ to school every day.",a:["go","goes","is going"],c:1},
+    {q:"Look! They ___ football.",a:["play","played","are playing"],c:2},
+    {q:"I ___ my homework yesterday.",a:["finish","finished","have finished"],c:1}
+  ],
+  "Modalverben":[
+    {q:"You ___ wear a seatbelt.",a:["must","might","could"],c:0},
+    {q:"___ you help me?",a:["Could","Must","May"],c:0}
+  ]
 };
 
+let currentTopic="", currentIndex=0;
+let recognition=null, listening=false, lastReply="Hi! I’m Sophie. Let’s practice English together!";
+let mood="normal", timerSeconds=0, timerInterval=null;
+let history=[];
 
-/* =========================================================
-   RENDER TOPICS
-========================================================= */
-
-function renderTopics(){
-
-  const container=document.getElementById("topics");
-
-  container.innerHTML="";
-
-  grammarTopics.forEach((topic,index)=>{
-
-    const div=document.createElement("div");
-
-    div.className="card topic-card";
-
-    div.onclick=()=>openTopic(index);
-
-    div.innerHTML=`
-      <div class="card-icon">${topic.emoji}</div>
-      <h2>${topic.title}</h2>
-      <p>${topic.description}</p>
-    `;
-
-    container.appendChild(div);
-  });
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
+  if(id==="ai") startTimer();
 }
+document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
 
-renderTopics();
+document.getElementById("topicGrid").innerHTML = topics.map(t=>`
+  <div class="topic card" onclick="openTopic('${t[1].replace(/'/g,"\\'")}')">
+    <div class="emoji">${t[0]}</div><h3>${t[1]}</h3><p>${t[2]}</p>
+  </div>`).join("");
 
-
-/* =========================================================
-   OPEN TOPIC
-========================================================= */
-
-let selectedTopic=null;
-let selectedSubtopic=null;
-
-function openTopic(index){
-
-  selectedTopic=grammarTopics[index];
-
-  document.getElementById("subtopicTitle").textContent=
-    selectedTopic.emoji+" "+selectedTopic.title;
-
-  const container=document.getElementById("subtopics");
-
-  container.innerHTML="";
-
-  selectedTopic.subtopics.forEach(subtopic=>{
-
-    const button=document.createElement("button");
-
-    button.className="subtopic";
-
-    button.textContent="📖 "+subtopic;
-
-    button.onclick=()=>startExercise(subtopic);
-
-    container.appendChild(button);
-
-  });
-
-  showPage("subtopicsPage");
+function openTopic(topic){
+  currentTopic=topic; currentIndex=0;
+  const list=exercises[topic] || [{q:`Choose the correct form for ${topic}.`,a:["Option A","Option B","Option C"],c:0}];
+  const ex=list[currentIndex];
+  document.getElementById("exerciseTitle").textContent=topic;
+  document.getElementById("exerciseQuestion").textContent=ex.q;
+  document.getElementById("feedback").textContent="";
+  document.getElementById("nextBtn").style.display="none";
+  document.getElementById("answers").innerHTML=ex.a.map((x,i)=>`<button class="answer" onclick="answer(${i})">${x}</button>`).join("");
+  document.getElementById("exerciseModal").classList.add("show");
 }
-
-
-/* =========================================================
-   EXERCISE SYSTEM
-========================================================= */
-
-let exerciseQuestions=[];
-let exerciseIndex=0;
-let currentAnswered=false;
-
-function startExercise(subtopic){
-
-  selectedSubtopic=subtopic;
-
-  const pool=E[subtopic] || [];
-
-  if(pool.length===0){
-
-    alert("Für dieses Thema sind noch keine Übungen vorhanden.");
-
-    return;
-  }
-
-  /*
-    Die Fragen werden mehrfach wiederholt,
-    damit man unbegrenzt üben kann.
-  */
-
-  exerciseQuestions=[];
-
-  for(let round=0;round<3;round++){
-
-    exerciseQuestions.push(
-      ...pool.map(q=>[...q])
-    );
-
-  }
-
-  shuffle(exerciseQuestions);
-
-  exerciseIndex=0;
-
-  showPage("exercise");
-
-  renderQuestion();
+function answer(i){
+  const ex=(exercises[currentTopic]||[{q:"",a:["Option A","Option B","Option C"],c:0}])[currentIndex];
+  const f=document.getElementById("feedback");
+  if(i===ex.c){f.className="feedback ok";f.textContent="✓ Richtig!";document.getElementById("nextBtn").style.display="inline-block";}
+  else{f.className="feedback bad";f.textContent="Noch nicht – versuch es noch einmal.";}
 }
-
-
-function renderQuestion(){
-
-  currentAnswered=false;
-
-  const q=exerciseQuestions[exerciseIndex];
-
-  document.getElementById("questionNumber").textContent=
-    `Übung ${exerciseIndex+1} von ${exerciseQuestions.length}`;
-
-  document.getElementById("question").textContent=q[0];
-
-  const answers=document.getElementById("answers");
-
-  answers.innerHTML="";
-
-  document.getElementById("explanation").className="explanation";
-
-  document.getElementById("explanation").textContent="";
-
-  document.getElementById("nextButton").style.display="none";
-
-  q[1].forEach((answer,index)=>{
-
-    const button=document.createElement("button");
-
-    button.className="answer";
-
-    button.textContent=answer;
-
-    button.onclick=()=>answerQuestion(index);
-
-    answers.appendChild(button);
-
-  });
-
+function nextExercise(){
+  const list=exercises[currentTopic]||[];
+  currentIndex=(currentIndex+1)%Math.max(1,list.length);
+  openTopic(currentTopic);
 }
+function closeExercise(){document.getElementById("exerciseModal").classList.remove("show")}
 
-
-function answerQuestion(index){
-
-  if(currentAnswered){
-    return;
-  }
-
-  currentAnswered=true;
-
-  const q=exerciseQuestions[exerciseIndex];
-
-  const buttons=document.querySelectorAll(".answer");
-
-  buttons.forEach((button,i)=>{
-
-    button.disabled=true;
-
-    if(i===q[2]){
-      button.classList.add("correct");
-    }
-
-  });
-
-  if(index!==q[2]){
-    buttons[index].classList.add("wrong");
-  }
-
-  const explanation=document.getElementById("explanation");
-
-  explanation.textContent=
-    (index===q[2] ? "✅ Richtig! " : "❌ Noch nicht ganz. ")
-    +q[3];
-
-  explanation.classList.add("show");
-
-  document.getElementById("nextButton").style.display="block";
-}
-
-
-function nextQuestion(){
-
-  exerciseIndex++;
-
-  if(exerciseIndex>=exerciseQuestions.length){
-
-    /*
-      Einfach wieder von vorne.
-      Keine XP, keine Herzen, kein Streak.
-    */
-
-    exerciseIndex=0;
-
-    shuffle(exerciseQuestions);
-
-  }
-
-  renderQuestion();
-}
-
-
-function backToSubtopics(){
-
-  if(selectedTopic){
-
-    openTopic(
-      grammarTopics.indexOf(selectedTopic)
-    );
-
-  }else{
-
-    showPage("grammar");
-
-  }
-}
-
-
-function shuffle(array){
-
-  for(let i=array.length-1;i>0;i--){
-
-    const j=Math.floor(Math.random()*(i+1));
-
-    [array[i],array[j]]=
-    [array[j],array[i]];
-
-  }
-
-  return array;
-}
-
-
-/* =========================================================
-   AI SYSTEM
-========================================================= */
-
-const API_URL=
-  "https://speakup-english-ai.onrender.com/api/chat";
-
-let aiHistory=[];
-
-let currentAvatar={
-  type:"human",
-  name:"Alex",
-  emoji:"🧑‍🏫"
-};
-
-let recognition=null;
-let listening=false;
-let speaking=false;
-
-let callSeconds=0;
-let callTimer=null;
-
-
-/* =========================================================
-   START CALL TIMER
-========================================================= */
-
-function startCall(){
-
-  if(callTimer){
-    return;
-  }
-
-  callSeconds=0;
-
-  callTimer=setInterval(()=>{
-
-    callSeconds++;
-
-    const minutes=
-      String(Math.floor(callSeconds/60)).padStart(2,"0");
-
-    const seconds=
-      String(callSeconds%60).padStart(2,"0");
-
-    document.getElementById("callTime").textContent=
-      `${minutes}:${seconds}`;
-
+function startTimer(){
+  if(timerInterval) return;
+  timerInterval=setInterval(()=>{
+    timerSeconds++;
+    const m=String(Math.floor(timerSeconds/60)).padStart(2,"0");
+    const s=String(timerSeconds%60).padStart(2,"0");
+    document.getElementById("timer").textContent=`${m}:${s}`;
   },1000);
-
 }
-
-
-/* =========================================================
-   AI AVATAR
-========================================================= */
-
-function setMood(mood){
-
-  const face=document.getElementById("face");
-
-  face.classList.remove(
-    "thinking",
-    "happy",
-    "surprised",
-    "listening",
-    "speaking"
-  );
-
-  if(mood){
-    face.classList.add(mood);
-  }
-
-  const status=document.getElementById("avatarStatus");
-
-  const text={
-
-    thinking:"Denkt nach... 🤔",
-
-    happy:"Das macht Spaß! 😄",
-
-    surprised:"Oh! 😮",
-
-    listening:"Ich höre zu... 👂",
-
-    speaking:"Spricht... 🗣️"
-
-  };
-
-  status.textContent=
-    text[mood] || "Bereit zum Sprechen";
+function setMood(next){
+  mood=next;
+  const call=document.getElementById("call");
+  call.classList.remove("speaking","thinking","listening");
+  if(next==="speaking") call.classList.add("speaking");
+  if(next==="thinking") call.classList.add("thinking");
+  if(next==="listening") call.classList.add("listening");
+  document.querySelectorAll(".mood").forEach(b=>b.classList.toggle("active",b.dataset.mood===next));
 }
-
-
-function changeMood(){
-
-  const moods=[
-    "happy",
-    "thinking",
-    "surprised",
-    "listening"
-  ];
-
-  const mood=
-    moods[Math.floor(Math.random()*moods.length)];
-
-  setMood(mood);
-
-  setTimeout(()=>{
-    setMood("");
-  },1800);
+function cycleMood(){
+  const moods=["normal","happy","laugh","surprised","thinking","listening"];
+  setMood(moods[(moods.indexOf(mood)+1)%moods.length]);
 }
-
-
-/* =========================================================
-   AVATAR SELECTION
-========================================================= */
-
-function selectAvatar(type,name,emoji,button){
-
-  currentAvatar={
-    type,
-    name,
-    emoji
-  };
-
-  document.getElementById("avatarName").textContent=name;
-
-  document.querySelectorAll(".avatar-choice").forEach(b=>{
-    b.classList.remove("active");
-  });
-
-  button.classList.add("active");
-
-  const face=document.getElementById("face");
-
-  face.className="face";
-
-  if(type!=="human"){
-    face.classList.add(type);
-  }
-
-  document.getElementById("aiMessage").textContent=
-    `Hi! I'm ${name}. Let's practice English together! 👋`;
-
-  speakText(
-    `Hi! I'm ${name}. Let's practice English together!`
-  );
-}
-
-
-/* =========================================================
-   MICROPHONE
-========================================================= */
-
-function setupRecognition(){
-
-  const SpeechRecognition=
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
-
-  if(!SpeechRecognition){
-
-    document.getElementById("avatarStatus").textContent=
-      "Spracherkennung wird auf diesem Browser nicht unterstützt.";
-
-    return false;
-  }
-
-  recognition=new SpeechRecognition();
-
-  recognition.lang="en-US";
-
-  recognition.continuous=false;
-
-  recognition.interimResults=true;
-
-  recognition.maxAlternatives=1;
-
-
-  recognition.onstart=()=>{
-
-    listening=true;
-
-    document.getElementById("micButton")
-      .classList.add("mic-active");
-
-    setMood("listening");
-
-  };
-
-
-  recognition.onresult=(event)=>{
-
-    let transcript="";
-
-    for(
-      let i=event.resultIndex;
-      i<event.results.length;
-      i++
-    ){
-
-      transcript+=
-        event.results[i][0].transcript;
-
-    }
-
-    document.getElementById("textInput").value=
-      transcript;
-
-    const last=
-      event.results[event.results.length-1];
-
-    if(last.isFinal){
-
-      sendText(transcript);
-
-    }
-
-  };
-
-
-  recognition.onerror=(event)=>{
-
-    console.log("Speech recognition error:",event.error);
-
-    listening=false;
-
-    document.getElementById("micButton")
-      .classList.remove("mic-active");
-
-    setMood("");
-
-    if(event.error==="not-allowed"){
-
-      document.getElementById("avatarStatus").textContent=
-        "Bitte Mikrofonzugriff erlauben 🎙️";
-
-    }
-
-  };
-
-
-  recognition.onend=()=>{
-
-    listening=false;
-
-    document.getElementById("micButton")
-      .classList.remove("mic-active");
-
-    if(!speaking){
-      setMood("");
-    }
-
-  };
-
-  return true;
-}
-
-
-function toggleMicrophone(){
-
-  startCall();
-
-  if(!recognition){
-
-    if(!setupRecognition()){
-
-      alert(
-        "Dein Browser unterstützt die Spracherkennung leider nicht. Du kannst unten trotzdem deine Nachricht eintippen."
-      );
-
-      return;
-    }
-
-  }
-
-  if(listening){
-
-    recognition.stop();
-
-    return;
-  }
-
-  try{
-
-    recognition.start();
-
-  }catch(error){
-
-    console.log(error);
-
-  }
-
-}
-
-
-/* =========================================================
-   SEND TEXT TO AI
-========================================================= */
-
-async function sendText(customText=null){
-
-  startCall();
-
-  const input=
-    customText ||
-    document.getElementById("textInput").value.trim();
-
-  if(!input){
-    return;
-  }
-
-  document.getElementById("textInput").value="";
-
-  const messageBox=
-    document.getElementById("aiMessage");
-
-  messageBox.textContent=
-    "You: "+input;
-
-  setMood("thinking");
-
-  document.getElementById("connection").textContent=
-    "● KI denkt nach...";
-
-
-  try{
-
-    const response=await fetch(API_URL,{
-
-      method:"POST",
-
-      headers:{
-        "Content-Type":"application/json"
-      },
-
-      body:JSON.stringify({
-
-        message:input,
-
-        history:aiHistory
-
-      })
-
-    });
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "Server returned "+response.status
-      );
-
-    }
-
-
-    const data=await response.json();
-
-    const text=
-      data.text ||
-      "Sorry, I couldn't answer right now.";
-
-    aiHistory.push({
-      role:"user",
-      content:input
-    });
-
-    aiHistory.push({
-      role:"assistant",
-      content:text
-    });
-
-    if(aiHistory.length>12){
-
-      aiHistory=
-        aiHistory.slice(-12);
-
-    }
-
-
-    messageBox.textContent=text;
-
-    document.getElementById("connection").textContent=
-      "● Verbunden";
-
-    speakText(text);
-
-  }catch(error){
-
-    console.error(error);
-
-    messageBox.textContent=
-      "Sorry, I can't connect to the AI right now. Please try again.";
-
-    document.getElementById("connection").textContent=
-      "● Verbindung prüfen";
-
-    setMood("surprised");
-
-  }
-
-}
-
-
-/* =========================================================
-   AI SPEECH
-========================================================= */
+document.querySelectorAll(".mood").forEach(b=>b.onclick=()=>setMood(b.dataset.mood));
 
 function speakText(text){
-
-  if(!("speechSynthesis" in window)){
-
-    document.getElementById("avatarStatus").textContent=
-      "Sprachausgabe wird nicht unterstützt.";
-
-    return;
-  }
-
+  lastReply=text;
+  if(!("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
-
-  const utterance=
-    new SpeechSynthesisUtterance(text);
-
-  utterance.lang="en-US";
-
-  utterance.rate=.92;
-
-  utterance.pitch=1.03;
-
-  speaking=true;
-
-  setMood("speaking");
-
-  utterance.onstart=()=>{
-
-    speaking=true;
-
-    setMood("speaking");
-
-  };
-
-  utterance.onend=()=>{
-
-    speaking=false;
-
-    setMood("happy");
-
-    setTimeout(()=>{
-      if(!speaking && !listening){
-        setMood("");
-      }
-    },1000);
-
-  };
-
-  utterance.onerror=()=>{
-
-    speaking=false;
-
-    setMood("");
-
-  };
-
-  window.speechSynthesis.speak(utterance);
-
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang="en-US"; u.rate=.96; u.pitch=1.02;
+  u.onstart=()=>{document.getElementById("speaker").textContent="Sophie spricht …";setMood("speaking")};
+  u.onend=()=>{document.getElementById("speaker").textContent="Sophie";setMood("happy")};
+  window.speechSynthesis.speak(u);
 }
+function repeatLast(){speakText(lastReply)}
 
-
-function repeatAI(){
-
-  const text=
-    document.getElementById("aiMessage").textContent;
-
-  if(text){
-
+async function sendText(message){
+  if(!message) return;
+  document.getElementById("bubbleText").textContent="Thinking… 🤔";
+  setMood("thinking");
+  try{
+    const res=await fetch(API_URL,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({message,history})
+    });
+    const data=await res.json();
+    if(!res.ok) throw new Error(data.error||"API error");
+    const text=data.text||"Sorry, I couldn't answer right now.";
+    history.push({role:"user",content:message},{role:"assistant",content:text});
+    history=history.slice(-10);
+    document.getElementById("bubbleText").textContent=text;
     speakText(text);
-
+  }catch(e){
+    document.getElementById("bubbleText").textContent="I couldn't connect to Sophie right now. You can try again in a moment.";
+    setMood("surprised");
   }
-
 }
 
-
-/* =========================================================
-   END CALL
-========================================================= */
+function setupRecognition(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){alert("Dein Browser unterstützt die Sprachaufnahme hier leider nicht. Du kannst weiterhin über die Textfunktion des Browsers sprechen.");return null}
+  const r=new SR();
+  r.lang="en-US";r.interimResults=false;r.continuous=false;
+  r.onstart=()=>{listening=true;document.getElementById("speaker").textContent="Du sprichst …";setMood("listening");document.getElementById("micBtn").textContent="⏹️"};
+  r.onresult=e=>{const text=e.results[0][0].transcript;document.getElementById("bubbleText").textContent=text;sendText(text)};
+  r.onerror=()=>{listening=false;document.getElementById("micBtn").textContent="🎙️";setMood("normal")};
+  r.onend=()=>{listening=false;document.getElementById("micBtn").textContent="🎙️"};
+  return r;
+}
+document.getElementById("micBtn").onclick=()=>{
+  if(!recognition) recognition=setupRecognition();
+  if(!recognition) return;
+  if(listening) recognition.stop(); else recognition.start();
+};
 
 function endCall(){
-
-  if(recognition && listening){
-
-    try{
-      recognition.stop();
-    }catch(e){}
-
-  }
-
-  if(window.speechSynthesis){
-
-    window.speechSynthesis.cancel();
-
-  }
-
-  listening=false;
-  speaking=false;
-
-  if(callTimer){
-
-    clearInterval(callTimer);
-
-    callTimer=null;
-
-  }
-
-  callSeconds=0;
-
-  document.getElementById("callTime").textContent=
-    "00:00";
-
-  document.getElementById("connection").textContent=
-    "● Bereit";
-
-  document.getElementById("avatarStatus").textContent=
-    "Gespräch beendet";
-
-  setMood("");
-
+  if(recognition && listening) recognition.stop();
+  window.speechSynthesis?.cancel();
+  setMood("normal");
+  document.getElementById("speaker").textContent="Sophie";
+  document.getElementById("bubbleText").textContent="Call beendet. Wenn du möchtest, können wir gleich wieder üben! 😊";
 }
 
-
-/* =========================================================
-   FRIENDS
-========================================================= */
-
-function getFriends(){
-
-  try{
-
-    return JSON.parse(
-      localStorage.getItem("speakupFriends") || "[]"
-    );
-
-  }catch{
-
-    return [];
-
-  }
-
-}
-
-
-function saveFriends(friends){
-
-  localStorage.setItem(
-    "speakupFriends",
-    JSON.stringify(friends)
-  );
-
-}
-
-
-function addFriend(){
-
-  const input=
-    document.getElementById("friendInput");
-
-  const name=
-    input.value.trim();
-
-  if(!name){
-    return;
-  }
-
-  const friends=getFriends();
-
-  friends.push({
-    name:name,
-    avatar:"👤"
-  });
-
-  saveFriends(friends);
-
-  input.value="";
-
-  renderFriends();
-
-}
-
-
-function renderFriends(){
-
-  const container=
-    document.getElementById("friendList");
-
-  const friends=getFriends();
-
-  if(friends.length===0){
-
-    container.innerHTML=`
-      <div class="card">
-        <p>Noch keine Freunde hinzugefügt.</p>
-      </div>
-    `;
-
-    return;
-  }
-
-  container.innerHTML=
-    friends.map(friend=>`
-
-      <div class="friend">
-
-        <div class="friend-avatar">
-          ${escapeHtml(friend.avatar)}
-        </div>
-
-        <strong>
-          ${escapeHtml(friend.name)}
-        </strong>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-function resetFriends(){
-
-  localStorage.removeItem("speakupFriends");
-
-  renderFriends();
-
-}
-
-
-/* =========================================================
-   SECURITY HELPER
-========================================================= */
-
-function escapeHtml(text){
-
-  return String(text)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
-}
-
-
-/* =========================================================
-   INIT
-========================================================= */
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-  renderTopics();
-
-  setupRecognition();
-
-});
-
+startTimer();
 </script>
-
 </body>
-  </html>
-    
-
-
+</html>
