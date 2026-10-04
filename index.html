@@ -3,541 +3,387 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SpeakUp</title>
+<title>SpeakUp – English Learning</title>
 
 <style>
-:root {
-  --green: #58cc02;
-  --green-dark: #46a302;
-  --blue: #1cb0f6;
-  --purple: #ce82ff;
-  --yellow: #ffc800;
-  --red: #ff4b4b;
-  --bg: #f7f7f7;
-  --white: #ffffff;
-  --text: #3c3c3c;
-  --muted: #777;
-  --border: #e5e5e5;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-}
-
-/* =========================
-   ZUGANGSCODE
-========================= */
-
-#gate {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  background: linear-gradient(135deg, #58cc02, #1cb0f6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
-.gate-box {
-  background: white;
-  width: 100%;
-  max-width: 390px;
-  padding: 30px;
-  border-radius: 25px;
-  text-align: center;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-}
-
-.logo {
-  font-size: 38px;
-  font-weight: 900;
-  color: var(--green);
-}
-
-.gate-box input {
-  width: 100%;
-  margin: 20px 0;
-  padding: 16px;
-  border: 2px solid var(--border);
-  border-radius: 15px;
-  text-align: center;
-  font-size: 24px;
-  letter-spacing: 7px;
-}
-
-.primary-button {
-  width: 100%;
-  border: none;
-  padding: 15px;
-  border-radius: 14px;
-  background: var(--green);
-  color: white;
-  font-weight: 900;
-  font-size: 17px;
-  box-shadow: 0 4px 0 var(--green-dark);
-}
-
-.error {
-  color: var(--red);
-  margin-top: 12px;
-  min-height: 20px;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-header {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  background: white;
-  border-bottom: 1px solid var(--border);
-  padding: 12px 18px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.header-logo {
-  font-size: 27px;
-  font-weight: 900;
-  color: var(--green);
-  margin-right: auto;
-}
-
-.stats {
-  display: flex;
-  gap: 13px;
-  font-weight: 900;
+:root{
+  --green:#58cc02;
+  --green-dark:#46a302;
+  --blue:#1cb0f6;
+  --purple:#ce82ff;
+  --yellow:#ffc800;
+  --red:#ff4b4b;
+  --bg:#f7f7f7;
+  --card:#ffffff;
+  --text:#3c3c3c;
+  --muted:#777;
+  --border:#e5e5e5;
 }
 
-.stat {
-  white-space: nowrap;
+*{
+  box-sizing:border-box;
 }
 
-.streak {
-  color: var(--red);
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
 
-.xp {
-  color: var(--yellow);
+button{
+  font:inherit;
+  cursor:pointer;
 }
 
-.gems {
-  color: var(--blue);
+.app{
+  max-width:1050px;
+  margin:auto;
+  min-height:100vh;
+  background:#fff;
 }
 
-/* =========================
-   MAIN
-========================= */
-
-main {
-  max-width: 1050px;
-  margin: auto;
-  padding: 22px 16px 100px;
-}
-
-.page {
-  display: none;
-}
-
-.page.active {
-  display: block;
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 24px;
-  margin-bottom: 20px;
+header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:#fff;
+  border-bottom:2px solid var(--border);
+  padding:12px 16px;
 }
 
-.hero h1 {
-  margin: 0 0 8px;
-  font-size: 28px;
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
 }
 
-.hero p {
-  color: var(--muted);
-  margin: 0;
-  line-height: 1.5;
+.logo{
+  font-size:25px;
+  font-weight:900;
+  color:var(--green);
 }
-
-/* =========================
-   TAGESZIEL
-========================= */
 
-.goal {
-  margin-top: 18px;
-  background: #f0fbe9;
-  border-radius: 15px;
-  padding: 15px;
+.stats{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
 }
 
-.progress {
-  height: 12px;
-  background: #e5e5e5;
-  border-radius: 20px;
-  overflow: hidden;
-  margin-top: 10px;
+.stat{
+  padding:8px 11px;
+  border-radius:14px;
+  background:#f2f2f2;
+  font-weight:800;
+  font-size:14px;
 }
 
-.progress span {
-  display: block;
-  width: 62%;
-  height: 100%;
-  background: var(--green);
+nav{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+  overflow:auto;
 }
 
-/* =========================
-   KARTEN
-========================= */
-
-.section-title {
-  margin: 25px 0 12px;
+nav button{
+  border:0;
+  background:#f1f1f1;
+  padding:10px 14px;
+  border-radius:14px;
+  font-weight:800;
+  white-space:nowrap;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 15px;
+nav button.active{
+  background:#ddffcc;
+  color:#348000;
 }
 
-.card {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 20px;
-  transition: 0.15s;
+main{
+  padding:20px 16px 100px;
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+.hero{
+  background:linear-gradient(135deg,#eaffd8,#f5fff0);
+  border:2px solid #d7efc7;
+  border-radius:24px;
+  padding:22px;
+  margin-bottom:20px;
 }
 
-.card h3 {
-  margin: 10px 0 6px;
+.hero h1{
+  margin:0 0 8px;
+  font-size:30px;
 }
 
-.card p {
-  color: var(--muted);
-  line-height: 1.4;
+.hero p{
+  margin:0;
+  color:#666;
+  line-height:1.5;
 }
 
-.topic-icon {
-  font-size: 38px;
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin:24px 0 12px;
 }
 
-.card button {
-  width: 100%;
-  margin-top: 15px;
-  padding: 13px;
-  border: none;
-  border-radius: 13px;
-  background: #eef8ff;
-  color: #168bc5;
-  font-weight: 900;
+.section-title h2{
+  margin:0;
+  font-size:21px;
 }
 
-.grammar-card button {
-  background: #f0fbe9;
-  color: #378d00;
+.topic-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
 }
-
-/* =========================
-   GRAMMATIK
-========================= */
 
-.subtopics {
-  display: none;
+.topic-card,
+.sub-card{
+  background:#fff;
+  border:2px solid var(--border);
+  border-radius:20px;
+  padding:16px;
+  box-shadow:0 2px 0 #ddd;
+  transition:.15s;
 }
 
-.subtopics.active {
-  display: block;
+.topic-card:hover,
+.sub-card:hover{
+  transform:translateY(-2px);
 }
 
-.back-button {
-  border: none;
-  background: transparent;
-  color: #168bc5;
-  font-weight: 900;
-  margin-bottom: 15px;
+.topic-card h3,
+.sub-card h3{
+  margin:8px 0 6px;
 }
 
-/* =========================
-   ÜBUNG
-========================= */
-
-.exercise {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 22px;
-  margin-top: 18px;
+.topic-card p,
+.sub-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.4;
 }
 
-.question {
-  font-size: 22px;
-  font-weight: 900;
-  line-height: 1.5;
-  margin-bottom: 20px;
+.topic-card button,
+.sub-card button{
+  margin-top:13px;
+  width:100%;
+  border:0;
+  border-bottom:4px solid var(--green-dark);
+  background:var(--green);
+  color:#fff;
+  border-radius:13px;
+  padding:11px;
+  font-weight:900;
 }
 
-.options {
-  display: grid;
-  gap: 10px;
+.sub-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
 }
 
-.option {
-  width: 100%;
-  padding: 15px;
-  border: 2px solid var(--border);
-  background: white;
-  border-radius: 13px;
-  text-align: left;
-  font-weight: 700;
+.back{
+  border:0;
+  background:#eee;
+  border-radius:12px;
+  padding:9px 13px;
+  font-weight:800;
+  margin-bottom:14px;
 }
 
-.option:hover {
-  border-color: var(--blue);
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:10px;
+  background:#eef8e8;
+  color:#398500;
+  font-size:12px;
+  font-weight:900;
 }
 
-.feedback {
-  margin-top: 15px;
-  font-weight: 900;
-  min-height: 25px;
+.exercise-card{
+  background:#fff;
+  border:2px solid var(--border);
+  border-radius:24px;
+  padding:22px;
+  margin-top:14px;
 }
 
-.pill {
-  display: inline-block;
-  padding: 7px 11px;
-  border-radius: 99px;
-  background: #f0fbe9;
-  color: #378d00;
-  font-size: 13px;
-  font-weight: 900;
+.question{
+  font-size:23px;
+  font-weight:900;
+  line-height:1.35;
+  margin:16px 0 20px;
 }
 
-.small {
-  color: var(--muted);
-  font-size: 14px;
+.option{
+  width:100%;
+  text-align:left;
+  border:2px solid #ddd;
+  background:#fff;
+  border-radius:15px;
+  padding:14px;
+  margin:7px 0;
+  font-weight:750;
 }
-
-/* =========================
-   KI CALL
-========================= */
 
-.call {
-  min-height: 520px;
-  border-radius: 28px;
-  background: #20242b;
-  color: white;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+.option:hover{
+  border-color:var(--blue);
 }
 
-.call-avatar {
-  font-size: 110px;
-  margin: 25px;
+.option.correct{
+  background:#e9ffd9;
+  border-color:var(--green);
 }
 
-.call h2 {
-  margin: 0;
+.option.wrong{
+  background:#ffe5e5;
+  border-color:var(--red);
 }
 
-.call-controls {
-  display: flex;
-  gap: 18px;
-  margin-top: 30px;
+.feedback{
+  padding:13px;
+  border-radius:14px;
+  margin-top:14px;
+  font-weight:800;
 }
 
-.round-button {
-  width: 65px;
-  height: 65px;
-  border: none;
-  border-radius: 50%;
-  background: #333941;
-  color: white;
-  font-size: 25px;
+.feedback.good{
+  background:#e9ffd9;
+  color:#318000;
 }
 
-.hangup {
-  background: var(--red);
+.feedback.bad{
+  background:#ffe5e5;
+  color:#c62828;
 }
 
-/* =========================
-   FREUNDE
-========================= */
-
-.friend-input {
-  display: flex;
-  gap: 10px;
-  margin-top: 18px;
+.next{
+  width:100%;
+  margin-top:12px;
+  border:0;
+  border-bottom:4px solid #2780ad;
+  background:var(--blue);
+  color:#fff;
+  border-radius:14px;
+  padding:13px;
+  font-weight:900;
 }
 
-.friend-input input {
-  flex: 1;
-  padding: 14px;
-  border: 2px solid var(--border);
-  border-radius: 13px;
+.progress{
+  height:10px;
+  background:#eee;
+  border-radius:20px;
+  overflow:hidden;
+  margin:12px 0;
 }
 
-.friend-input button {
-  border: none;
-  background: var(--blue);
-  color: white;
-  padding: 14px;
-  border-radius: 13px;
-  font-weight: 900;
+.progress div{
+  height:100%;
+  background:var(--green);
+  transition:.25s;
 }
-
-/* =========================
-   PROFIL
-========================= */
 
-.profile-box {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 30px;
-  text-align: center;
+.center{
+  text-align:center;
 }
 
-.profile-avatar {
-  font-size: 75px;
+.big-icon{
+  font-size:60px;
 }
 
-.big-stats {
-  display: flex;
-  justify-content: center;
-  gap: 35px;
-  margin-top: 25px;
+.call{
+  background:#17191f;
+  color:white;
+  border-radius:28px;
+  padding:30px 18px;
+  text-align:center;
+  max-width:600px;
+  margin:auto;
 }
 
-.big-stats b {
-  display: block;
-  font-size: 23px;
+.avatar{
+  font-size:90px;
+  margin:20px;
 }
 
-/* =========================
-   BOTTOM NAV
-========================= */
-
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 30;
-  background: white;
-  border-top: 1px solid var(--border);
+.call button{
+  border:0;
+  border-radius:15px;
+  padding:12px 16px;
+  margin:5px;
+  font-weight:900;
 }
 
-.nav {
-  max-width: 700px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+.call-main{
+  background:var(--green);
+  color:white;
 }
 
-.nav button {
-  border: none;
-  background: white;
-  padding: 10px 5px;
-  color: #777;
-  font-weight: 900;
-  font-size: 12px;
+.call-alt{
+  background:#30343d;
+  color:white;
 }
 
-.nav button.active {
-  color: var(--green);
+textarea,
+input{
+  width:100%;
+  padding:13px;
+  border:2px solid #ddd;
+  border-radius:13px;
+  font:inherit;
 }
 
-.nav span {
-  display: block;
-  font-size: 22px;
-  margin-bottom: 3px;
+.friend-card{
+  border:2px solid var(--border);
+  border-radius:16px;
+  padding:14px;
+  margin:10px 0;
+  background:#fff;
 }
 
-/* =========================
-   MODAL
-========================= */
-
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  z-index: 90;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
+.empty{
+  padding:30px;
+  text-align:center;
+  color:#777;
 }
 
-.modal.show {
-  display: flex;
+.small{
+  font-size:13px;
+  color:#777;
 }
 
-.modal-box {
-  background: white;
-  border-radius: 23px;
-  width: 100%;
-  max-width: 620px;
-  max-height: 90vh;
-  overflow-y: auto;
-  padding: 25px;
+.hidden{
+  display:none!important;
 }
 
-.close {
-  float: right;
-  border: none;
-  background: #eee;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  font-size: 22px;
+footer{
+  text-align:center;
+  color:#888;
+  padding:25px;
+  font-size:13px;
 }
-
-/* =========================
-   MOBILE
-========================= */
 
-@media(max-width:600px) {
+@media(max-width:700px){
 
-  .header-logo {
-    font-size: 22px;
+  .topic-grid,
+  .sub-grid{
+    grid-template-columns:1fr;
   }
 
-  .stats {
-    gap: 7px;
-    font-size: 12px;
+  .hero h1{
+    font-size:25px;
   }
 
-  .hero h1 {
-    font-size: 24px;
-  }
-
-  .big-stats {
-    gap: 18px;
+  .question{
+    font-size:20px;
   }
 
 }
@@ -546,176 +392,130 @@ main {
 
 <body>
 
-<!-- =========================
-     ZUGANGSCODE
-========================= -->
-
-<div id="gate">
-
-  <div class="gate-box">
-
-    <div class="logo">
-      SpeakUp 🚀
-    </div>
-
-    <p>
-      Deine Englisch-Lernapp
-    </p>
-
-    <p class="small">
-      Gib den Zugangscode ein.
-    </p>
-
-    <input
-      id="code"
-      inputmode="numeric"
-      maxlength="4"
-      placeholder="••••"
-    >
-
-    <button
-      class="primary-button"
-      onclick="unlock()"
-    >
-      Öffnen
-    </button>
-
-    <div
-      id="gateError"
-      class="error"
-    ></div>
-
-  </div>
-
-</div>
-
-
-<!-- =========================
-     HEADER
-========================= -->
+<div class="app">
 
 <header>
 
-  <div class="header-logo">
-    SpeakUp
+  <div class="top">
+
+    <div class="logo">
+      🦉 SpeakUp
+    </div>
+
+    <div class="stats">
+
+      <div class="stat">
+        🔥 <span id="streak">7</span>
+      </div>
+
+      <div class="stat">
+        ⭐ <span id="xp">120</span> XP
+      </div>
+
+      <div class="stat">
+        💎 80
+      </div>
+
+    </div>
+
   </div>
 
-  <div class="stats">
+  <nav>
 
-    <div class="stat streak">
-      🔥 <span id="streak">7</span>
-    </div>
+    <button class="active" data-page="home">
+      🏠 Start
+    </button>
 
-    <div class="stat xp">
-      ⭐ <span id="xp">120</span>
-    </div>
+    <button data-page="grammar">
+      📚 Grammatik
+    </button>
 
-    <div class="stat gems">
-      💎 <span id="gems">80</span>
-    </div>
+    <button data-page="ai">
+      🤖 KI
+    </button>
 
-  </div>
+    <button data-page="friends">
+      👥 Freunde
+    </button>
+
+    <button data-page="profile">
+      👤 Profil
+    </button>
+
+  </nav>
 
 </header>
 
 
-<!-- =========================
-     MAIN
-========================= -->
-
 <main>
 
 
-<!-- =========================
-     STARTSEITE
-========================= -->
+<!-- HOME -->
 
-<section
-  id="home"
-  class="page active"
->
+<section id="home">
 
   <div class="hero">
 
     <h1>
-      Hallo! 👋
+      Hey! Bereit für Englisch? 🚀
     </h1>
 
     <p>
-      Was möchtest du heute lernen?
+      Wähle frei ein Grammatikthema und übe so oft du möchtest.
+      Keine Herzen, keine Leben – einfach lernen und XP sammeln!
     </p>
-
-    <div class="goal">
-
-      <b>
-        🎯 Tagesziel
-      </b>
-
-      <br>
-
-      <span class="small">
-        Du hast heute schon 62 % geschafft.
-      </span>
-
-      <div class="progress">
-        <span></span>
-      </div>
-
-    </div>
 
   </div>
 
 
-  <h2 class="section-title">
-    Schnellstart
-  </h2>
+  <div class="section-title">
+
+    <h2>
+      Heute üben
+    </h2>
+
+  </div>
 
 
-  <div class="grid">
+  <div class="topic-grid">
 
-    <div class="card">
+    <div class="topic-card">
 
-      <div class="topic-icon">
-        📚
-      </div>
+      <span class="badge">
+        ⭐ Empfohlen
+      </span>
 
       <h3>
-        Grammatik
+        🕐 Zeitformen
       </h3>
 
       <p>
-        Wähle jedes Grammatik-Thema frei aus
-        und übe ohne Leben.
+        Present, Past, Perfect & Future
       </p>
 
-      <button
-        onclick="showPage('grammar')"
-      >
-        Grammatik öffnen
+      <button onclick="openTopic(0)">
+        Loslegen
       </button>
 
     </div>
 
 
-    <div class="card">
+    <div class="topic-card">
 
-      <div class="topic-icon">
-        📞
-      </div>
+      <span class="badge">
+        🔥 Beliebt
+      </span>
 
       <h3>
-        KI-Sprechen
+        🔀 If-Sätze
       </h3>
 
       <p>
-        Sprich mit deinem KI-Partner
-        und übe echte Gespräche.
+        Type 1, Type 2, Type 3 und gemischt
       </p>
 
-      <button
-        onclick="showPage('ai')"
-      >
-        Zum KI-Anruf
+      <button onclick="openTopic(1)">
+        Üben
       </button>
 
     </div>
@@ -725,14 +525,9 @@ main {
 </section>
 
 
-<!-- =========================
-     GRAMMATIK
-========================= -->
+<!-- GRAMMAR -->
 
-<section
-  id="grammar"
-  class="page"
->
+<section id="grammar" class="hidden">
 
   <div class="hero">
 
@@ -741,98 +536,86 @@ main {
     </h1>
 
     <p>
-      Wähle einfach das Thema aus,
-      das du gerade üben möchtest.
-      Keine Reihenfolge, keine Leben –
-      unendlich viele Versuche. ♾️
+      Such dir einfach ein Thema aus.
+      Du kannst jedes Thema jederzeit wiederholen.
     </p>
 
   </div>
 
-
-  <div
-    id="topicGrid"
-    class="grid"
-  ></div>
-
-
-  <div
-    id="subtopicView"
-    class="subtopics"
-  ></div>
+  <div id="topicView"></div>
 
 </section>
 
 
-<!-- =========================
-     KI
-========================= -->
+<!-- EXERCISE -->
 
-<section
-  id="ai"
-  class="page"
->
+<section id="exercise" class="hidden">
+
+  <button class="back" onclick="backToSubtopics()">
+    ← Zurück
+  </button>
+
+  <div id="exerciseView"></div>
+
+</section>
+
+
+<!-- AI -->
+
+<section id="ai" class="hidden">
+
+  <div class="hero">
+
+    <h1>
+      🤖 KI-Sprechpartner
+    </h1>
+
+    <p>
+      Übe Englisch in einem lockeren Gespräch.
+      Hier kannst du später die echte KI-Telefonfunktion anschließen.
+    </p>
+
+  </div>
+
 
   <div class="call">
 
-    <div class="pill">
-      KI-Sprechpartner
+    <div class="small" style="color:#aaa">
+      SPEAKUP AI CALL
     </div>
 
-    <div
-      id="callAvatar"
-      class="call-avatar"
-    >
+    <div id="aiAvatar" class="avatar">
       🧑‍🏫
     </div>
 
-    <h2>
-      English Chat
+    <h2 id="aiName">
+      Alex – dein Englisch-Coach
     </h2>
 
-    <p id="callText">
-      Sprich später mit deinem
-      KI-Partner und übe Englisch.
+    <p id="aiText">
+      Hi! Nice to meet you! Tell me something about your day.
     </p>
 
-    <div class="call-controls">
+    <button class="call-main" onclick="speakAI()">
+      🔊 KI sprechen
+    </button>
 
-      <button
-        class="round-button"
-        onclick="changeAvatar()"
-      >
-        🎭
-      </button>
+    <button class="call-alt" onclick="changeAvatar()">
+      🎭 Avatar wechseln
+    </button>
 
-      <button
-        class="round-button"
-        onclick="speakAI()"
-      >
-        🔊
-      </button>
-
-      <button
-        class="round-button hangup"
-        onclick="endCall()"
-      >
-        ☎
-      </button>
-
-    </div>
+    <button class="call-alt" onclick="endCall()">
+      📞 Gespräch beenden
+    </button>
 
   </div>
 
 </section>
 
 
-<!-- =========================
-     FREUNDE
-========================= -->
+<!-- FRIENDS -->
 
-<section
-  id="friends"
-  class="page"
->
+<section id="friends" class="hidden">
 
   <div class="hero">
 
@@ -841,87 +624,93 @@ main {
     </h1>
 
     <p>
-      Füge Freunde über einen Code hinzu
-      und vergleicht eure XP.
+      Du kannst Freunde hinzufügen.
+      Für echte Accounts und gemeinsame Daten braucht die App später eine Datenbank.
     </p>
-
-
-    <div class="friend-input">
-
-      <input
-        id="friendInput"
-        placeholder="Freundescode"
-      >
-
-      <button
-        onclick="addFriend()"
-      >
-        Hinzufügen
-      </button>
-
-    </div>
 
   </div>
 
+  <input
+    id="friendInput"
+    placeholder="Freund hinzufügen …"
+  >
 
-  <h2>
-    Meine Freunde
-  </h2>
+  <button class="next" onclick="addFriend()">
+    + Freund hinzufügen
+  </button>
 
-  <div
-    id="friendList"
-    class="grid"
-  ></div>
+  <div id="friendsList"></div>
 
 </section>
 
 
-<!-- =========================
-     PROFIL
-========================= -->
+<!-- PROFILE -->
 
-<section
-  id="profile"
-  class="page"
->
+<section id="profile" class="hidden">
 
-  <div class="profile-box">
-
-    <div class="profile-avatar">
-      🧙‍♂️
-    </div>
+  <div class="hero">
 
     <h1>
-      Magier der Stufe 10
+      👤 Dein Profil
     </h1>
 
-    <p class="small">
-      Englisch lernen mit SpeakUp
+    <p>
+      Dein Lernfortschritt
     </p>
 
+  </div>
 
-    <div class="big-stats">
 
-      <div>
-        <b id="profileXP">
-          120
-        </b>
-        XP
-      </div>
+  <div class="topic-grid">
 
-      <div>
-        <b>
-          🔥 7
-        </b>
-        Tage
-      </div>
+    <div class="topic-card">
 
-      <div>
-        <b>
-          🏆 4
-        </b>
-        Abzeichen
-      </div>
+      <h3>
+        ⭐ XP
+      </h3>
+
+      <p id="profileXP">
+        120 XP
+      </p>
+
+    </div>
+
+
+    <div class="topic-card">
+
+      <h3>
+        🔥 Streak
+      </h3>
+
+      <p>
+        7 Tage
+      </p>
+
+    </div>
+
+
+    <div class="topic-card">
+
+      <h3>
+        📚 Übungen
+      </h3>
+
+      <p id="exerciseCount">
+        0 richtig beantwortet
+      </p>
+
+    </div>
+
+
+    <div class="topic-card">
+
+      <h3>
+        🏆 Modus
+      </h3>
+
+      <p>
+        Unbegrenztes Üben
+      </p>
 
     </div>
 
@@ -932,147 +721,26 @@ main {
 </main>
 
 
-<!-- =========================
-     BOTTOM NAVIGATION
-========================= -->
-
-<div class="bottom-nav">
-
-  <div class="nav">
-
-    <button
-      class="active"
-      onclick="showPage('home', this)"
-    >
-      <span>🏠</span>
-      Start
-    </button>
-
-
-    <button
-      onclick="showPage('grammar', this)"
-    >
-      <span>📚</span>
-      Grammatik
-    </button>
-
-
-    <button
-      onclick="showPage('ai', this)"
-    >
-      <span>📞</span>
-      KI
-    </button>
-
-
-    <button
-      onclick="showPage('friends', this)"
-    >
-      <span>👥</span>
-      Freunde
-    </button>
-
-
-    <button
-      onclick="showPage('profile', this)"
-    >
-      <span>👤</span>
-      Profil
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- =========================
-     ÜBUNGS-MODAL
-========================= -->
-
-<div
-  id="modal"
-  class="modal"
->
-
-  <div class="modal-box">
-
-    <button
-      class="close"
-      onclick="closeModal()"
-    >
-      ×
-    </button>
-
-    <div id="modalContent"></div>
-
-  </div>
+<footer>
+  SpeakUp – English Learning 🚀
+</footer>
 
 </div>
 
 
 <script>
 
-/* =========================
-   ZUGANG
-========================= */
 
-function unlock() {
-
-  const code =
-    document.getElementById("code").value;
-
-  if (code === "1234") {
-
-    document.getElementById("gate").style.display = "none";
-
-    sessionStorage.setItem(
-      "speakupUnlocked",
-      "1"
-    );
-
-  } else {
-
-    document.getElementById(
-      "gateError"
-    ).textContent =
-      "Falscher Code. Versuch es noch einmal.";
-
-  }
-
-}
-
-
-if (
-  sessionStorage.getItem(
-    "speakupUnlocked"
-  ) === "1"
-) {
-
-  document.getElementById(
-    "gate"
-  ).style.display = "none";
-
-}
-
-
-/* =========================
-   STATS
-========================= */
-
-let xp = 120;
-
-
-/* =========================
+/* =========================================================
    GRAMMATIK-THEMEN
-========================= */
+========================================================= */
 
 const topics = [
 
   {
-    name: "Zeitformen",
-    icon: "🕐",
-    desc: "Present, Past, Perfect und mehr",
-    subs: [
+    name:"🕐 Zeitformen",
+    desc:"Die wichtigsten englischen Zeiten",
+    subs:[
       "Present Simple",
       "Present Progressive",
       "Past Simple",
@@ -1085,776 +753,2881 @@ const topics = [
   },
 
   {
-    name: "If-Sätze",
-    icon: "🔀",
-    desc: "Type 1, Type 2, Type 3",
-    subs: [
+    name:"🔀 If-Sätze",
+    desc:"Bedingungssätze sicher beherrschen",
+    subs:[
       "Grundlagen",
       "Type 1",
       "Type 2",
       "Type 3",
-      "Gemischte Übungen"
+      "Gemischte If-Sätze"
     ]
   },
 
   {
-    name: "Modalverben",
-    icon: "🧩",
-    desc: "can, must, should, might ...",
-    subs: [
+    name:"🧩 Modalverben",
+    desc:"can, must, should, may und mehr",
+    subs:[
       "can / could",
       "must / have to",
       "should",
       "may / might",
-      "Gemischte Übungen"
+      "Gemischte Modalverben"
     ]
   },
 
   {
-    name: "Passiv",
-    icon: "🔄",
-    desc: "Passive Voice verstehen und bilden",
-    subs: [
-      "Grundlagen",
+    name:"🔄 Passiv",
+    desc:"Aktiv und Passiv unterscheiden",
+    subs:[
+      "Grundlagen Passiv",
       "Present Passive",
       "Past Passive",
       "Perfect Passive",
-      "Gemischte Übungen"
+      "Gemischtes Passiv"
     ]
   },
 
   {
-    name: "Reported Speech",
-    icon: "💬",
-    desc: "Aussagen richtig wiedergeben",
-    subs: [
-      "Grundlagen",
+    name:"💬 Reported Speech",
+    desc:"Aussagen und Fragen indirekt wiedergeben",
+    subs:[
+      "Reported Speech",
       "Statements",
       "Questions",
       "Commands",
-      "Gemischte Übungen"
+      "Gemischt Reported Speech"
     ]
   },
 
   {
-    name: "Fragen",
-    icon: "❓",
-    desc: "Questions und Frageformen",
-    subs: [
+    name:"❓ Fragen",
+    desc:"Fragen richtig bilden",
+    subs:[
       "Yes/No Questions",
       "Wh-Questions",
-      "Questions with auxiliaries",
-      "Indirect Questions"
+      "Hilfsverben",
+      "Indirect Questions",
+      "Gemischt Fragen"
     ]
   },
 
   {
-    name: "Vergleiche",
-    icon: "📏",
-    desc: "Comparative und Superlative",
-    subs: [
+    name:"📏 Vergleiche",
+    desc:"Comparative, Superlative & as...as",
+    subs:[
       "Comparative",
       "Superlative",
-      "as ... as",
-      "Gemischte Übungen"
+      "as...as",
+      "Gemischt Vergleiche"
     ]
   },
 
   {
-    name: "Pronomen",
-    icon: "🧠",
-    desc: "Personal, possessive und relative pronouns",
-    subs: [
+    name:"🧠 Pronomen",
+    desc:"Personal, Possessive, Reflexive & Relative",
+    subs:[
       "Personal Pronouns",
       "Possessive Pronouns",
       "Reflexive Pronouns",
-      "Relative Pronouns"
+      "Relative Pronouns",
+      "Gemischt Pronomen"
     ]
   },
 
   {
-    name: "Artikel",
-    icon: "🅰️",
-    desc: "a, an, the oder kein Artikel",
-    subs: [
+    name:"🅰️ Artikel",
+    desc:"a, an, the oder kein Artikel",
+    subs:[
       "a / an",
       "the",
-      "kein Artikel",
-      "Gemischte Übungen"
+      "No Article",
+      "Gemischt Artikel"
     ]
   },
 
   {
-    name: "Präpositionen",
-    icon: "📍",
-    desc: "in, on, at und viele mehr",
-    subs: [
-      "Zeit",
-      "Ort",
-      "Bewegung",
-      "Gemischte Übungen"
+    name:"📍 Präpositionen",
+    desc:"Zeit, Ort und Bewegung",
+    subs:[
+      "Time",
+      "Place",
+      "Movement",
+      "Gemischt Präpositionen"
     ]
   }
 
 ];
 
 
-/* =========================
+/* =========================================================
    ÜBUNGEN
-========================= */
+========================================================= */
 
-const exercises = {
+const E = {
 
-  "Present Simple": [
 
-    [
-      "She ___ to school every day.",
-      ["go", "goes", "going"],
-      "goes"
-    ],
+/* ---------------- PRESENT SIMPLE ---------------- */
 
-    [
-      "They ___ football on Saturdays.",
-      ["play", "plays", "playing"],
-      "play"
-    ]
+"Present Simple":[
 
-  ],
+ [
+  "She ___ to school every day.",
+  ["go","goes","going"],
+  1,
+  "Bei he/she/it bekommt das Verb meistens -s."
+ ],
 
-  "Past Simple": [
+ [
+  "I ___ football on Saturdays.",
+  ["play","plays","playing"],
+  0,
+  "Bei I bleibt das Verb in der Grundform."
+ ],
 
-    [
-      "Yesterday I ___ a movie.",
-      ["watch", "watched", "watching"],
-      "watched"
-    ],
+ [
+  "Tom ___ his homework after dinner.",
+  ["do","does","doing"],
+  1,
+  "Tom = he → does."
+ ],
 
-    [
-      "He ___ home late last night.",
-      ["comes", "came", "come"],
-      "came"
-    ]
+ [
+  "We ___ English at school.",
+  ["study","studies","studying"],
+  0,
+  "We + Grundform."
+ ],
 
-  ],
+ [
+  "___ your brother like pizza?",
+  ["Do","Does","Is"],
+  1,
+  "your brother = he → Does."
+ ],
 
-  "Present Progressive": [
+ [
+  "She doesn't ___ coffee.",
+  ["likes","like","liking"],
+  1,
+  "Nach doesn't steht die Grundform."
+ ],
 
-    [
-      "Look! The baby ___.",
-      ["sleeps", "is sleeping", "sleep"],
-      "is sleeping"
-    ]
+ [
+  "My parents ___ in Cologne.",
+  ["live","lives","living"],
+  0,
+  "My parents = they."
+ ],
 
-  ],
+ [
+  "The bus ___ at eight o'clock.",
+  ["leave","leaves","leaving"],
+  1,
+  "The bus = it → leaves."
+ ],
 
-  "Type 1": [
+ [
+  "He ___ his teeth every morning.",
+  ["brush","brushes","brushing"],
+  1,
+  "He → brushes."
+ ],
 
-    [
-      "If it rains, we ___ at home.",
-      ["stay", "will stay", "would stay"],
-      "will stay"
-    ]
+ [
+  "They ___ basketball after school.",
+  ["play","plays","playing"],
+  0,
+  "They → play."
+ ],
 
-  ],
+ [
+  "Sarah ___ English very well.",
+  ["speak","speaks","speaking"],
+  1,
+  "Sarah = she → speaks."
+ ],
 
-  "Type 2": [
+ [
+  "We don't ___ meat.",
+  ["eat","eats","eating"],
+  0,
+  "Nach don't → Grundform."
+ ]
 
-    [
-      "If I had more time, I ___ more.",
-      ["travel", "would travel", "will travel"],
-      "would travel"
-    ]
+],
 
-  ],
 
-  "Type 3": [
+/* ---------------- PRESENT PROGRESSIVE ---------------- */
 
-    [
-      "If I had studied, I ___ the test.",
-      ["would pass", "would have passed", "will pass"],
-      "would have passed"
-    ]
+"Present Progressive":[
 
-  ],
+ [
+  "Look! The dog ___ in the garden.",
+  ["runs","is running","run"],
+  1,
+  "Look! zeigt, dass etwas gerade passiert."
+ ],
 
-  "can / could": [
+ [
+  "I ___ my homework right now.",
+  ["do","am doing","does"],
+  1,
+  "I + am + Verb-ing."
+ ],
 
-    [
-      "I ___ swim when I was five.",
-      ["can", "could", "must"],
-      "could"
-    ]
+ [
+  "They ___ TV at the moment.",
+  ["watch","are watching","watches"],
+  1,
+  "They + are + Verb-ing."
+ ],
 
-  ],
+ [
+  "She ___ a book now.",
+  ["is reading","reads","read"],
+  0,
+  "Now → Present Progressive."
+ ],
 
-  "must / have to": [
+ [
+  "We ___ dinner at the moment.",
+  ["have","are having","has"],
+  1,
+  "We + are having."
+ ],
 
-    [
-      "You ___ wear a seatbelt.",
-      ["must", "might", "could"],
-      "must"
-    ]
+ [
+  "The children ___ outside.",
+  ["are playing","play","played"],
+  0,
+  "Gerade jetzt → are playing."
+ ],
 
-  ],
+ [
+  "Listen! Someone ___.",
+  ["is singing","sings","sang"],
+  0,
+  "Listen! → etwas passiert gerade."
+ ],
 
-  "should": [
+ [
+  "I ___ to music right now.",
+  ["am listening","listen","listened"],
+  0,
+  "I + am listening."
+ ]
 
-    [
-      "You ___ study for the test.",
-      ["should", "couldn't", "mightn't"],
-      "should"
-    ]
+],
 
-  ],
 
-  "Comparative": [
+/* ---------------- PAST SIMPLE ---------------- */
 
-    [
-      "My bike is ___ than yours.",
-      ["fast", "faster", "fastest"],
-      "faster"
-    ]
+"Past Simple":[
 
-  ],
+ [
+  "Yesterday, I ___ to school.",
+  ["walk","walked","walking"],
+  1,
+  "Yesterday → Past Simple."
+ ],
 
-  "Superlative": [
+ [
+  "We ___ a great film last night.",
+  ["watch","watched","watching"],
+  1,
+  "Last night → watched."
+ ],
 
-    [
-      "This is the ___ book here.",
-      ["interesting", "more interesting", "most interesting"],
-      "most interesting"
-    ]
+ [
+  "She ___ her keys yesterday.",
+  ["lost","lose","loses"],
+  0,
+  "lose → lost."
+ ],
 
-  ],
+ [
+  "They ___ football on Sunday.",
+  ["played","play","playing"],
+  0,
+  "Past Simple → played."
+ ],
 
-  "Personal Pronouns": [
+ [
+  "He ___ breakfast at 7 o'clock.",
+  ["has","had","having"],
+  1,
+  "have → had."
+ ],
 
-    [
-      "Tom is my friend. ___ is nice.",
-      ["He", "She", "They"],
-      "He"
-    ]
+ [
+  "Did you ___ the homework?",
+  ["finished","finish","finishing"],
+  1,
+  "Nach Did kommt die Grundform."
+ ],
 
-  ],
+ [
+  "I didn't ___ the answer.",
+  ["knew","know","knowing"],
+  1,
+  "Nach didn't → Grundform."
+ ],
 
-  "a / an": [
+ [
+  "We ___ to London last year.",
+  ["went","go","going"],
+  0,
+  "go → went."
+ ],
 
-    [
-      "I saw ___ elephant.",
-      ["a", "an", "the"],
-      "an"
-    ]
+ [
+  "She ___ a new phone yesterday.",
+  ["bought","buy","buys"],
+  0,
+  "buy → bought."
+ ],
 
-  ],
+ [
+  "They ___ home at 9 pm.",
+  ["came","come","coming"],
+  0,
+  "come → came."
+ ]
 
-  "the": [
+],
 
-    [
-      "___ sun is shining.",
-      ["A", "An", "The"],
-      "The"
-    ]
 
-  ],
+/* ---------------- PAST PROGRESSIVE ---------------- */
 
-  "Zeitformen": [
+"Past Progressive":[
 
-    [
-      "I ___ my homework yesterday.",
-      ["do", "did", "am doing"],
-      "did"
-    ]
+ [
+  "At 8 pm, I ___ TV.",
+  ["watched","was watching","am watching"],
+  1,
+  "I + was + Verb-ing."
+ ],
 
-  ],
+ [
+  "They ___ football when it started to rain.",
+  ["were playing","played","are playing"],
+  0,
+  "They + were playing."
+ ],
 
-  "Gemischte Zeitformen": [
+ [
+  "She ___ when I called.",
+  ["was sleeping","slept","is sleeping"],
+  0,
+  "Eine Handlung war gerade im Gange."
+ ],
 
-    [
-      "She ___ here since 2020.",
-      ["lives", "lived", "has lived"],
-      "has lived"
-    ]
+ [
+  "We ___ dinner at six.",
+  ["were having","had","have"],
+  0,
+  "We + were having."
+ ],
 
-  ]
+ [
+  "I ___ when the phone rang.",
+  ["was studying","studied","study"],
+  0,
+  "Was + Verb-ing."
+ ],
+
+ [
+  "They ___ when the teacher came in.",
+  ["were talking","talked","talk"],
+  0,
+  "Die Handlung lief gerade."
+ ]
+
+],
+
+
+/* ---------------- PRESENT PERFECT ---------------- */
+
+"Present Perfect":[
+
+ [
+  "I ___ my homework.",
+  ["have finished","finished","am finishing"],
+  0,
+  "have + past participle."
+ ],
+
+ [
+  "She ___ never ___ to London.",
+  ["has / been","have / been","is / been"],
+  0,
+  "She → has been."
+ ],
+
+ [
+  "We ___ already eaten.",
+  ["have","has","did"],
+  0,
+  "We → have eaten."
+ ],
+
+ [
+  "He ___ just arrived.",
+  ["has","have","did"],
+  0,
+  "He → has arrived."
+ ],
+
+ [
+  "Have you ever ___ sushi?",
+  ["eat","ate","eaten"],
+  2,
+  "eat → eaten."
+ ],
+
+ [
+  "They haven't ___ the film yet.",
+  ["see","saw","seen"],
+  2,
+  "see → seen."
+ ],
+
+ [
+  "I have ___ this book before.",
+  ["read","reading","reads"],
+  0,
+  "have + past participle."
+ ],
+
+ [
+  "She has ___ her room.",
+  ["cleaned","clean","cleaning"],
+  0,
+  "has + cleaned."
+ ]
+
+],
+
+
+/* ---------------- PAST PERFECT ---------------- */
+
+"Past Perfect":[
+
+ [
+  "When I arrived, she ___ already ___.",
+  ["had / left","has / left","was / leave"],
+  0,
+  "Past Perfect = had + past participle."
+ ],
+
+ [
+  "He was tired because he ___ badly.",
+  ["had slept","has slept","slept"],
+  0,
+  "Die frühere Handlung steht im Past Perfect."
+ ],
+
+ [
+  "We ___ dinner before the guests arrived.",
+  ["had eaten","have eaten","eat"],
+  0,
+  "had + eaten."
+ ],
+
+ [
+  "After they ___ the test, they went home.",
+  ["had finished","have finished","finish"],
+  0,
+  "Die erste vergangene Handlung → Past Perfect."
+ ],
+
+ [
+  "She was hungry because she ___ breakfast.",
+  ["hadn't eaten","hasn't eaten","didn't eat"],
+  0,
+  "Die frühere Handlung → Past Perfect."
+ ]
+
+],
+
+
+/* ---------------- FUTURE ---------------- */
+
+"Future":[
+
+ [
+  "I think it ___ tomorrow.",
+  ["will rain","rained","is raining"],
+  0,
+  "Vorhersage → will."
+ ],
+
+ [
+  "I ___ help you.",
+  ["will","am","did"],
+  0,
+  "Future: will + Grundform."
+ ],
+
+ [
+  "She ___ visit London next year.",
+  ["will","was","has"],
+  0,
+  "next year → Future."
+ ],
+
+ [
+  "They ___ probably win.",
+  ["will","are","did"],
+  0,
+  "Vorhersage → will."
+ ],
+
+ [
+  "I think we ___ be late.",
+  ["will","were","have"],
+  0,
+  "Future → will."
+ ],
+
+ [
+  "Tomorrow, I ___ call you.",
+  ["will","did","have"],
+  0,
+  "Tomorrow → will."
+ ]
+
+],
+
+
+/* ---------------- GEMISCHTE ZEITFORMEN ---------------- */
+
+"Gemischte Zeitformen":[
+
+ [
+  "Every Monday, he ___ football.",
+  ["plays","is playing","played"],
+  0,
+  "Every Monday → Present Simple."
+ ],
+
+ [
+  "Look! They ___.",
+  ["run","are running","ran"],
+  1,
+  "Look! → Present Progressive."
+ ],
+
+ [
+  "Last year, we ___ in Spain.",
+  ["travel","travelled","are travelling"],
+  1,
+  "Last year → Past Simple."
+ ],
+
+ [
+  "I ___ already finished my homework.",
+  ["have","had","am"],
+  0,
+  "already + Present Perfect."
+ ],
+
+ [
+  "Tomorrow, I ___ visit my grandma.",
+  ["will","did","have"],
+  0,
+  "Tomorrow → Future."
+ ],
+
+ [
+  "When I got home, my sister ___ already left.",
+  ["had","has","is"],
+  0,
+  "Die frühere Handlung → Past Perfect."
+ ],
+
+ [
+  "Right now, she ___ dinner.",
+  ["is cooking","cooks","cooked"],
+  0,
+  "Right now → Present Progressive."
+ ],
+
+ [
+  "We ___ to Paris two years ago.",
+  ["went","have gone","go"],
+  0,
+  "Two years ago → Past Simple."
+ ]
+
+],
+
+
+/* =========================================================
+   IF-SÄTZE
+========================================================= */
+
+"Grundlagen":[
+
+ [
+  "If it rains, we ___ at home.",
+  ["stay","stayed","would stay"],
+  0,
+  "Allgemeine Bedingung."
+ ],
+
+ [
+  "If you heat ice, it ___.",
+  ["melts","melted","will melt"],
+  0,
+  "Allgemeine Tatsache."
+ ],
+
+ [
+  "A conditional sentence has an ___ and a result.",
+  ["if-clause","article","adjective"],
+  0,
+  "Die if-clause enthält die Bedingung."
+ ],
+
+ [
+  "The word ___ introduces the condition.",
+  ["if","than","because"],
+  0,
+  "Bedingung → if."
+ ]
+
+],
+
+
+"Type 1":[
+
+ [
+  "If it rains, I ___ stay home.",
+  ["will","would","did"],
+  0,
+  "Type 1 → will."
+ ],
+
+ [
+  "If I study, I ___ pass the test.",
+  ["will","would","had"],
+  0,
+  "Mögliche Zukunft → will."
+ ],
+
+ [
+  "If she comes, we ___ start the party.",
+  ["will","would","did"],
+  0,
+  "Type 1 → will."
+ ],
+
+ [
+  "If you hurry, you ___ catch the bus.",
+  ["will","would","have"],
+  0,
+  "Mögliche Folge → will."
+ ],
+
+ [
+  "We will go outside if the weather ___ nice.",
+  ["is","was","were"],
+  0,
+  "Nach if im Type 1: Present Simple."
+ ],
+
+ [
+  "If I finish early, I ___ call you.",
+  ["will","would","had"],
+  0,
+  "Type 1 → will."
+ ]
+
+],
+
+
+"Type 2":[
+
+ [
+  "If I ___ rich, I would travel a lot.",
+  ["am","were","will be"],
+  1,
+  "Type 2: If + Past Simple."
+ ],
+
+ [
+  "If she had more time, she ___ learn Spanish.",
+  ["would","will","did"],
+  0,
+  "would + Grundform."
+ ],
+
+ [
+  "If we lived in London, we ___ visit museums.",
+  ["would","will","had"],
+  0,
+  "would visit."
+ ],
+
+ [
+  "I would buy it if it ___ cheaper.",
+  ["was","were","will be"],
+  0,
+  "Im Alltag ist was häufig; formell auch were."
+ ],
+
+ [
+  "If I were you, I ___ talk to the teacher.",
+  ["would","will","did"],
+  0,
+  "If I were you → would."
+ ],
+
+ [
+  "If he had a car, he ___ drive to school.",
+  ["would","will","did"],
+  0,
+  "Type 2 → would."
+ ]
+
+],
+
+
+"Type 3":[
+
+ [
+  "If I had studied, I ___ have passed.",
+  ["would","will","wouldn't"],
+  0,
+  "Type 3: would have + past participle."
+ ],
+
+ [
+  "If she had left earlier, she ___ have caught the bus.",
+  ["would","will","did"],
+  0,
+  "Vergangenheit → would have."
+ ],
+
+ [
+  "If we had known, we ___ have helped.",
+  ["would","will","are"],
+  0,
+  "would have helped."
+ ],
+
+ [
+  "If he had listened, he ___ have understood.",
+  ["would","will","does"],
+  0,
+  "would have understood."
+ ],
+
+ [
+  "If I had seen you, I ___ have said hello.",
+  ["would","will","did"],
+  0,
+  "Type 3 → would have."
+ ]
+
+],
+
+
+"Gemischte If-Sätze":[
+
+ [
+  "If I study tonight, I ___ pass tomorrow.",
+  ["will","would","had"],
+  0,
+  "Mögliche Zukunft → Type 1."
+ ],
+
+ [
+  "If I were taller, I ___ play basketball.",
+  ["would","will","have"],
+  0,
+  "Unrealistische Gegenwart → Type 2."
+ ],
+
+ [
+  "If they had trained, they ___ have won.",
+  ["would","will","are"],
+  0,
+  "Vergangenheit → Type 3."
+ ],
+
+ [
+  "If you heat water to 100°C, it ___.",
+  ["boils","will boil","would boil"],
+  0,
+  "Allgemeine Tatsache."
+ ]
+
+],
+
+
+/* =========================================================
+   MODALVERBEN
+========================================================= */
+
+"can / could":[
+
+ [
+  "I ___ swim very well.",
+  ["can","must","should"],
+  0,
+  "Fähigkeit → can."
+ ],
+
+ [
+  "When I was five, I ___ swim.",
+  ["can","could","must"],
+  1,
+  "Vergangenheit → could."
+ ],
+
+ [
+  "___ you help me, please?",
+  ["Could","Must","Should"],
+  0,
+  "Höfliche Bitte → Could."
+ ],
+
+ [
+  "She ___ speak three languages.",
+  ["can","must","should"],
+  0,
+  "Fähigkeit → can."
+ ],
+
+ [
+  "Could you ___ the window?",
+  ["open","opened","opening"],
+  0,
+  "Nach could kommt die Grundform."
+ ],
+
+ [
+  "He ___ run very fast.",
+  ["can","must","should"],
+  0,
+  "Fähigkeit → can."
+ ]
+
+],
+
+
+"must / have to":[
+
+ [
+  "You ___ wear a seat belt.",
+  ["must","could","might"],
+  0,
+  "Starke Notwendigkeit → must."
+ ],
+
+ [
+  "I ___ go to school every day.",
+  ["have to","could","might"],
+  0,
+  "Notwendigkeit → have to."
+ ],
+
+ [
+  "You ___ not touch that.",
+  ["must","can","should"],
+  0,
+  "Verbot → must not."
+ ],
+
+ [
+  "She ___ finish her homework today.",
+  ["has to","have to","could"],
+  0,
+  "She → has to."
+ ],
+
+ [
+  "Do we ___ bring a pen?",
+  ["have to","has to","must to"],
+  0,
+  "Nach do: have to."
+ ]
+
+],
+
+
+"should":[
+
+ [
+  "You ___ drink more water.",
+  ["should","mustn't","couldn't"],
+  0,
+  "Ratschlag → should."
+ ],
+
+ [
+  "You should ___ to the teacher.",
+  ["talk","talked","talking"],
+  0,
+  "Nach should → Grundform."
+ ],
+
+ [
+  "I think you ___ study for the test.",
+  ["should","wouldn't","can't"],
+  0,
+  "Ratschlag → should."
+ ],
+
+ [
+  "We ___ be polite.",
+  ["should","mightn't","couldn't"],
+  0,
+  "Sollten → should."
+ ],
+
+ [
+  "You should ___ earlier.",
+  ["sleep","slept","sleeping"],
+  0,
+  "should + Grundform."
+ ]
+
+],
+
+
+"may / might":[
+
+ [
+  "It ___ rain later.",
+  ["might","must","should"],
+  0,
+  "Unsicherheit → might."
+ ],
+
+ [
+  "___ I come in?",
+  ["May","Must","Should"],
+  0,
+  "Höfliche Erlaubnis → May."
+ ],
+
+ [
+  "She ___ be at home.",
+  ["may","must","has"],
+  0,
+  "Mögliche Vermutung → may."
+ ],
+
+ [
+  "We ___ go to the cinema tonight.",
+  ["might","must","have to"],
+  0,
+  "Vielleicht → might."
+ ]
+
+],
+
+
+"Gemischte Modalverben":[
+
+ [
+  "You ___ wear a helmet here.",
+  ["must","might","could"],
+  0,
+  "Pflicht → must."
+ ],
+
+ [
+  "___ you help me?",
+  ["Could","Must","Should"],
+  0,
+  "Höfliche Bitte → Could."
+ ],
+
+ [
+  "You ___ see a doctor if you feel ill.",
+  ["should","mustn't","can't"],
+  0,
+  "Ratschlag → should."
+ ],
+
+ [
+  "It ___ snow tomorrow.",
+  ["might","must","has to"],
+  0,
+  "Möglichkeit → might."
+ ]
+
+],
+
+
+/* =========================================================
+   PASSIV
+========================================================= */
+
+"Grundlagen Passiv":[
+
+ [
+  "The cake ___ by Tom.",
+  ["was baked","baked","bakes"],
+  0,
+  "Passiv: be + past participle."
+ ],
+
+ [
+  "English ___ in many countries.",
+  ["is spoken","speaks","spoken"],
+  0,
+  "is + spoken."
+ ],
+
+ [
+  "The window ___ yesterday.",
+  ["was cleaned","cleaned","is clean"],
+  0,
+  "Past Passive."
+ ],
+
+ [
+  "The letters ___ every morning.",
+  ["are delivered","deliver","delivered"],
+  0,
+  "Present Passive."
+ ]
+
+],
+
+
+"Present Passive":[
+
+ [
+  "Cars ___ in this factory.",
+  ["are made","make","made"],
+  0,
+  "Plural → are made."
+ ],
+
+ [
+  "English ___ at our school.",
+  ["is taught","teaches","taught"],
+  0,
+  "English → is taught."
+ ],
+
+ [
+  "The rooms ___ every day.",
+  ["are cleaned","clean","cleaned"],
+  0,
+  "rooms → are cleaned."
+ ],
+
+ [
+  "Chocolate ___ from cocoa beans.",
+  ["is made","makes","made"],
+  0,
+  "Chocolate → is made."
+ ]
+
+],
+
+
+"Past Passive":[
+
+ [
+  "The house ___ in 1990.",
+  ["was built","is built","built"],
+  0,
+  "Past Passive → was built."
+ ],
+
+ [
+  "The books ___ yesterday.",
+  ["were delivered","are delivered","deliver"],
+  0,
+  "Plural → were delivered."
+ ],
+
+ [
+  "The window ___ last night.",
+  ["was broken","is broken","break"],
+  0,
+  "was + broken."
+ ],
+
+ [
+  "The match ___ on TV.",
+  ["was shown","is show","showed"],
+  0,
+  "was shown."
+ ]
+
+],
+
+
+"Perfect Passive":[
+
+ [
+  "The work ___ already been finished.",
+  ["has","is","was"],
+  0,
+  "Present Perfect Passive."
+ ],
+
+ [
+  "The letters have ___ sent.",
+  ["been","be","being"],
+  0,
+  "have been + past participle."
+ ],
+
+ [
+  "The house had been ___ before we arrived.",
+  ["painted","paint","painting"],
+  0,
+  "had been + past participle."
+ ],
+
+ [
+  "The problem has been ___.",
+  ["solved","solve","solving"],
+  0,
+  "has been solved."
+ ]
+
+],
+
+
+"Gemischtes Passiv":[
+
+ [
+  "The song ___ by millions of people.",
+  ["is heard","hears","heard"],
+  0,
+  "Present Passive."
+ ],
+
+ [
+  "The bridge ___ last year.",
+  ["was repaired","is repaired","repair"],
+  0,
+  "Past Passive."
+ ],
+
+ [
+  "The homework has been ___.",
+  ["checked","check","checking"],
+  0,
+  "Perfect Passive."
+ ],
+
+ [
+  "English ___ around the world.",
+  ["is spoken","speaks","spoke"],
+  0,
+  "Present Passive."
+ ]
+
+],
+
+
+/* =========================================================
+   REPORTED SPEECH
+========================================================= */
+
+"Reported Speech":[
+
+ [
+  "He says, 'I am tired.' → He says that he ___ tired.",
+  ["is","was","be"],
+  0,
+  "Bei say im Präsens bleibt die Zeitform oft gleich."
+ ],
+
+ [
+  "She said, 'I am busy.' → She said that she ___ busy.",
+  ["was","is","be"],
+  0,
+  "am → was."
+ ],
+
+ [
+  "Reported speech often uses ___ to connect statements.",
+  ["that","than","then"],
+  0,
+  "that kann Aussagen einleiten."
+ ]
+
+],
+
+
+"Statements":[
+
+ [
+  "'I like pizza.' → He said that he ___ pizza.",
+  ["liked","likes","like"],
+  0,
+  "Past reporting verb → backshift."
+ ],
+
+ [
+  "'We are happy.' → They said that they ___ happy.",
+  ["were","are","be"],
+  0,
+  "are → were."
+ ],
+
+ [
+  "'I will help.' → She said that she ___ help.",
+  ["would","will","can"],
+  0,
+  "will → would."
+ ],
+
+ [
+  "'I can swim.' → He said that he ___ swim.",
+  ["could","can","will"],
+  0,
+  "can → could."
+ ]
+
+],
+
+
+"Questions":[
+
+ [
+  "'Where do you live?' → He asked me where I ___.",
+  ["lived","live","did live"],
+  0,
+  "Indirekte Frage → normale Satzstellung."
+ ],
+
+ [
+  "'Are you ready?' → She asked if I ___ ready.",
+  ["was","am","be"],
+  0,
+  "if + Aussagesatz."
+ ],
+
+ [
+  "'What is your name?' → He asked what my name ___.",
+  ["was","is","were"],
+  0,
+  "Fragewort + Aussagesatz."
+ ]
+
+],
+
+
+"Commands":[
+
+ [
+  "'Close the door.' → He told me ___ the door.",
+  ["to close","close","closing"],
+  0,
+  "tell + Person + to + Verb."
+ ],
+
+ [
+  "'Don't be late.' → She told me ___ late.",
+  ["not to be","don't be","not be"],
+  0,
+  "Negative command."
+ ],
+
+ [
+  "'Help me.' → He asked me ___ him.",
+  ["to help","help","helping"],
+  0,
+  "asked + Person + to + Verb."
+ ]
+
+],
+
+
+"Gemischt Reported Speech":[
+
+ [
+  "'I am tired.' → She said that she ___ tired.",
+  ["was","is","be"],
+  0,
+  "am → was."
+ ],
+
+ [
+  "'Can you help?' → He asked if I ___ help.",
+  ["could","can","would"],
+  0,
+  "can → could."
+ ],
+
+ [
+  "'Open it.' → She told me ___ it.",
+  ["to open","open","opening"],
+  0,
+  "told + Person + to."
+ ]
+
+],
+
+
+/* =========================================================
+   FRAGEN
+========================================================= */
+
+"Yes/No Questions":[
+
+ [
+  "___ you like pizza?",
+  ["Do","Does","Are"],
+  0,
+  "you → do."
+ ],
+
+ [
+  "___ she play tennis?",
+  ["Does","Do","Is"],
+  0,
+  "she → does."
+ ],
+
+ [
+  "___ they at home?",
+  ["Are","Do","Does"],
+  0,
+  "to be → Are they?"
+ ],
+
+ [
+  "Did he ___ yesterday?",
+  ["go","went","goes"],
+  0,
+  "Nach did → Grundform."
+ ],
+
+ [
+  "___ you finished?",
+  ["Have","Do","Are"],
+  0,
+  "Present Perfect → Have."
+ ]
+
+],
+
+
+"Wh-Questions":[
+
+ [
+  "___ do you live?",
+  ["Where","Who","Why"],
+  0,
+  "Ort → Where."
+ ],
+
+ [
+  "___ is your best friend?",
+  ["Who","Where","When"],
+  0,
+  "Person → Who."
+ ],
+
+ [
+  "___ are you late?",
+  ["Why","Where","Who"],
+  0,
+  "Grund → Why."
+ ],
+
+ [
+  "___ do you get up?",
+  ["When","Who","Where"],
+  0,
+  "Zeit → When."
+ ],
+
+ [
+  "___ is your birthday?",
+  ["When","Who","Why"],
+  0,
+  "Zeit → When."
+ ]
+
+],
+
+
+"Hilfsverben":[
+
+ [
+  "___ you like English?",
+  ["Do","Are","Does"],
+  0,
+  "you → do."
+ ],
+
+ [
+  "___ he working now?",
+  ["Is","Does","Do"],
+  0,
+  "Present Progressive → is."
+ ],
+
+ [
+  "___ they finished?",
+  ["Have","Do","Are"],
+  0,
+  "Present Perfect → have."
+ ],
+
+ [
+  "___ she play yesterday?",
+  ["Did","Does","Is"],
+  0,
+  "Past Simple → did."
+ ]
+
+],
+
+
+"Indirect Questions":[
+
+ [
+  "Could you tell me where the station ___?",
+  ["is","is it","does it"],
+  0,
+  "Indirekte Frage hat normale Satzstellung."
+ ],
+
+ [
+  "Do you know what time it ___?",
+  ["starts","does it start","start"],
+  0,
+  "Normale Satzstellung."
+ ],
+
+ [
+  "Can you tell me where he ___?",
+  ["lives","does he live","live"],
+  0,
+  "where + he lives."
+ ]
+
+],
+
+
+"Gemischt Fragen":[
+
+ [
+  "___ did you go yesterday?",
+  ["Where","Does","Are"],
+  0,
+  "Frage nach Ort."
+ ],
+
+ [
+  "Does she ___ English?",
+  ["speak","speaks","speaking"],
+  0,
+  "Nach does → Grundform."
+ ],
+
+ [
+  "Are they ___ football?",
+  ["playing","play","played"],
+  0,
+  "Are + Verb-ing."
+ ]
+
+],
+
+
+/* =========================================================
+   VERGLEICHE
+========================================================= */
+
+"Comparative":[
+
+ [
+  "My car is ___ than yours.",
+  ["faster","fast","fastest"],
+  0,
+  "Comparative → faster."
+ ],
+
+ [
+  "This book is ___ than that one.",
+  ["more interesting","most interesting","interesting"],
+  0,
+  "Langes Adjektiv → more."
+ ],
+
+ [
+  "Tom is ___ than Ben.",
+  ["taller","tallest","tall"],
+  0,
+  "Comparative → taller."
+ ],
+
+ [
+  "A bike is ___ than a car.",
+  ["cheaper","cheapest","cheap"],
+  0,
+  "cheaper than."
+ ],
+
+ [
+  "This test is ___ than the last one.",
+  ["easier","easiest","easy"],
+  0,
+  "easy → easier."
+ ]
+
+],
+
+
+"Superlative":[
+
+ [
+  "Mount Everest is the ___ mountain.",
+  ["highest","higher","high"],
+  0,
+  "Superlative → highest."
+ ],
+
+ [
+  "This is the ___ film I have seen.",
+  ["best","better","good"],
+  0,
+  "good → best."
+ ],
+
+ [
+  "She is the ___ student in the class.",
+  ["fastest","faster","fast"],
+  0,
+  "the + Superlative."
+ ],
+
+ [
+  "This is the ___ book here.",
+  ["most interesting","more interesting","interesting"],
+  0,
+  "most interesting."
+ ]
+
+],
+
+
+"as...as":[
+
+ [
+  "Tom is as ___ as Ben.",
+  ["tall","taller","tallest"],
+  0,
+  "as + Grundform + as."
+ ],
+
+ [
+  "This test is not as ___ as the last one.",
+  ["difficult","more difficult","most difficult"],
+  0,
+  "Nach as steht die Grundform."
+ ],
+
+ [
+  "My bag is as ___ as yours.",
+  ["heavy","heavier","heaviest"],
+  0,
+  "as...as → Grundform."
+ ]
+
+],
+
+
+"Gemischt Vergleiche":[
+
+ [
+  "A cheetah is ___ than a lion.",
+  ["faster","fastest","fast"],
+  0,
+  "Zwei Dinge → Comparative."
+ ],
+
+ [
+  "She is the ___ runner.",
+  ["fastest","faster","fast"],
+  0,
+  "the + Superlative."
+ ],
+
+ [
+  "This room is as ___ as the other one.",
+  ["big","bigger","biggest"],
+  0,
+  "as...as → Grundform."
+ ]
+
+],
+
+
+/* =========================================================
+   PRONOMEN
+========================================================= */
+
+"Personal Pronouns":[
+
+ [
+  "Tom is my friend. ___ is funny.",
+  ["He","Him","His"],
+  0,
+  "Tom → he."
+ ],
+
+ [
+  "I like Sarah. I see ___ every day.",
+  ["her","she","hers"],
+  0,
+  "Objektpronomen → her."
+ ],
+
+ [
+  "This is our dog. We love ___.",
+  ["it","he","they"],
+  0,
+  "Tier als Objekt → it."
+ ],
+
+ [
+  "Anna and I are students. ___ study together.",
+  ["We","Us","Our"],
+  0,
+  "Anna + I → we."
+ ],
+
+ [
+  "Please help ___.",
+  ["me","I","my"],
+  0,
+  "Objektpronomen → me."
+ ]
+
+],
+
+
+"Possessive Pronouns":[
+
+ [
+  "This book is ___.",
+  ["mine","my","me"],
+  0,
+  "Possessive pronoun → mine."
+ ],
+
+ [
+  "That bike is ___.",
+  ["hers","her","she"],
+  0,
+  "hers = ihrs."
+ ],
+
+ [
+  "These seats are ___.",
+  ["ours","our","us"],
+  0,
+  "ours = unsere."
+ ],
+
+ [
+  "Is this pen ___?",
+  ["yours","your","you"],
+  0,
+  "yours = deiner/deins."
+ ]
+
+],
+
+
+"Reflexive Pronouns":[
+
+ [
+  "I made it ___.",
+  ["myself","me","mine"],
+  0,
+  "I → myself."
+ ],
+
+ [
+  "She hurt ___.",
+  ["herself","her","hers"],
+  0,
+  "She → herself."
+ ],
+
+ [
+  "We did it ___.",
+  ["ourselves","us","our"],
+  0,
+  "We → ourselves."
+ ],
+
+ [
+  "They enjoyed ___.",
+  ["themselves","them","their"],
+  0,
+  "They → themselves."
+ ]
+
+],
+
+
+"Relative Pronouns":[
+
+ [
+  "The boy ___ lives next door is nice.",
+  ["who","which","where"],
+  0,
+  "Person → who."
+ ],
+
+ [
+  "The book ___ I bought is interesting.",
+  ["that","where","who"],
+  0,
+  "Sache → that."
+ ],
+
+ [
+  "The city ___ I was born is beautiful.",
+  ["where","who","which"],
+  0,
+  "Ort → where."
+ ],
+
+ [
+  "The dog ___ barked is mine.",
+  ["which","where","who"],
+  0,
+  "Tier/Sache → which."
+ ]
+
+],
+
+
+"Gemischt Pronomen":[
+
+ [
+  "This is my sister. ___ is 14.",
+  ["She","Her","Hers"],
+  0,
+  "Person als Subjekt → she."
+ ],
+
+ [
+  "That phone is ___.",
+  ["mine","my","me"],
+  0,
+  "Besitz → mine."
+ ],
+
+ [
+  "He did it ___.",
+  ["himself","him","his"],
+  0,
+  "Reflexiv → himself."
+ ],
+
+ [
+  "The girl ___ won is my friend.",
+  ["who","where","which"],
+  0,
+  "Person → who."
+ ]
+
+],
+
+
+/* =========================================================
+   ARTIKEL
+========================================================= */
+
+"a / an":[
+
+ [
+  "I have ___ apple.",
+  ["an","a","the"],
+  0,
+  "Vor Vokallaut → an."
+ ],
+
+ [
+  "She is ___ teacher.",
+  ["a","an","the"],
+  0,
+  "a teacher."
+ ],
+
+ [
+  "He bought ___ umbrella.",
+  ["an","a","the"],
+  0,
+  "an umbrella."
+ ],
+
+ [
+  "I saw ___ dog in the park.",
+  ["a","an","the"],
+  0,
+  "Nicht näher bestimmter Hund → a."
+ ],
+
+ [
+  "She wants ___ new phone.",
+  ["a","an","the"],
+  0,
+  "new phone → a."
+ ],
+
+ [
+  "He is ___ honest person.",
+  ["an","a","the"],
+  0,
+  "honest beginnt mit Vokallaut."
+ ]
+
+],
+
+
+"the":[
+
+ [
+  "___ sun is shining.",
+  ["The","A","An"],
+  0,
+  "Einzigartiges Objekt → the."
+ ],
+
+ [
+  "I opened ___ door.",
+  ["the","a","an"],
+  0,
+  "Eine konkrete Tür → the."
+ ],
+
+ [
+  "We visited ___ museum you told us about.",
+  ["the","a","an"],
+  0,
+  "Bestimmtes Museum → the."
+ ],
+
+ [
+  "___ moon looks beautiful tonight.",
+  ["The","A","An"],
+  0,
+  "the moon."
+ ]
+
+],
+
+
+"No Article":[
+
+ [
+  "I like ___ football.",
+  ["—","the","a"],
+  0,
+  "Sportarten meist ohne Artikel."
+ ],
+
+ [
+  "She speaks ___ English.",
+  ["—","the","an"],
+  0,
+  "Sprachen meist ohne Artikel."
+ ],
+
+ [
+  "We have ___ breakfast at 7.",
+  ["—","the","a"],
+  0,
+  "Mahlzeiten meist ohne Artikel."
+ ],
+
+ [
+  "He goes to ___ school every day.",
+  ["—","the","a"],
+  0,
+  "school im allgemeinen Zweck."
+ ]
+
+],
+
+
+"Gemischt Artikel":[
+
+ [
+  "I saw ___ elephant at the zoo.",
+  ["an","a","the"],
+  0,
+  "an elephant."
+ ],
+
+ [
+  "___ Earth goes around the Sun.",
+  ["The","A","An"],
+  0,
+  "Einzigartiger Planet → the."
+ ],
+
+ [
+  "I love ___ music.",
+  ["—","the","a"],
+  0,
+  "music allgemein → kein Artikel."
+ ],
+
+ [
+  "She bought ___ book you recommended.",
+  ["the","a","an"],
+  0,
+  "Bestimmtes Buch → the."
+ ]
+
+],
+
+
+/* =========================================================
+   PRÄPOSITIONEN
+========================================================= */
+
+"Time":[
+
+ [
+  "I get up ___ 7 o'clock.",
+  ["at","on","in"],
+  0,
+  "Uhrzeit → at."
+ ],
+
+ [
+  "We have English ___ Monday.",
+  ["on","at","in"],
+  0,
+  "Wochentag → on."
+ ],
+
+ [
+  "My birthday is ___ July.",
+  ["in","on","at"],
+  0,
+  "Monat → in."
+ ],
+
+ [
+  "I usually study ___ the evening.",
+  ["in","on","at"],
+  0,
+  "Tageszeit → in."
+ ],
+
+ [
+  "See you ___ Friday!",
+  ["on","at","in"],
+  0,
+  "Tag → on."
+ ],
+
+ [
+  "We meet ___ lunchtime.",
+  ["at","on","in"],
+  0,
+  "at lunchtime."
+ ]
+
+],
+
+
+"Place":[
+
+ [
+  "The book is ___ the table.",
+  ["on","in","at"],
+  0,
+  "Auf einer Oberfläche → on."
+ ],
+
+ [
+  "She is ___ the kitchen.",
+  ["in","on","at"],
+  0,
+  "In einem Raum → in."
+ ],
+
+ [
+  "We are ___ school.",
+  ["at","on","in"],
+  0,
+  "at school."
+ ],
+
+ [
+  "The picture is ___ the wall.",
+  ["on","in","at"],
+  0,
+  "An einer Oberfläche → on."
+ ],
+
+ [
+  "The keys are ___ my bag.",
+  ["in","on","at"],
+  0,
+  "In einer Tasche → in."
+ ]
+
+],
+
+
+"Movement":[
+
+ [
+  "I am going ___ school.",
+  ["to","at","on"],
+  0,
+  "Bewegung zu einem Ort → to."
+ ],
+
+ [
+  "She walked ___ the room.",
+  ["into","on","at"],
+  0,
+  "Bewegung hinein → into."
+ ],
+
+ [
+  "We ran ___ the bridge.",
+  ["across","at","in"],
+  0,
+  "Über eine Fläche → across."
+ ],
+
+ [
+  "He jumped ___ the water.",
+  ["into","on","at"],
+  0,
+  "hinein → into."
+ ],
+
+ [
+  "They walked ___ the park.",
+  ["through","at","on"],
+  0,
+  "Durch einen Ort → through."
+ ]
+
+],
+
+
+"Gemischt Präpositionen":[
+
+ [
+  "The lesson starts ___ 9.",
+  ["at","on","in"],
+  0,
+  "Uhrzeit → at."
+ ],
+
+ [
+  "We met ___ Tuesday.",
+  ["on","at","in"],
+  0,
+  "Tag → on."
+ ],
+
+ [
+  "The keys are ___ my bag.",
+  ["in","on","at"],
+  0,
+  "In einer Tasche → in."
+ ],
+
+ [
+  "She went ___ the shop.",
+  ["to","at","on"],
+  0,
+  "Bewegung zu einem Ort → to."
+ ],
+
+ [
+  "The cat is ___ the table.",
+  ["under","at","to"],
+  0,
+  "Ort → under."
+ ]
+
+]
 
 };
 
 
-/* =========================
-   SEITENWECHSEL
-========================= */
+/* =========================================================
+   APP-LOGIK
+========================================================= */
 
-function showPage(id, button) {
+let currentTopic=-1;
+let currentSub="";
+let currentExercises=[];
+let currentIndex=0;
+let score=0;
+let answered=false;
+
+let totalCorrect=
+  Number(
+    localStorage.getItem("speakupCorrect") || 0
+  );
+
+let xp=
+  Number(
+    localStorage.getItem("speakupXP") || 120
+  );
+
+let friends=
+  JSON.parse(
+    localStorage.getItem("speakupFriends") || "[]"
+  );
+
+
+/* =========================================================
+   SEITEN
+========================================================= */
+
+function openPage(page){
 
   document
-    .querySelectorAll(".page")
-    .forEach(page => {
-      page.classList.remove("active");
-    });
-
-  document
-    .getElementById(id)
-    .classList.add("active");
-
-
-  if (button) {
-
-    document
-      .querySelectorAll(".nav button")
-      .forEach(btn => {
-        btn.classList.remove("active");
-      });
-
-    button.classList.add("active");
-
-  }
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
-}
-
-
-/* =========================
-   THEMEN ANZEIGEN
-========================= */
-
-function renderTopics() {
-
-  document.getElementById(
-    "topicGrid"
-  ).innerHTML = topics.map(
-    (topic, index) => `
-
-      <div class="card grammar-card">
-
-        <div class="topic-icon">
-          ${topic.icon}
-        </div>
-
-        <h3>
-          ${topic.name}
-        </h3>
-
-        <p>
-          ${topic.desc}
-        </p>
-
-        <button
-          onclick="openTopic(${index})"
-        >
-          Thema öffnen →
-        </button>
-
-      </div>
-
-    `
-  ).join("");
-
-}
-
-
-/* =========================
-   THEMA ÖFFNEN
-========================= */
-
-let currentTopic = null;
-
-function openTopic(index) {
-
-  currentTopic =
-    topics[index];
-
-
-  document.getElementById(
-    "topicGrid"
-  ).style.display = "none";
-
-
-  const view =
-    document.getElementById(
-      "subtopicView"
+    .querySelectorAll("main>section")
+    .forEach(
+      section=>section.classList.add("hidden")
     );
 
-  view.classList.add("active");
+  document
+    .getElementById(page)
+    .classList.remove("hidden");
+
+  document
+    .querySelectorAll("nav button")
+    .forEach(
+      button=>{
+        button.classList.toggle(
+          "active",
+          button.dataset.page===page
+        );
+      }
+    );
+
+  if(page==="grammar"){
+    renderTopics();
+  }
+
+  updateStats();
+}
 
 
-  view.innerHTML = `
-
-    <button
-      class="back-button"
-      onclick="backTopics()"
-    >
-      ← Alle Grammatik-Themen
-    </button>
-
-
-    <div class="hero">
-
-      <h1>
-        ${currentTopic.icon}
-        ${currentTopic.name}
-      </h1>
-
-      <p>
-        Wähle einen Unterpunkt.
-        Du kannst jederzeit wechseln
-        und so oft üben, wie du möchtest.
-      </p>
-
-    </div>
+document
+  .querySelectorAll("nav button")
+  .forEach(
+    button=>{
+      button.onclick=()=>{
+        openPage(button.dataset.page);
+      };
+    }
+  );
 
 
-    <div class="grid">
+/* =========================================================
+   THEMEN ANZEIGEN
+========================================================= */
 
-      ${currentTopic.subs.map(
-        sub => `
+function renderTopics(){
 
-          <div class="card">
+  const el=
+    document.getElementById("topicView");
 
-            <span class="pill">
-              ♾️ Unbegrenzt
+  el.innerHTML=
+    `<div class="topic-grid">`
+
+    +
+
+    topics
+      .map(
+        (topic,index)=>`
+
+          <div class="topic-card">
+
+            <span class="badge">
+              ${topic.subs.length} Unterthemen
             </span>
 
             <h3>
-              ${sub}
+              ${topic.name}
             </h3>
 
             <p>
-              Übungen zu ${sub}.
+              ${topic.desc}
             </p>
 
             <button
-              onclick="startExercise('${sub.replaceAll("'","\\'")}')"
+              onclick="openTopic(${index})"
             >
-              Üben →
+              Thema öffnen →
             </button>
 
           </div>
 
         `
-      ).join("")}
+      )
+      .join("")
+
+    +
+
+    `</div>`;
+}
+
+
+/* =========================================================
+   UNTERTHEMEN
+========================================================= */
+
+function openTopic(index){
+
+  currentTopic=index;
+
+  const topic=
+    topics[index];
+
+  openPage("grammar");
+
+  const el=
+    document.getElementById("topicView");
+
+  el.innerHTML=
+
+    `<button
+      class="back"
+      onclick="renderTopics()"
+    >
+      ← Alle Grammatikthemen
+    </button>
+
+    <div class="hero">
+
+      <h1>
+        ${topic.name}
+      </h1>
+
+      <p>
+        ${topic.desc}
+      </p>
 
     </div>
 
-  `;
+    <div class="sub-grid">
 
+      ${topic.subs
+        .map(
+          sub=>{
+
+            const count=
+              (E[sub] || []).length;
+
+            return`
+
+              <div class="sub-card">
+
+                <span class="badge">
+                  ${count} Aufgaben
+                </span>
+
+                <h3>
+                  ${sub}
+                </h3>
+
+                <p>
+                  Unbegrenzt wiederholen ·
+                  +10 XP pro richtiger Antwort
+                </p>
+
+                <button
+                  onclick="startExercise('${escapeAttr(sub)}')"
+                >
+                  Üben →
+                </button>
+
+              </div>
+
+            `;
+          }
+        )
+        .join("")}
+
+    </div>`;
 }
 
 
-/* =========================
-   ZURÜCK
-========================= */
+/* =========================================================
+   ÜBUNG STARTEN
+========================================================= */
 
-function backTopics() {
+function startExercise(sub){
 
-  document.getElementById(
-    "topicGrid"
-  ).style.display = "grid";
+  currentSub=sub;
 
-  document.getElementById(
-    "subtopicView"
-  ).classList.remove("active");
+  const original=
+    E[sub] || [];
 
-}
+  /*
+    Wir wiederholen den Pool dreimal.
+    Dadurch hat jede Übung direkt mehrere Runden.
+  */
 
+  currentExercises=[
+    ...original,
+    ...original,
+    ...original
+  ];
 
-/* =========================
-   ÜBUNG
-========================= */
+  shuffle(currentExercises);
 
-let currentSub = "";
-let questionIndex = 0;
+  currentIndex=0;
 
-
-function startExercise(subtopic) {
-
-  currentSub = subtopic;
-
-  questionIndex = 0;
+  score=0;
 
   document
-    .getElementById("modal")
-    .classList.add("show");
+    .querySelectorAll("main>section")
+    .forEach(
+      section=>section.classList.add("hidden")
+    );
+
+  document
+    .getElementById("exercise")
+    .classList.remove("hidden");
 
   renderQuestion();
-
 }
 
 
-function renderQuestion() {
+/* =========================================================
+   FRAGE ANZEIGEN
+========================================================= */
 
-  const bank =
-    exercises[currentSub] ||
-    [
-      [
-        "Wähle die richtige Antwort.",
-        [
-          "Option A",
-          "Option B",
-          "Option C"
-        ],
-        "Option B"
-      ]
-    ];
+function renderQuestion(){
+
+  const el=
+    document.getElementById("exerciseView");
+
+  if(currentIndex>=currentExercises.length){
+
+    el.innerHTML=
+
+      `<div class="hero center">
+
+        <div class="big-icon">
+          🎉
+        </div>
+
+        <h1>
+          Super gemacht!
+        </h1>
+
+        <p>
+          Du hast
+          <strong>${score}</strong>
+          von
+          ${currentExercises.length}
+          Aufgaben richtig.
+        </p>
+
+        <p>
+          ⭐ Insgesamt:
+          <strong>${xp} XP</strong>
+        </p>
+
+        <button
+          class="next"
+          onclick="startExercise('${escapeAttr(currentSub)}')"
+        >
+          Nochmal üben 🔄
+        </button>
+
+        <button
+          class="back"
+          style="margin-top:10px"
+          onclick="backToSubtopics()"
+        >
+          ← Unterthemen
+        </button>
+
+      </div>`;
+
+    return;
+  }
 
 
-  const question =
-    bank[
-      questionIndex % bank.length
-    ];
+  answered=false;
+
+  const question=
+    currentExercises[currentIndex];
 
 
-  document.getElementById(
-    "modalContent"
-  ).innerHTML = `
+  el.innerHTML=
 
-    <span class="pill">
-      ♾️ Unbegrenzte Versuche
-    </span>
+    `<div class="exercise-card">
 
-    <h2>
-      ${currentSub}
-    </h2>
+      <div class="small">
+        📚 ${currentSub}
+        · Aufgabe
+        ${currentIndex+1}
+        von
+        ${currentExercises.length}
+      </div>
 
-    <div class="exercise">
+      <div class="progress">
+
+        <div
+          style="
+            width:${(
+              currentIndex/
+              currentExercises.length
+            )*100}%
+          "
+        ></div>
+
+      </div>
 
       <div class="question">
         ${question[0]}
       </div>
 
-      <div class="options">
+      <div id="options">
 
-        ${question[1].map(
-          option => `
+        ${question[1]
+          .map(
+            (option,index)=>`
 
-            <button
-              class="option"
-              onclick="answer(
-                '${option.replaceAll("'","\\'")}',
-                '${question[2].replaceAll("'","\\'")}'
-              )"
-            >
-              ${option}
-            </button>
+              <button
+                class="option"
+                onclick="answer(${index})"
+              >
+                ${option}
+              </button>
 
-          `
-        ).join("")}
+            `
+          )
+          .join("")}
 
       </div>
 
-      <div
-        id="feedback"
-        class="feedback"
-      ></div>
+      <div id="feedback"></div>
 
-    </div>
+    </div>`;
+}
 
-  `;
+
+/* =========================================================
+   ANTWORT
+========================================================= */
+
+function answer(index){
+
+  if(answered)return;
+
+  answered=true;
+
+  const question=
+    currentExercises[currentIndex];
+
+  const buttons=
+    [...document.querySelectorAll(".option")];
+
+  buttons[
+    question[2]
+  ].classList.add("correct");
+
+
+  if(index===question[2]){
+
+    score++;
+
+    xp+=10;
+
+    totalCorrect++;
+
+    document
+      .getElementById("feedback")
+      .innerHTML=
+
+      `<div class="feedback good">
+
+        ✅ Richtig!
+        <br>
+
+        ⭐ +10 XP
+
+        <br>
+
+        <span class="small">
+          ${question[3]}
+        </span>
+
+      </div>
+
+      <button
+        class="next"
+        onclick="nextQuestion()"
+      >
+        Weiter →
+      </button>`;
+
+  }
+
+  else{
+
+    buttons[index]
+      .classList.add("wrong");
+
+    document
+      .getElementById("feedback")
+      .innerHTML=
+
+      `<div class="feedback bad">
+
+        ❌ Noch nicht!
+
+        <br>
+
+        <span class="small">
+          ${question[3]}
+        </span>
+
+      </div>
+
+      <button
+        class="next"
+        onclick="nextQuestion()"
+      >
+        Weiter →
+      </button>`;
+  }
+
+
+  localStorage.setItem(
+    "speakupXP",
+    xp
+  );
+
+  localStorage.setItem(
+    "speakupCorrect",
+    totalCorrect
+  );
+
+  updateStats();
+}
+
+
+/* =========================================================
+   NÄCHSTE FRAGE
+========================================================= */
+
+function nextQuestion(){
+
+  currentIndex++;
+
+  renderQuestion();
+}
+
+
+/* =========================================================
+   ZURÜCK
+========================================================= */
+
+function backToSubtopics(){
+
+  openTopic(currentTopic);
 
 }
 
 
-/* =========================
-   ANTWORT
-========================= */
+/* =========================================================
+   SHUFFLE
+========================================================= */
 
-function answer(
-  selected,
-  correct
-) {
+function shuffle(array){
 
-  const feedback =
-    document.getElementById(
-      "feedback"
+  for(
+    let i=array.length-1;
+    i>0;
+    i--
+  ){
+
+    const j=
+      Math.floor(
+        Math.random()*(i+1)
+      );
+
+    [
+      array[i],
+      array[j]
+    ]=
+    [
+      array[j],
+      array[i]
+    ];
+  }
+
+  return array;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats(){
+
+  document
+    .getElementById("xp")
+    .textContent=xp;
+
+  document
+    .getElementById("profileXP")
+    .textContent=
+      xp+" XP";
+
+  document
+    .getElementById("exerciseCount")
+    .textContent=
+      totalCorrect+
+      " richtig beantwortet";
+}
+
+
+/* =========================================================
+   KI-AVATARE
+========================================================= */
+
+const avatars=[
+
+  [
+    "🧑‍🏫",
+    "Alex – dein Englisch-Coach"
+  ],
+
+  [
+    "🦙",
+    "Luna – die Sprach-Lama"
+  ],
+
+  [
+    "👽",
+    "Zorp – Alien English"
+  ],
+
+  [
+    "🤖",
+    "Byte – AI Coach"
+  ],
+
+  [
+    "🐱",
+    "Milo – Cat Coach"
+  ],
+
+  [
+    "🐉",
+    "Draco – Dragon Coach"
+  ]
+
+];
+
+let avatarIndex=0;
+
+
+function changeAvatar(){
+
+  avatarIndex=
+    (avatarIndex+1)
+    %
+    avatars.length;
+
+  document
+    .getElementById("aiAvatar")
+    .textContent=
+      avatars[avatarIndex][0];
+
+  document
+    .getElementById("aiName")
+    .textContent=
+      avatars[avatarIndex][1];
+}
+
+
+function speakAI(){
+
+  const text=
+    document
+      .getElementById("aiText")
+      .textContent;
+
+  if("speechSynthesis" in window){
+
+    speechSynthesis.cancel();
+
+    const utterance=
+      new SpeechSynthesisUtterance(text);
+
+    utterance.lang="en-US";
+
+    utterance.rate=.9;
+
+    speechSynthesis.speak(
+      utterance
     );
-
-
-  if (selected === correct) {
-
-    xp += 10;
-
-
-    document.getElementById(
-      "xp"
-    ).textContent = xp;
-
-
-    document.getElementById(
-      "profileXP"
-    ).textContent = xp;
-
-
-    feedback.textContent =
-      "✅ Richtig! +10 XP";
-
-
-    setTimeout(
-      () => {
-
-        questionIndex++;
-
-        renderQuestion();
-
-      },
-      700
-    );
-
-
-  } else {
-
-    feedback.textContent =
-      "💡 Noch nicht. Versuch es einfach noch einmal – du verlierst kein Leben!";
 
   }
 
 }
 
 
-/* =========================
-   MODAL SCHLIESSEN
-========================= */
-
-function closeModal() {
+function endCall(){
 
   document
-    .getElementById("modal")
-    .classList.remove("show");
+    .getElementById("aiText")
+    .textContent=
+      "Call ended. Great job practicing English! 👋";
 
 }
 
 
-/* =========================
+/* =========================================================
    FREUNDE
-========================= */
+========================================================= */
 
-function addFriend() {
+function addFriend(){
 
-  const input =
+  const input=
     document.getElementById(
       "friendInput"
     );
 
+  const name=
+    input.value.trim();
 
-  if (!input.value.trim()) {
+  if(!name)return;
+
+  friends.push(name);
+
+  localStorage.setItem(
+    "speakupFriends",
+    JSON.stringify(friends)
+  );
+
+  input.value="";
+
+  renderFriends();
+}
+
+
+function renderFriends(){
+
+  const el=
+    document.getElementById(
+      "friendsList"
+    );
+
+  if(!friends.length){
+
+    el.innerHTML=
+      `<div class="empty">
+        Noch keine Freunde hinzugefügt.
+      </div>`;
+
     return;
   }
 
 
-  const friend =
-    document.createElement("div");
+  el.innerHTML=
+    friends
+      .map(
+        friend=>`
+
+          <div class="friend-card">
+
+            👤
+            <strong>
+              ${escapeHtml(friend)}
+            </strong>
+
+            <div class="small">
+              SpeakUp Freund · Demo
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("");
+}
 
 
-  friend.className = "card";
+/* =========================================================
+   SICHERER TEXT
+========================================================= */
 
+function escapeHtml(text){
 
-  friend.innerHTML = `
+  return text.replace(
+    /[&<>"']/g,
+    function(match){
 
-    <h3>
-      👤 ${input.value}
-    </h3>
+      return {
 
-    <p>
-      Freund hinzugefügt · 0 XP
-    </p>
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
 
-  `;
+      }[match];
 
-
-  document
-    .getElementById("friendList")
-    .appendChild(friend);
-
-
-  input.value = "";
+    }
+  );
 
 }
 
 
-/* =========================
-   KI AVATARE
-========================= */
+function escapeAttr(text){
 
-const avatars = [
-  "🧑‍🏫",
-  "🦙",
-  "👽",
-  "🤖",
-  "🐱",
-  "🐉"
-];
-
-let avatarIndex = 0;
-
-
-function changeAvatar() {
-
-  avatarIndex++;
-
-  if (
-    avatarIndex >= avatars.length
-  ) {
-    avatarIndex = 0;
-  }
-
-
-  document.getElementById(
-    "callAvatar"
-  ).textContent =
-    avatars[avatarIndex];
-
+  return text
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'");
 }
 
 
-function speakAI() {
-
-  document.getElementById(
-    "callText"
-  ).textContent =
-    "Hi! Let's practice English together. What did you do today?";
-
-
-  if ("speechSynthesis" in window) {
-
-    const speech =
-      new SpeechSynthesisUtterance(
-        "Hi! Let's practice English together. What did you do today?"
-      );
-
-    speech.lang = "en-US";
-
-    speechSynthesis.speak(
-      speech
-    );
-
-  }
-
-}
-
-
-function endCall() {
-
-  document.getElementById(
-    "callText"
-  ).textContent =
-    "Anruf beendet 👋";
-
-}
-
-
-/* =========================
+/* =========================================================
    START
-========================= */
+========================================================= */
 
 renderTopics();
+
+renderFriends();
+
+updateStats();
 
 </script>
 
 </body>
   </html>
-
     
 
 
